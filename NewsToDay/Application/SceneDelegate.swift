@@ -11,14 +11,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func homeController() -> UINavigationController {
+        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "house"), tag: 0)
+        return navigationVC
+    }
 
+    func categoriesControler() -> UINavigationController {
+        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "square.grid.2x2"), tag: 1)
+        return navigationVC
+    }
+
+    func bookmarmController() -> UINavigationController {
+        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "bookmark"), tag: 2)
+        return navigationVC
+    }
+
+    func profileControler() -> UINavigationController {
+        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 3)
+        return navigationVC
+    }
+    
+    func createTabBar() -> UITabBarController {
+        let tabBar = UITabBarController()
+        tabBar.viewControllers = [homeController(), categoriesControler(), bookmarmController(), profileControler()]
+        return tabBar
+    }
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        let viewController = LaunchScreenViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+    
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = createTabBar()
+        window.makeKeyAndVisible()
+        self.window = window
     }
 
 }
