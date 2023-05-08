@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		17BE9C332A0950DC0062B6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C322A0950DC0062B6EA /* AppDelegate.swift */; };
 		17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */; };
-		17BE9C372A0950DC0062B6EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C362A0950DC0062B6EA /* ViewController.swift */; };
-		17BE9C3A2A0950DD0062B6EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17BE9C382A0950DC0062B6EA /* Main.storyboard */; };
+		17BE9C372A0950DC0062B6EA /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */; };
 		17BE9C3C2A0950E50062B6EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17BE9C3B2A0950E50062B6EA /* Assets.xcassets */; };
 		17BE9C3F2A0950E50062B6EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */; };
+		17BE9C4B2A09578B0062B6EA /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C4A2A09578B0062B6EA /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		17BE9C2F2A0950DC0062B6EA /* NewsToDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BE9C322A0950DC0062B6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		17BE9C362A0950DC0062B6EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		17BE9C392A0950DC0062B6EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		17BE9C3B2A0950E50062B6EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17BE9C3E2A0950E50062B6EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17BE9C402A0950E50062B6EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17BE9C4A2A09578B0062B6EA /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,47 @@
 		17BE9C312A0950DC0062B6EA /* NewsToDay */ = {
 			isa = PBXGroup;
 			children = (
-				17BE9C322A0950DC0062B6EA /* AppDelegate.swift */,
-				17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */,
-				17BE9C362A0950DC0062B6EA /* ViewController.swift */,
-				17BE9C382A0950DC0062B6EA /* Main.storyboard */,
-				17BE9C3B2A0950E50062B6EA /* Assets.xcassets */,
-				17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */,
-				17BE9C402A0950E50062B6EA /* Info.plist */,
+				17BE9C472A0952830062B6EA /* Models */,
+				17BE9C462A09525F0062B6EA /* Application */,
+				17BE9C482A0952AD0062B6EA /* Controllers */,
+				17BE9C492A0952D30062B6EA /* Resources */,
 			);
 			path = NewsToDay;
+			sourceTree = "<group>";
+		};
+		17BE9C462A09525F0062B6EA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				17BE9C322A0950DC0062B6EA /* AppDelegate.swift */,
+				17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		17BE9C472A0952830062B6EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		17BE9C482A0952AD0062B6EA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		17BE9C492A0952D30062B6EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17BE9C4A2A09578B0062B6EA /* Resources.swift */,
+				17BE9C3B2A0950E50062B6EA /* Assets.xcassets */,
+				17BE9C402A0950E50062B6EA /* Info.plist */,
+				17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +159,6 @@
 			files = (
 				17BE9C3F2A0950E50062B6EA /* LaunchScreen.storyboard in Resources */,
 				17BE9C3C2A0950E50062B6EA /* Assets.xcassets in Resources */,
-				17BE9C3A2A0950DD0062B6EA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +169,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17BE9C372A0950DC0062B6EA /* ViewController.swift in Sources */,
+				17BE9C372A0950DC0062B6EA /* LaunchScreenViewController.swift in Sources */,
+				17BE9C4B2A09578B0062B6EA /* Resources.swift in Sources */,
 				17BE9C332A0950DC0062B6EA /* AppDelegate.swift in Sources */,
 				17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +179,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		17BE9C382A0950DC0062B6EA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				17BE9C392A0950DC0062B6EA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,12 +313,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J2VS5TP5S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NewsToDay/Info.plist;
+				INFOPLIST_FILE = NewsToDay/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +326,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DApp.NewsToDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -317,12 +344,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J2VS5TP5S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NewsToDay/Info.plist;
+				INFOPLIST_FILE = NewsToDay/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +357,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DApp.NewsToDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
