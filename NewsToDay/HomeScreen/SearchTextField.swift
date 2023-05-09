@@ -36,8 +36,8 @@ class SearchTextField: UIView {
     
     private func configureContainerView() {
         addSubview(containerView)
-        containerView.backgroundColor = .lightGray
-        containerView.layer.borderColor = UIColor.lightGray.cgColor
+        containerView.backgroundColor = UIColor(named: Resources.Colors.grayLighter)
+        containerView.layer.borderColor = UIColor(named: Resources.Colors.grayLighter)?.cgColor
         containerView.layer.borderWidth = 1
         containerView.layer.cornerRadius = 26
         containerView.layer.masksToBounds = true
@@ -52,7 +52,7 @@ class SearchTextField: UIView {
     private func configureSearchImageView() {
         containerView.addSubview(searchImageView)
         searchImageView.image = searchImageViewImage
-        searchImageView.tintColor = .gray
+        searchImageView.tintColor = UIColor(named: Resources.Colors.gray)
         searchImageView.snp.makeConstraints { make in
             make.left.equalTo(containerView).inset(16)
             make.centerY.equalTo(containerView)
@@ -62,8 +62,9 @@ class SearchTextField: UIView {
     
     private func configureSearchTextField() {
         containerView.addSubview(searchTextField)
-        searchTextField.backgroundColor = .lightGray
-        searchTextField.placeholder = textFieldPlaceHolder
+        searchTextField.backgroundColor = UIColor(named: Resources.Colors.grayLighter)
+        let attributedPlaceholder = NSAttributedString(string: textFieldPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: Resources.Colors.gray) as Any])
+        searchTextField.attributedPlaceholder = attributedPlaceholder
         searchTextField.font = .systemFont(ofSize: 16)
         searchTextField.textColor = .black
         searchTextField.snp.makeConstraints { make in

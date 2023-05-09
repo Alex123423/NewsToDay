@@ -38,7 +38,7 @@ class NewsCell: UICollectionViewCell {
         label.text = "The latest situation in the presedential election"
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.font = UIFont(name: "Arial", size: 16)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -71,12 +71,10 @@ class NewsCell: UICollectionViewCell {
         }
     }
     
-    
     private func setupViews() {
         contentView.addSubview(newsImageView)
         contentView.addSubview(favouriteButton)
         contentView.addSubview(titleLabel)
-        
     }
     
     private func setupConstraints() {
@@ -90,11 +88,10 @@ class NewsCell: UICollectionViewCell {
             titleLabel.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: -15),
             titleLabel.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: -24),
             
-            favouriteButton.heightAnchor.constraint(equalToConstant: 20),
-            favouriteButton.widthAnchor.constraint(equalToConstant: 20),
-            favouriteButton.topAnchor.constraint(equalTo: newsImageView.topAnchor, constant: 25),
-            favouriteButton.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: -25)
-            
+            favouriteButton.heightAnchor.constraint(equalToConstant: 25),
+            favouriteButton.widthAnchor.constraint(equalToConstant: 25),
+            favouriteButton.topAnchor.constraint(equalTo: newsImageView.topAnchor, constant: 20),
+            favouriteButton.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: -20)
         ])
     }
 }

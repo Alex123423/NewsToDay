@@ -8,43 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController, CollectionDidSelectProtocol {
-    
-    func getNewsFromCategory(categoryName: String) {
-        if categoryName == "Random" {
-            RequestsManager.shared.getTopNews { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let newsData):
-                    self.middleCollectionView.news.removeAll()
-                    DispatchQueue.main.async {
-                        self.middleCollectionView.news = newsData.articles
-                        self.middleCollectionView.collectionView.reloadData()
-                        
-                    }
-                case .failure(let error):
-                    print("Error fetching news data: \(error)")
-                }
-            }
-        } else {
-            RequestsManager.shared.getNewsByCategory(category: categoryName) { [weak self] result in
-                print(categoryName)
-                print(result)
-                guard let self = self else { return }
-                switch result {
-                case .success(let newsData):
-                    self.middleCollectionView.news.removeAll()
-                    DispatchQueue.main.async {
-                        self.middleCollectionView.news.append(contentsOf: newsData.articles)
-                        self.middleCollectionView.collectionView.reloadData()
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
+class HomeViewController: UIViewController  {
     
     private let collectionView = CategoriesCollection()
     private let middleCollectionView = MiddleCollectionView()
@@ -63,23 +27,6 @@ class HomeViewController: UIViewController, CollectionDidSelectProtocol {
         setupConstraints()
         collectionView.delegateCollectionDidSelect = self
         randomNews()
-    }
-    
-    func randomNews() {
-        RequestsManager.shared.getTopNews { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let newsData):
-                self.middleCollectionView.news.removeAll()
-                DispatchQueue.main.async {
-                    self.middleCollectionView.news = newsData.articles
-                    self.middleCollectionView.collectionView.reloadData()
-                    
-                }
-            case .failure(let error):
-                print("Error fetching news data: \(error)")
-            }
-        }
     }
     
     //MARK: - Configuring UI Elements
@@ -110,7 +57,7 @@ class HomeViewController: UIViewController, CollectionDidSelectProtocol {
         view.addSubview(topSublabel)
         topSublabel.text = "Discover things of this world"
         topSublabel.font = .systemFont(ofSize: 16)
-        topSublabel.textColor = .lightGray
+        topSublabel.textColor = UIColor(named: Resources.Colors.gray)
         topSublabel.textAlignment = .left
         topSublabel.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -126,8 +73,9 @@ class HomeViewController: UIViewController, CollectionDidSelectProtocol {
     
     private func configureSeeAllButton() {
         view.addSubview(seeAllButton)
-        seeAllButton.setTitle("See all", for: .normal)
         seeAllButton.titleLabel?.font = .systemFont(ofSize: 14)
+        seeAllButton.tintColor = UIColor(named: Resources.Colors.gray)
+        seeAllButton.setTitle("See all", for: .normal)
         seeAllButton.addTarget(self, action: #selector(seeAllPressed), for: .touchUpInside)
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -177,5 +125,63 @@ class HomeViewController: UIViewController, CollectionDidSelectProtocol {
             recommendedTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             recommendedTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+//MARK: - Network requests
+
+extension HomeViewController: CollectionDidSelectProtocol {
+    
+    // get news for random category
+    func randomNews() {
+        RequestsManager.shared.getTopNews { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                self.middleCollectionView.news.removeAll()
+                DispatchQueue.main.async {
+                    self.middleCollectionView.news = newsData.articles
+                    self.middleCollectionView.collectionView.reloadData()
+                    
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
+    func getNewsFromCategory(categoryName: String) {
+        if categoryName == "Random" {
+            RequestsManager.shared.getTopNews { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let newsData):
+                    self.middleCollectionView.news.removeAll()
+                    DispatchQueue.main.async {
+                        self.middleCollectionView.news = newsData.articles
+                        self.middleCollectionView.collectionView.reloadData()
+                        
+                    }
+                case .failure(let error):
+                    print("Error fetching news data: \(error)")
+                }
+            }
+        } else {
+            RequestsManager.shared.getNewsByCategory(category: categoryName) { [weak self] result in
+                print(categoryName)
+                print(result)
+                guard let self = self else { return }
+                switch result {
+                case .success(let newsData):
+                    self.middleCollectionView.news.removeAll()
+                    DispatchQueue.main.async {
+                        self.middleCollectionView.news.append(contentsOf: newsData.articles)
+                        self.middleCollectionView.collectionView.reloadData()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

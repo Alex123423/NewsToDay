@@ -11,14 +11,14 @@ import SnapKit
 class CategoryCell: UICollectionViewCell {
     
     static let identifier = "CategoryCell"
-
-     let categoryLabel: UILabel = {
+    
+    let categoryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-         label.textColor = .black
+        label.textColor = UIColor(named: Resources.Colors.gray)
         label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
@@ -26,14 +26,14 @@ class CategoryCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                backgroundColor = .purple
+                backgroundColor = UIColor(named: Resources.Colors.button)
                 categoryLabel.textColor = .white
-                layer.borderColor = UIColor.purple.cgColor
+                layer.borderColor = UIColor(named: Resources.Colors.button)?.cgColor
                 
             } else {
-                backgroundColor = .clear
-                categoryLabel.textColor = .black
-                layer.borderColor = UIColor.lightGray.cgColor
+                backgroundColor = UIColor(named: Resources.Colors.grayLighter)
+                categoryLabel.textColor = UIColor(named: Resources.Colors.gray)
+                layer.borderColor = UIColor(named: Resources.Colors.grayLighter)?.cgColor
             }
         }
     }
@@ -46,9 +46,9 @@ class CategoryCell: UICollectionViewCell {
     }
     
     func setupUICell() {
-        backgroundColor = .clear
+        backgroundColor = UIColor(named: Resources.Colors.grayLighter)
         layer.borderWidth = 1
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = UIColor(named: Resources.Colors.grayLighter)?.cgColor
         layer.masksToBounds = false
         layer.cornerRadius = 15
     }
@@ -56,7 +56,7 @@ class CategoryCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     public func configure(with title: String) {
         categoryLabel.text = title
     }
@@ -66,7 +66,6 @@ class CategoryCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
-        
         categoryLabel.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
