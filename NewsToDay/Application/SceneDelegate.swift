@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func homeController() -> UINavigationController {
-        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        let navigationVC = UINavigationController(rootViewController: HomeViewController())
         navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "house"), tag: 0)
         return navigationVC
     }
@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func profileControler() -> UINavigationController {
-        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        let navigationVC = UINavigationController(rootViewController: UserProfileController())
         navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 3)
         return navigationVC
     }
@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
     
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = OnboardingViewController()
+        window.rootViewController = createTabBar()
         window.makeKeyAndVisible()
         self.window = window
     }
