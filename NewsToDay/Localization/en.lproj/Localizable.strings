@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  NewsToDay
+
+  Created by Александра Савчук on 09.05.2023.
+  
+*/
+"slidetitle1" = "Welcome to our news!";
+"slidetitle2" = "It's your choise!";
+"slidetitle3" = "Let's get started!";
+"slidedescript1" = "Receive the latest news from different areas of life - from politics to sports.";
+"slidedescript2" = "You can choose the news categories that are most important to you.";
+"slidedescript3" = "Start your journey through the world of news now!";
+"getStartBtn" = "Get Started";
+"next" = "Next";

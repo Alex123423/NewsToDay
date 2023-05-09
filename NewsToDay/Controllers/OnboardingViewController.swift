@@ -11,9 +11,9 @@ class OnboardingViewController: UIViewController {
     
     
     private let slides: [Slide] = [
-        Slide(image: UIImage(named: "image1"), title: "Slide 1", description: "Description for slide 1"),
-        Slide(image: UIImage(named: "image2"), title: "Slide 2", description: "Description for slide 2"),
-        Slide(image: UIImage(named: "image3"), title: "Slide 3", description: "Description for slide 3")
+        Slide(image: UIImage(named: "image1"), title: "slidetitle1", description: "slidedescript1"),
+        Slide(image: UIImage(named: "image2"), title: "slidetitle2", description: "slidedescript2"),
+        Slide(image: UIImage(named: "image3"), title: "slidetitle3", description: "slidedescript3")
     ]
     
     private lazy var imageView: UIImageView = {
@@ -42,7 +42,6 @@ class OnboardingViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let nextButton = UIButton()
-        nextButton.setTitle("Next", for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.backgroundColor = UIColor(named: "buttonBlue")
         nextButton.layer.cornerRadius = 8
@@ -115,17 +114,17 @@ class OnboardingViewController: UIViewController {
     private func updateUI() {
         let slide = slides[currentIndex]
         imageView.image = slide.image
-        titleLabel.text = slide.title
-        descriptionLabel.text = slide.description
+        titleLabel.text = slide.title.localized
+        descriptionLabel.text = slide.description.localized
         
         if currentIndex == slides.count - 1 {
-            nextButton.setTitle("Get Started", for: .normal)
+            nextButton.setTitle("getStartBtn".localized, for: .normal)
         } else {
-            nextButton.setTitle("Next", for: .normal)
+            nextButton.setTitle("next".localized, for: .normal)
         }
     }
     
-    @objc private func pageControlTapped() {
+        @objc private func pageControlTapped() {
         if currentIndex == slides.count - 1 {
             dismiss(animated: true, completion: nil)
         } else {
