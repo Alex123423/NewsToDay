@@ -46,7 +46,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         //        window.rootViewController = createTabBar()
-        window.rootViewController = HomeViewController()
+//        window.rootViewController = HomeViewController()
+        window.rootViewController = BookmarksViewController()
         window.makeKeyAndVisible()
         self.window = window
     }

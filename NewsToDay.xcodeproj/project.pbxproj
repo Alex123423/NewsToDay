@@ -27,6 +27,7 @@
 		8717984F2A0979BA003921BF /* CategoriesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871798472A0979BA003921BF /* CategoriesCollection.swift */; };
 		871798522A097A36003921BF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 871798512A097A36003921BF /* Kingfisher */; };
 		871798552A097A50003921BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 871798542A097A50003921BF /* SnapKit */; };
+		871798582A0A4E08003921BF /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871798572A0A4E08003921BF /* BookmarksViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		871798452A0979BA003921BF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		871798462A0979BA003921BF /* SearchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		871798472A0979BA003921BF /* CategoriesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCollection.swift; sourceTree = "<group>"; };
+		871798572A0A4E08003921BF /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		17BE9C312A0950DC0062B6EA /* NewsToDay */ = {
 			isa = PBXGroup;
 			children = (
+				871798562A0A4DE3003921BF /* BookmarksScreen */,
 				8717983E2A0979BA003921BF /* HomeScreen */,
 				871798372A097999003921BF /* Network */,
 				17BE9C472A0952830062B6EA /* Models */,
@@ -161,6 +164,14 @@
 				871798422A0979BA003921BF /* RecommendedCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		871798562A0A4DE3003921BF /* BookmarksScreen */ = {
+			isa = PBXGroup;
+			children = (
+				871798572A0A4E08003921BF /* BookmarksViewController.swift */,
+			);
+			path = BookmarksScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +267,7 @@
 				8717984C2A0979BA003921BF /* RecommendedTableView.swift in Sources */,
 				17BE9C332A0950DC0062B6EA /* AppDelegate.swift in Sources */,
 				17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */,
+				871798582A0A4E08003921BF /* BookmarksViewController.swift in Sources */,
 				8717983B2A097999003921BF /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
