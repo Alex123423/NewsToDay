@@ -11,9 +11,10 @@
 		17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */; };
 		17BE9C372A0950DC0062B6EA /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */; };
 		17BE9C3C2A0950E50062B6EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17BE9C3B2A0950E50062B6EA /* Assets.xcassets */; };
-		17BE9C3F2A0950E50062B6EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */; };
 		17BE9C4B2A09578B0062B6EA /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C4A2A09578B0062B6EA /* Resources.swift */; };
 		578757462A09659400AC49F3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578757452A09659400AC49F3 /* OnboardingViewController.swift */; };
+		578757592A0AAFB900AC49F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5787575B2A0AAFB900AC49F3 /* Localizable.strings */; };
+		5787575E2A0AB01900AC49F3 /* swiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5787575D2A0AB01900AC49F3 /* swiftExtension.swift */; };
 		8717983A2A097999003921BF /* RequestsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871798382A097999003921BF /* RequestsManager.swift */; };
 		8717983B2A097999003921BF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871798392A097999003921BF /* API.swift */; };
 		8717983D2A0979A5003921BF /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8717983C2A0979A5003921BF /* NewsModel.swift */; };
@@ -38,10 +39,12 @@
 		17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		17BE9C3B2A0950E50062B6EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		17BE9C3E2A0950E50062B6EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17BE9C402A0950E50062B6EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17BE9C4A2A09578B0062B6EA /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		578757452A09659400AC49F3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		5787575A2A0AAFB900AC49F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5787575C2A0AAFBE00AC49F3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5787575D2A0AB01900AC49F3 /* swiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftExtension.swift; sourceTree = "<group>"; };
 		871798382A097999003921BF /* RequestsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsManager.swift; sourceTree = "<group>"; };
 		871798392A097999003921BF /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8717983C2A0979A5003921BF /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 				17BE9C472A0952830062B6EA /* Models */,
 				17BE9C462A09525F0062B6EA /* Application */,
 				17BE9C482A0952AD0062B6EA /* Controllers */,
+				578757562A0AAF6400AC49F3 /* Localization */,
 				17BE9C492A0952D30062B6EA /* Resources */,
 			);
 			path = NewsToDay;
@@ -135,9 +139,17 @@
 				17BE9C4A2A09578B0062B6EA /* Resources.swift */,
 				17BE9C3B2A0950E50062B6EA /* Assets.xcassets */,
 				17BE9C402A0950E50062B6EA /* Info.plist */,
-				17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		578757562A0AAF6400AC49F3 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				5787575B2A0AAFB900AC49F3 /* Localizable.strings */,
+				5787575D2A0AB01900AC49F3 /* swiftExtension.swift */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		871798372A097999003921BF /* Network */ = {
@@ -217,7 +229,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				ru,
 			);
 			mainGroup = 17BE9C262A0950DC0062B6EA;
 			packageReferences = (
@@ -238,8 +250,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17BE9C3F2A0950E50062B6EA /* LaunchScreen.storyboard in Resources */,
 				17BE9C3C2A0950E50062B6EA /* Assets.xcassets in Resources */,
+				578757592A0AAFB900AC49F3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +279,7 @@
 				8717984C2A0979BA003921BF /* RecommendedTableView.swift in Sources */,
 				17BE9C332A0950DC0062B6EA /* AppDelegate.swift in Sources */,
 				EC7D696D2A0A5ADB00A502CE /* TermsConditionsController.swift in Sources */,
+				5787575E2A0AB01900AC49F3 /* swiftExtension.swift in Sources */,
 				17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */,
 				8717983B2A097999003921BF /* API.swift in Sources */,
 			);
@@ -275,12 +288,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		17BE9C3D2A0950E50062B6EA /* LaunchScreen.storyboard */ = {
+		5787575B2A0AAFB900AC49F3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				17BE9C3E2A0950E50062B6EA /* Base */,
+				5787575A2A0AAFB900AC49F3 /* en */,
+				5787575C2A0AAFBE00AC49F3 /* ru */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
