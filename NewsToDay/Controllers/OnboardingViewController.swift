@@ -63,7 +63,6 @@ class OnboardingViewController: UIViewController {
         page.backgroundStyle = .minimal
         page.pageIndicatorTintColor = .lightGray
         page.currentPageIndicatorTintColor = UIColor(named: "buttonBlue")
-        page.addTarget(self, action: #selector(pageControlTapped), for: .valueChanged)
         page.translatesAutoresizingMaskIntoConstraints = false
         page.isUserInteractionEnabled = true
         return page
@@ -111,7 +110,7 @@ class OnboardingViewController: UIViewController {
         ])
     }
     
-    private func updateUI() {
+    @objc private func updateUI() {
         let slide = slides[currentIndex]
         imageView.image = slide.image
         titleLabel.text = slide.title.localized
@@ -124,26 +123,17 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-        @objc private func pageControlTapped() {
-        if currentIndex == slides.count - 1 {
-            dismiss(animated: true, completion: nil)
-        } else {
-            currentIndex += 1
-            updateUI()
-            pageControl.currentPage = currentIndex
-        }
-    }
-   
     @objc private func nextButtonTapped() {
         if currentIndex == slides.count - 1 {
-            dismiss(animated: true, completion: nil)
+            let vc = HomeViewController()
+            navigationController?.pushViewController(vc, animated: true)
         } else {
             currentIndex += 1
             updateUI()
             pageControl.currentPage = currentIndex
         }
     }
-
+    
     struct Slide {
         let image: UIImage?
         let title: String

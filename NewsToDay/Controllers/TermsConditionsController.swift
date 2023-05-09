@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TearmsConditionsController: UIViewController {
+class TearmsConditionsController: UIViewController {
 
     //MARK: - Elements
 
@@ -21,16 +21,6 @@ final class TearmsConditionsController: UIViewController {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
-    }()
-
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Terms & Conditions"
-        label.textColor = .black
-        label.font = UIFont(name: "Avenir Next Bold", size: 27)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-
     }()
 
     private let subtitleLabel: UILabel = {
@@ -68,7 +58,6 @@ final class TearmsConditionsController: UIViewController {
     }
 
     func setupViews() {
-        view.addSubview(titleLabel)
         view.addSubview(scrollView)
         contentView.addSubview(subtitleLabel)
         scrollView.addSubview(contentView)
@@ -80,9 +69,6 @@ final class TearmsConditionsController: UIViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
 
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 60),
             subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
@@ -91,7 +77,7 @@ final class TearmsConditionsController: UIViewController {
 
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),

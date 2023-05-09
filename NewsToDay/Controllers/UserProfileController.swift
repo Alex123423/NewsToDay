@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserProfileController: OnboardingViewController{
+class UserProfileController: UIViewController{
     
     
     // MARK: - Outlets
@@ -21,7 +21,7 @@ class UserProfileController: OnboardingViewController{
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .left
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonTermsPressed), for: .touchUpInside)
         return button
     }()
     
@@ -47,7 +47,7 @@ class UserProfileController: OnboardingViewController{
         button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeLanguagePressed), for: .touchUpInside)
         return button
     }()
     let titleLabel: UILabel = {
@@ -95,39 +95,26 @@ class UserProfileController: OnboardingViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem?.isEnabled = true
-        let tabBar = createTabBar()
-        addChild(tabBar)
-        view.addSubview(tabBar.view)
-        tabBar.didMove(toParent: self)
         setupViews()
         setConstraints()
         view.backgroundColor = .white
     }
-    func createTabBar() -> UITabBarController {
-        let tabBar = UITabBarController()
-        
-        let homeVC = UIViewController()
-        homeVC.tabBarItem.image = UIImage(named: "house")
-        
-        let categoriesVC = UIViewController()
-        categoriesVC.tabBarItem.image = UIImage(named: "categories")
-        
-        let bookmarksVC = UIViewController()
-        bookmarksVC.tabBarItem.image = UIImage(named: "favourite")
-        
-        let profileVC = UIViewController()
-        profileVC.tabBarItem.image = UIImage(named: "profile")
-        
-        tabBar.viewControllers = [homeVC, categoriesVC, bookmarksVC, profileVC]
-        
-        return tabBar
-    }
     
     //MARK: - Methods
+  
+    @objc func buttonTermsPressed(_ sender: UIButton) {
+        let vc = TearmsConditionsController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     @objc func buttonPressed(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let vc = OnboardingViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func changeLanguagePressed(_ sender: UIButton) {
+        let vc = LanguageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupViews() {
@@ -147,7 +134,7 @@ class UserProfileController: OnboardingViewController{
             
             
             languageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            languageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -460),
+            languageButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 44),
             languageButton.widthAnchor.constraint(equalToConstant: 360),
             languageButton.heightAnchor.constraint(equalToConstant: 60),
             
@@ -176,8 +163,6 @@ class UserProfileController: OnboardingViewController{
             emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             emailLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor),
             emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-        
-            
         ])
     }
 }
