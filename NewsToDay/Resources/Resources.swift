@@ -14,6 +14,7 @@ enum Resources {
         static let background = "backgroundBlue"
         static let gray = "gray"
         static let darkGray = "darkGray"
+        static let grayLighter = "grayLighter"
     }
     
     enum Offsets {
