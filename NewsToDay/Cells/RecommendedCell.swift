@@ -12,8 +12,11 @@ class RecommendedCell: UITableViewCell {
     
     static let identifier = "RecommendedCell"
     
+    var liked: Bool = false
+    
     private let newsImageView = UIImageView()
     private let newsTitleLabel = UILabel()
+    private let favouriteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +35,23 @@ class RecommendedCell: UITableViewCell {
             self.newsImageView.kf.setImage(with: url)
         } else {
             self.newsImageView.image = UIImage(named: "CellImage")
+        }
+    }
+    
+    func configureFavouriteButton() {
+        favouriteButton.tintColor = UIColor(named: Resources.Colors.gray)
+        favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        favouriteButton.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
+        favouriteButton.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    @objc func favouriteButtonPressed() {
+        if liked {
+            favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            liked = false
+        } else {
+            favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            liked = true
         }
     }
     
@@ -60,6 +80,8 @@ extension RecommendedCell {
     func setupView() {
         contentView.addSubview(newsImageView)
         contentView.addSubview(newsTitleLabel)
+        contentView.addSubview(favouriteButton)
+        configureFavouriteButton()
         configureNewsImageView()
         configureTitleLabel()
     }
@@ -74,7 +96,12 @@ extension RecommendedCell {
             
             newsTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -15),
             newsTitleLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: 15),
-            newsTitleLabel.centerYAnchor.constraint(equalTo: newsImageView.centerYAnchor)
+            newsTitleLabel.centerYAnchor.constraint(equalTo: newsImageView.centerYAnchor),
+            
+            favouriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            favouriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            favouriteButton.widthAnchor.constraint(equalToConstant: 20),
+            favouriteButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
 }
