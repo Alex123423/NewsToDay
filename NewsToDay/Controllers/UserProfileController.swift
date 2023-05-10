@@ -16,8 +16,16 @@ class UserProfileController: UIViewController{
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.setTitle("   Terms & Conditions", for: .normal)
+        button.setTitle("Terms & Conditions".localized, for: .normal)
+        button.configuration = .plain()
+        button.configuration?.titlePadding = CGFloat(10)
+        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
+            var updated = attributes
+            updated.font = font
+            return updated
+        }
+        button.configuration?.titleTextAttributesTransformer = transformer
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .left
@@ -29,8 +37,16 @@ class UserProfileController: UIViewController{
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.setTitle("   Sign Out", for: .normal)
+        button.setTitle("Sign Out".localized, for: .normal)
+        button.configuration = .plain()
+        button.configuration?.titlePadding = CGFloat(10)
+        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
+            var updated = attributes
+            updated.font = font
+            return updated
+        }
+        button.configuration?.titleTextAttributesTransformer = transformer
         button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -42,8 +58,16 @@ class UserProfileController: UIViewController{
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.setTitle("   Language", for: .normal)
+        button.setTitle("Language".localized, for: .normal)
+        button.configuration = .plain()
+        button.configuration?.titlePadding = CGFloat(10)
+        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
+            var updated = attributes
+            updated.font = font
+            return updated
+        }
+        button.configuration?.titleTextAttributesTransformer = transformer
         button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +76,7 @@ class UserProfileController: UIViewController{
     }()
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Profile"
+        label.text = "Profile".localized
         label.textColor = .black
         label.font = UIFont(name: "Avenir Next Bold", size: 27)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +133,10 @@ class UserProfileController: UIViewController{
     
     @objc func buttonPressed(_ sender: UIButton) {
         let vc = OnboardingViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.hidesBottomBarWhenPushed = true
+        vc.navigationItem.hidesBackButton = true
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc func changeLanguagePressed(_ sender: UIButton) {
@@ -166,5 +193,4 @@ class UserProfileController: UIViewController{
         ])
     }
 }
-
 

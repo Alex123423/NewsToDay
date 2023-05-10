@@ -41,10 +41,12 @@ class TearmsConditionsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.backBarButtonItem?.isEnabled = true
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .gray
+        navigationItem.leftBarButtonItem = backButton
         setupViews()
         setConstraints()
-        title = "Terms & Conditions"
+        title = "Terms & Conditions".localized
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.black,
             NSAttributedString.Key.font: UIFont(name: "Avenir Next Bold", size: 20)!
@@ -53,7 +55,7 @@ class TearmsConditionsController: UIViewController {
 
     //MARK: - Methods
 
-    @objc func buttonPressed(_ sender:UIButton) {
+    @objc func backButtonTapped(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -70,7 +72,7 @@ class TearmsConditionsController: UIViewController {
         NSLayoutConstraint.activate([
 
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 60),
+            subtitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
             subtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
