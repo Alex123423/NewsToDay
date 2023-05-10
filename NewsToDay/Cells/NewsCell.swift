@@ -25,7 +25,7 @@ class NewsCell: UICollectionViewCell {
     
     private let newsImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "CellImage")
+        image.image = UIImage(systemName: "photo")?.withTintColor(.black)
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
@@ -66,8 +66,12 @@ class NewsCell: UICollectionViewCell {
     func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
-            guard let imageURL = newsData.imageURL else { return }
-            self.newsImageView.kf.setImage(with: URL(string: imageURL))
+            
+            if let imageURL = newsData.imageURL {
+                self.newsImageView.kf.setImage(with: URL(string: imageURL))
+            } else {
+                self.newsImageView.tintColor = .black
+            }
         }
     }
     

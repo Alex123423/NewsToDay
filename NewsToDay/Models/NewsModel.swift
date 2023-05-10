@@ -24,10 +24,10 @@ struct Result: Codable {
     let videoURL: JSONNull?
     let description, content, pubDate: String?
     let imageURL: String?
-    let sourceID: SourceID?
+    let sourceID: String?
     let category: [Category]?
-    let country: [Country]?
-    let language: Language?
+    let country: [String]?
+    let language: String?
 
     enum CodingKeys: String, CodingKey {
         case title, link, keywords, creator
@@ -54,20 +54,20 @@ enum Category: String, Codable {
     case world = "world"
 }
 
-enum Country: String, Codable {
-    case austria = "austria"
-    case indonesia = "indonesia"
-}
+//enum Country: String, Codable {
+//    case austria = "austria"
+//    case indonesia = "indonesia"
+//}
 
-enum Language: String, Codable {
-    case german = "german"
-    case indonesian = "indonesian"
-}
+//enum Language: String, Codable {
+//    case german = "german"
+//    case indonesian = "indonesian"
+//}
 
-enum SourceID: String, Codable {
-    case liputan6 = "liputan6"
-    case meinbezirk = "meinbezirk"
-}
+//enum SourceID: String, Codable {
+//    case liputan6 = "liputan6"
+//    case meinbezirk = "meinbezirk"
+//}
 
 // MARK: - Encode/decode helpers
 

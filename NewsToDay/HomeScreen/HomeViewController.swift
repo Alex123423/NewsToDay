@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController  {
+class HomeViewController: UIViewController, UITextFieldDelegate  {
     
     private let collectionView = CategoriesCollection()
     private let middleCollectionView = MiddleCollectionView()
@@ -27,7 +27,56 @@ class HomeViewController: UIViewController  {
         setupConstraints()
         collectionView.delegateCollectionDidSelect = self
         randomNews()
+        searchTextField.searchTextField.delegate = self
     }
+    
+    // get news for random category
+    func randomNews() {
+        RequestsManager.shared.getTopNews { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                self.middleCollectionView.news.removeAll()
+                DispatchQueue.main.async {
+                    self.middleCollectionView.news = newsData.results
+                    self.middleCollectionView.collectionView.reloadData()
+                    
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        searchNews(with: searchTextField.searchTextField.text)
+        print("tapped")
+        return true
+    }
+    
+    func searchNews(with: String?) {
+        guard let query = with,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3 else {
+            return
+        }
+        RequestsManager.shared.getNewsByKeyWord(keyWord: query) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                print(newsData)
+                self.middleCollectionView.news.removeAll()
+                DispatchQueue.main.async {
+                    self.middleCollectionView.news = newsData.results
+                    self.middleCollectionView.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
     
     //MARK: - Configuring UI Elements
     
@@ -133,23 +182,6 @@ class HomeViewController: UIViewController  {
 
 extension HomeViewController: CollectionDidSelectProtocol {
     
-    // get news for random category
-    func randomNews() {
-        RequestsManager.shared.getTopNews { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let newsData):
-                self.middleCollectionView.news.removeAll()
-                DispatchQueue.main.async {
-                    self.middleCollectionView.news = newsData.results
-                    self.middleCollectionView.collectionView.reloadData()
-                    
-                }
-            case .failure(let error):
-                print("Error fetching news data: \(error)")
-            }
-        }
-    }
     
     func getNewsFromCategory(categoryName: String) {
         if categoryName == "Random" {

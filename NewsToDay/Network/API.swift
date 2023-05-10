@@ -25,13 +25,13 @@ enum API {
     var url: URL {
         switch self {
         case .popular:
-            return URL(string:"\(baseURL)\(apiKey)")!
+            return URL(string:"\(baseURL)\(apiKey)&language=en")!
         case .search(let keyWord):
 //            let encodedKeyWord = keyWord.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            return URL(string: "\(baseURL)\(apiKey)&q=\(keyWord)")!
+            return URL(string: "\(baseURL)\(apiKey)&q=\(keyWord)&language=en")!
         case .byCategory(let category):
 //            let encodedCategory = category.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            return URL(string: "\(baseURL)\(apiKey)&category=\(category)")!
+            return URL(string: "\(baseURL)\(apiKey)&category=\(category)&language=en")!
         }
     }
 }
