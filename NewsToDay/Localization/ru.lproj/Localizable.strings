@@ -21,6 +21,15 @@
 "See all" = "Все";
 "Search" = "Поиск";
 
+"Bookmarks" = "Избранное";
+"Saved articles to the library" = "Сохраненные статьи в библиотеке";
+"You haven't saved any articles yet. Start reading and bookmarking them now" = "Вы еще не сохранили ни одной статьи. Начните читать и добавлять их в закладки прямо сейчас";
+
+"Profile" = "Профиль";
+"Terms & Conditions" = "Условия и положения";
+"Sign Out" = "Выйти";
+"Language" = "Язык";
+
 "Welcome to our news service! These terms and conditions outline the rules and regulations for the use of our news service.
 
 By using our news service, we assume you accept these terms and conditions in full. If you disagree with these terms and conditions, you must not use our news service.

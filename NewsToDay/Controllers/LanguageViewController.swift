@@ -12,12 +12,20 @@ class LanguageViewController: UIViewController{
     
     // MARK: - Outlets
    
-   private lazy var changeToENButton: UIButton = {
+    private lazy var changeToENButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.setTitle("English", for: .normal)
+        button.configuration = .plain()
+        button.configuration?.titlePadding = CGFloat(10)
+        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
+            var updated = attributes
+            updated.font = font
+            return updated
+        }
+        button.configuration?.titleTextAttributesTransformer = transformer
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .left
@@ -29,8 +37,16 @@ class LanguageViewController: UIViewController{
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.setTitle("Russian", for: .normal)
+        button.configuration = .plain()
+        button.configuration?.titlePadding = CGFloat(10)
+        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
+            var updated = attributes
+            updated.font = font
+            return updated
+        }
+        button.configuration?.titleTextAttributesTransformer = transformer
         button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -62,13 +78,13 @@ class LanguageViewController: UIViewController{
   
     @objc func changeLanguagePressedEN(_ sender: UIButton) {
         Bundle.setLanguage(lang: "en")
-        let vc = HomeViewController()
+        let vc = UserProfileController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func changeLanguagePressedRU(_ sender: UIButton) {
         Bundle.setLanguage(lang: "ru")
-        let vc = HomeViewController()
+        let vc = UserProfileController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
