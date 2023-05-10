@@ -61,17 +61,13 @@ class LanguageViewController: UIViewController{
     //MARK: - Methods
   
     @objc func changeLanguagePressedEN(_ sender: UIButton) {
-        let language = "en"
-            UserDefaults.standard.set([language], forKey: "AppleLanguages")
-            UserDefaults.standard.synchronize()
+        Bundle.setLanguage(lang: "en")
         let vc = HomeViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func changeLanguagePressedRU(_ sender: UIButton) {
-        let language = "ru"
-            UserDefaults.standard.set([language], forKey: "AppleLanguages")
-            UserDefaults.standard.synchronize()
+        Bundle.setLanguage(lang: "ru")
         let vc = HomeViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
