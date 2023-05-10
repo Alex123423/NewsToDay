@@ -29,9 +29,9 @@ class RecommendedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ article: Article) {
+    func configureCell(_ article: Result) {
         self.newsTitleLabel.text = article.title
-        if let imageURL = article.urlToImage, let url = URL(string: imageURL) {
+        if let imageURL = article.imageURL, let url = URL(string: imageURL) {
             self.newsImageView.kf.setImage(with: url)
         } else {
             self.newsImageView.image = UIImage(named: "CellImage")

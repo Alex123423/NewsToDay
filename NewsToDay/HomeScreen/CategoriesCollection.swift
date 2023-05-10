@@ -18,7 +18,7 @@ class CategoriesCollection: UIView {
     private var collectionView: UICollectionView!
     weak var delegateCollectionDidSelect: CollectionDidSelectProtocol?
     
-    private var categories = ["Random", "Business", "Entertainment", "General", "Health", "Science", "Sports", "Technology"]
+    private var categories = ["Random", "Politics", "Business", "Top", "Environment", "Entertainment", "Food", "Health", "Science", "Sports", "Tourism", "Technology", "World"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)

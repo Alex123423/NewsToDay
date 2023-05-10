@@ -11,7 +11,7 @@ import SnapKit
 
 class SearchTextField: UIView {
     let searchImageViewImage = UIImage(systemName: "magnifyingglass")
-    var textFieldPlaceHolder = "Search".localized
+    var textFieldPlaceHolder = "Search"
     
     lazy var containerView = UIView()
     lazy var stackView = UIStackView()
@@ -69,6 +69,7 @@ class SearchTextField: UIView {
         searchTextField.textColor = .black
         searchTextField.snp.makeConstraints { make in
             make.left.equalTo(searchImageView.snp_rightMargin).inset(-16)
+            make.right.equalToSuperview()
             make.height.equalTo(24)
             make.centerY.equalTo(containerView)
         }
