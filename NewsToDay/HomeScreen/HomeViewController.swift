@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController  {
+class HomeViewController: UIViewController, UITextFieldDelegate  {
     
     private let collectionView = CategoriesCollection()
     private let middleCollectionView = MiddleCollectionView()
@@ -25,11 +25,74 @@ class HomeViewController: UIViewController  {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        collectionView.delegateCollectionDidSelect = self
         randomNews()
+        setupDelegates()
+//        configureTapGesture()
     }
     
+    // get news for random category
+    func randomNews() {
+        RequestsManager.shared.getRandomNews { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                self.middleCollectionView.news.removeAll()
+                DispatchQueue.main.async {
+                    self.middleCollectionView.news = newsData.results
+                    self.middleCollectionView.collectionView.reloadData()
+                    
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
+    //get news for keyWord specified in search field
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        searchNews(with: searchTextField.searchTextField.text)
+        return true
+    }
+    
+    func searchNews(with: String?) {
+        guard let query = with,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3 else {
+            let alert = UIAlertController(title: "", message: "Search request must contain at least 3 symbols", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { (action) in }
+            alert.addAction(action)
+            present(alert, animated: true)
+            return
+        }
+        RequestsManager.shared.getNewsByKeyWord(keyWord: query) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                self.middleCollectionView.news.removeAll()
+                DispatchQueue.main.async {
+                    self.middleCollectionView.news = newsData.results
+                    self.middleCollectionView.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
+    
     //MARK: - Configuring UI Elements
+    
+    // hiding keyboard
+    private func configureTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func setupDelegates() {
+        collectionView.delegateCollectionDidSelect = self
+        searchTextField.searchTextField.delegate = self
+    }
     
     private func setupViews() {
         configureToptitleLabel()
@@ -46,7 +109,7 @@ class HomeViewController: UIViewController  {
     
     private func configureToptitleLabel() {
         view.addSubview(topTitleLabel)
-        topTitleLabel.text = "Browse".localized
+        topTitleLabel.text = "Browse"
         topTitleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         topTitleLabel.textColor = .black
         topTitleLabel.textAlignment = .left
@@ -55,7 +118,7 @@ class HomeViewController: UIViewController  {
     
     private func configureTopSublabel() {
         view.addSubview(topSublabel)
-        topSublabel.text = "Discover things of this world".localized
+        topSublabel.text = "Discover things of this world"
         topSublabel.font = .systemFont(ofSize: 16)
         topSublabel.textColor = UIColor(named: Resources.Colors.gray)
         topSublabel.textAlignment = .left
@@ -64,7 +127,7 @@ class HomeViewController: UIViewController  {
     
     private func configureBottomLabel() {
         view.addSubview(bottomTitleLabel)
-        bottomTitleLabel.text = "Recommended for you".localized
+        bottomTitleLabel.text = "Recommended for you"
         bottomTitleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         bottomTitleLabel.textColor = .black
         bottomTitleLabel.textAlignment = .left
@@ -75,7 +138,7 @@ class HomeViewController: UIViewController  {
         view.addSubview(seeAllButton)
         seeAllButton.titleLabel?.font = .systemFont(ofSize: 14)
         seeAllButton.tintColor = UIColor(named: Resources.Colors.gray)
-        seeAllButton.setTitle("See all".localized, for: .normal)
+        seeAllButton.setTitle("See all", for: .normal)
         seeAllButton.addTarget(self, action: #selector(seeAllPressed), for: .touchUpInside)
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -133,33 +196,15 @@ class HomeViewController: UIViewController  {
 
 extension HomeViewController: CollectionDidSelectProtocol {
     
-    // get news for random category
-    func randomNews() {
-        RequestsManager.shared.getTopNews { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let newsData):
-                self.middleCollectionView.news.removeAll()
-                DispatchQueue.main.async {
-                    self.middleCollectionView.news = newsData.articles
-                    self.middleCollectionView.collectionView.reloadData()
-                    
-                }
-            case .failure(let error):
-                print("Error fetching news data: \(error)")
-            }
-        }
-    }
-    
     func getNewsFromCategory(categoryName: String) {
         if categoryName == "Random" {
-            RequestsManager.shared.getTopNews { [weak self] result in
+            RequestsManager.shared.getRandomNews { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let newsData):
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
-                        self.middleCollectionView.news = newsData.articles
+                        self.middleCollectionView.news = newsData.results
                         self.middleCollectionView.collectionView.reloadData()
                         
                     }
@@ -169,14 +214,12 @@ extension HomeViewController: CollectionDidSelectProtocol {
             }
         } else {
             RequestsManager.shared.getNewsByCategory(category: categoryName) { [weak self] result in
-                print(categoryName)
-                print(result)
                 guard let self = self else { return }
                 switch result {
                 case .success(let newsData):
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
-                        self.middleCollectionView.news.append(contentsOf: newsData.articles)
+                        self.middleCollectionView.news.append(contentsOf: newsData.results)
                         self.middleCollectionView.collectionView.reloadData()
                     }
                 case .failure(let error):

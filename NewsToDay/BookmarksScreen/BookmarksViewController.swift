@@ -11,7 +11,7 @@ class BookmarksViewController: UIViewController {
     
     private let bookmarksView = BookmarksView()
 
-    var savedNews: [Article] = []
+    var savedNews: [Result] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

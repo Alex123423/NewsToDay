@@ -12,7 +12,7 @@ class MiddleCollectionView: UIView {
     
     var collectionView: UICollectionView!
     
-    var news: [Article] = [] {
+    var news: [Result] = [] {
         didSet {
             print("articles network")
             DispatchQueue.main.async {
@@ -70,5 +70,9 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 250, height: 250)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+    
 }
 
