@@ -69,6 +69,7 @@ class SearchTextField: UIView {
         searchTextField.textColor = .black
         searchTextField.snp.makeConstraints { make in
             make.left.equalTo(searchImageView.snp_rightMargin).inset(-16)
+            make.right.equalToSuperview()
             make.height.equalTo(24)
             make.centerY.equalTo(containerView)
         }

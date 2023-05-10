@@ -12,7 +12,6 @@ struct NewsModel: Codable {
     let status: String?
     let totalResults: Int?
     let results: [Result]
-//    let nextPage: JSONNull?
 }
 
 // MARK: - Result
@@ -54,21 +53,6 @@ enum Category: String, Codable {
     case world = "world"
 }
 
-//enum Country: String, Codable {
-//    case austria = "austria"
-//    case indonesia = "indonesia"
-//}
-
-//enum Language: String, Codable {
-//    case german = "german"
-//    case indonesian = "indonesian"
-//}
-
-//enum SourceID: String, Codable {
-//    case liputan6 = "liputan6"
-//    case meinbezirk = "meinbezirk"
-//}
-
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
@@ -95,29 +79,4 @@ class JSONNull: Codable, Hashable {
         try container.encodeNil()
     }
 }
-
-//// MARK: - NewsByCategoryModel
-//struct NewsModel: Codable {
-//    let status: String
-//    let totalResults: Int
-//    let articles: [Article]
-//}
-//
-//// MARK: - Article
-//struct Article: Codable {
-//    let source: Source
-//    let author: String?
-//    let title: String
-//    let description: String?
-//    let url: String
-//    let urlToImage: String?
-//    let publishedAt: String
-//    let content: String?
-//}
-//
-//// MARK: - Source
-//struct Source: Codable {
-//    let id: String?
-//    let name: String
-//}
 

@@ -12,7 +12,7 @@ final class RequestsManager {
     static let shared = RequestsManager()
     private init() { }
     
-    func getTopNews(completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
+    func getRandomNews(completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: API.popular.url) { data, response, error in
                 if let error = error {

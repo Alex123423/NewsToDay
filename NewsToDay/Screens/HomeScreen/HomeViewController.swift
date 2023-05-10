@@ -25,15 +25,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        collectionView.delegateCollectionDidSelect = self
         randomNews()
-        searchTextField.searchTextField.delegate = self
-        print(API.search(keyWord: "trumparrest").url)
+        setupDelegates()
+//        configureTapGesture()
     }
     
     // get news for random category
     func randomNews() {
-        RequestsManager.shared.getTopNews { [weak self] result in
+        RequestsManager.shared.getRandomNews { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let newsData):
@@ -53,7 +52,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.endEditing(true)
         searchNews(with: searchTextField.searchTextField.text)
-        print("tapped")
         return true
     }
     
@@ -61,6 +59,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         guard let query = with,
               !query.trimmingCharacters(in: .whitespaces).isEmpty,
               query.trimmingCharacters(in: .whitespaces).count >= 3 else {
+            let alert = UIAlertController(title: "", message: "Search request must contain at least 3 symbols", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { (action) in }
+            alert.addAction(action)
+            present(alert, animated: true)
             return
         }
         RequestsManager.shared.getNewsByKeyWord(keyWord: query) { [weak self] result in
@@ -80,6 +82,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     
     
     //MARK: - Configuring UI Elements
+    
+    // hiding keyboard
+    private func configureTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func setupDelegates() {
+        collectionView.delegateCollectionDidSelect = self
+        searchTextField.searchTextField.delegate = self
+    }
     
     private func setupViews() {
         configureToptitleLabel()
@@ -185,7 +198,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
     
     func getNewsFromCategory(categoryName: String) {
         if categoryName == "Random" {
-            RequestsManager.shared.getTopNews { [weak self] result in
+            RequestsManager.shared.getRandomNews { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let newsData):

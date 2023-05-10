@@ -102,9 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				87679D572A0B6958007BC7C7 /* Cells */,
-				87679D562A0B6958007BC7C7 /* HomeScreen */,
-				578757642A0AEBD700AC49F3 /* BookmarksScreen */,
-				87679D6A2A0BAF9E007BC7C7 /* RecommendedScreen */,
+				87679D6D2A0C23E9007BC7C7 /* Screens */,
 				871798372A097999003921BF /* Network */,
 				17BE9C472A0952830062B6EA /* Models */,
 				17BE9C462A09525F0062B6EA /* Application */,
@@ -210,6 +208,16 @@
 				87679D6B2A0BAFC0007BC7C7 /* RecommendedViewController.swift */,
 			);
 			path = RecommendedScreen;
+			sourceTree = "<group>";
+		};
+		87679D6D2A0C23E9007BC7C7 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				87679D562A0B6958007BC7C7 /* HomeScreen */,
+				578757642A0AEBD700AC49F3 /* BookmarksScreen */,
+				87679D6A2A0BAF9E007BC7C7 /* RecommendedScreen */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
