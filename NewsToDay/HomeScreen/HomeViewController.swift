@@ -81,7 +81,8 @@ class HomeViewController: UIViewController  {
     }
     
     @objc func seeAllPressed(sender: UIButton) {
-        
+        let recommendedVC = RecommendedViewController()
+        present(recommendedVC, animated: true)
     }
     
     //MARK: - Constraints
