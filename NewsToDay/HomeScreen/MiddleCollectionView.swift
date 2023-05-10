@@ -12,7 +12,7 @@ class MiddleCollectionView: UIView {
     
     var collectionView: UICollectionView!
     
-    var news: [Article] = [] {
+    var news: [Result] = [] {
         didSet {
             print("articles network")
             DispatchQueue.main.async {

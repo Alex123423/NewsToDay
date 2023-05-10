@@ -63,10 +63,10 @@ class NewsCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(_ newsData: Article) {
+    func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
-            guard let imageURL = newsData.urlToImage else { return }
+            guard let imageURL = newsData.imageURL else { return }
             self.newsImageView.kf.setImage(with: URL(string: imageURL))
         }
     }

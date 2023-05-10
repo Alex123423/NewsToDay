@@ -141,7 +141,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
             case .success(let newsData):
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
-                    self.middleCollectionView.news = newsData.articles
+                    self.middleCollectionView.news = newsData.results
                     self.middleCollectionView.collectionView.reloadData()
                     
                 }
@@ -159,7 +159,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
                 case .success(let newsData):
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
-                        self.middleCollectionView.news = newsData.articles
+                        self.middleCollectionView.news = newsData.results
                         self.middleCollectionView.collectionView.reloadData()
                         
                     }
@@ -176,7 +176,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
                 case .success(let newsData):
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
-                        self.middleCollectionView.news.append(contentsOf: newsData.articles)
+                        self.middleCollectionView.news.append(contentsOf: newsData.results)
                         self.middleCollectionView.collectionView.reloadData()
                     }
                 case .failure(let error):

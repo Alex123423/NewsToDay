@@ -12,7 +12,7 @@ final class RequestsManager {
     static let shared = RequestsManager()
     private init() { }
     
-    func getTopNews(completion: @escaping (Result<NewsModel, Error>) -> Void) {
+    func getTopNews(completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: API.popular.url) { data, response, error in
                 if let error = error {
@@ -30,7 +30,7 @@ final class RequestsManager {
             task.resume()
         }
     
-    func getNewsByCategory(category: String, completion: @escaping (Result<NewsModel, Error>) -> Void) {
+    func getNewsByCategory(category: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
         let session = URLSession(configuration: .default)
         let url = API.byCategory(category: category).url
         let task = session.dataTask(with: url) { data, response, error in
@@ -49,7 +49,7 @@ final class RequestsManager {
         task.resume()
     }
     
-    func getNewsByKeyWord(keyWord: String, completion: @escaping (Result<NewsModel, Error>) -> Void) {
+    func getNewsByKeyWord(keyWord: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
         let session = URLSession(configuration: .default)
         let url = API.search(keyWord: keyWord).url
         let task = session.dataTask(with: url) { data, response, error in
