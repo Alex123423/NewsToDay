@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func bookmarmController() -> UINavigationController {
-        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        let navigationVC = UINavigationController(rootViewController: BookmarksViewController())
         navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "bookmark"), tag: 2)
         return navigationVC
     }
