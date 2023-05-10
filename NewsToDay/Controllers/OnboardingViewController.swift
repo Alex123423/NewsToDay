@@ -9,7 +9,6 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
-    var onCompletion: (() -> Void)?
     
     private let slides: [Slide] = [
         Slide(image: UIImage(named: "image1"), title: "slidetitle1", description: "slidedescript1"),
@@ -126,11 +125,8 @@ class OnboardingViewController: UIViewController {
     
     @objc private func nextButtonTapped() {
         if currentIndex == slides.count - 1 {
-            let scene = UIApplication.shared.connectedScenes.first
-            if let sceneDelegate = scene?.delegate as? SceneDelegate {
-                let tabBarController = TabBarController()
-                sceneDelegate.window?.rootViewController = tabBarController.createTabBar()
-            }
+            let vc = HomeViewController()
+            navigationController?.pushViewController(vc, animated: true)
         } else {
             currentIndex += 1
             updateUI()
@@ -143,7 +139,6 @@ class OnboardingViewController: UIViewController {
         let title: String
         let description: String
     }
-    
 }
 
 extension OnboardingViewController: UIScrollViewDelegate {
