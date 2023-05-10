@@ -11,7 +11,7 @@ import SnapKit
 
 class SearchTextField: UIView {
     let searchImageViewImage = UIImage(systemName: "magnifyingglass")
-    var textFieldPlaceHolder = "Search"
+    var textFieldPlaceHolder = "Search".localized
     
     lazy var containerView = UIView()
     lazy var stackView = UIStackView()

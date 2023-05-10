@@ -46,7 +46,7 @@ class HomeViewController: UIViewController  {
     
     private func configureToptitleLabel() {
         view.addSubview(topTitleLabel)
-        topTitleLabel.text = "Browse"
+        topTitleLabel.text = "Browse".localized
         topTitleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         topTitleLabel.textColor = .black
         topTitleLabel.textAlignment = .left
@@ -55,7 +55,7 @@ class HomeViewController: UIViewController  {
     
     private func configureTopSublabel() {
         view.addSubview(topSublabel)
-        topSublabel.text = "Discover things of this world"
+        topSublabel.text = "Discover things of this world".localized
         topSublabel.font = .systemFont(ofSize: 16)
         topSublabel.textColor = UIColor(named: Resources.Colors.gray)
         topSublabel.textAlignment = .left
@@ -64,7 +64,7 @@ class HomeViewController: UIViewController  {
     
     private func configureBottomLabel() {
         view.addSubview(bottomTitleLabel)
-        bottomTitleLabel.text = "Recommended for you"
+        bottomTitleLabel.text = "Recommended for you".localized
         bottomTitleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         bottomTitleLabel.textColor = .black
         bottomTitleLabel.textAlignment = .left
@@ -75,7 +75,7 @@ class HomeViewController: UIViewController  {
         view.addSubview(seeAllButton)
         seeAllButton.titleLabel?.font = .systemFont(ofSize: 14)
         seeAllButton.tintColor = UIColor(named: Resources.Colors.gray)
-        seeAllButton.setTitle("See all", for: .normal)
+        seeAllButton.setTitle("See all".localized, for: .normal)
         seeAllButton.addTarget(self, action: #selector(seeAllPressed), for: .touchUpInside)
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false
     }

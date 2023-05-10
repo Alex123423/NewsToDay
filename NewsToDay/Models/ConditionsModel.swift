@@ -9,12 +9,30 @@ import Foundation
 
 struct Rules {
     let rules = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Welcome to our news service! These terms and conditions outline the rules and regulations for the use of our news service.
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+By using our news service, we assume you accept these terms and conditions in full. If you disagree with these terms and conditions, you must not use our news service.
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+License and Use of Our Service
 
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-"""
+Our news service is licensed to you for your personal, non-commercial use only. You must not use our news service for any commercial purpose without our prior written consent.
+
+You must not use our news service in any way that causes, or may cause, damage to the news service or impairment of the availability or accessibility of the news service; or in any way which is unlawful, illegal, fraudulent or harmful, or in connection with any unlawful, illegal, fraudulent or harmful purpose or activity.
+
+Accuracy of Information
+
+We take all reasonable steps to ensure the accuracy of the information on our news service. However, we do not guarantee or warrant the accuracy, reliability, completeness or timeliness of the information provided. The information on our news service is for general information purposes only and should not be relied upon or used as the sole basis for making decisions.
+
+Intellectual Property
+
+The content on our news service, including but not limited to text, graphics, images, and software, is the property of our news service and is protected by intellectual property laws. You must not use, reproduce, modify, distribute or republish any content from our news service without our prior written consent.
+
+Changes to Terms and Conditions
+
+We reserve the right to make changes to these terms and conditions at any time without prior notice. Your continued use of our news service after any changes have been made constitutes your acceptance of the new terms and conditions.
+
+Governing Law
+
+These terms and conditions are governed by and construed in accordance with the laws of [insert country and state/province]. Any disputes arising under or in connection with these terms and conditions shall be subject to the exclusive jurisdiction of the courts located in Russia.
+""".localized
 }
