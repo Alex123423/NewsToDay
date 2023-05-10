@@ -118,7 +118,7 @@ class ArticleViewController: UIViewController {
 }
 
 //  MARK: -  Private Methods
-extension ViewController {
+extension ArticleViewController {
   private func setViews() {
     mainView.addSubview(imageView)
     mainView.addSubview(themeButton)
@@ -183,3 +183,4 @@ extension ViewController {
     }
   }
 }
+
