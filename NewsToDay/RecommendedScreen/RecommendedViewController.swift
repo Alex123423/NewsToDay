@@ -21,7 +21,7 @@ class RecommendedViewController: UIViewController {
     
     private func configureToptitleLabel() {
         view.addSubview(topTitleLabel)
-        topTitleLabel.text = "Recommended for you"
+        topTitleLabel.text = "Recommended for you".localized
         topTitleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         topTitleLabel.textColor = .black
         topTitleLabel.textAlignment = .left

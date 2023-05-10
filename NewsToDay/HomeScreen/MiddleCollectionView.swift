@@ -14,7 +14,6 @@ class MiddleCollectionView: UIView {
     
     var news: [Result] = [] {
         didSet {
-            print("articles network")
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }

@@ -64,7 +64,7 @@ class BookmarksView: UIView {
     
     private func configureToptitleLabel() {
         self.addSubview(topTitleLabel)
-        topTitleLabel.text = "Bookmarks"
+        topTitleLabel.text = "Bookmarks".localized
         topTitleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         topTitleLabel.textColor = .black
         topTitleLabel.textAlignment = .left
@@ -73,7 +73,7 @@ class BookmarksView: UIView {
     
     private func configureTopSublabel() {
         self.addSubview(topSublabel)
-        topSublabel.text = "Saved articles to the library"
+        topSublabel.text = "Saved articles to the library".localized
         topSublabel.font = .systemFont(ofSize: 16)
         topSublabel.textColor = UIColor(named: Resources.Colors.gray)
         topSublabel.textAlignment = .left
@@ -82,7 +82,7 @@ class BookmarksView: UIView {
     
     private func configureEmptyLabel() {
         self.addSubview(emptyLabel)
-        emptyLabel.text = "You haven't saved any articles yet. Start reading and bookmarking them now"
+        emptyLabel.text = "You haven't saved any articles yet. Start reading and bookmarking them now".localized
         emptyLabel.numberOfLines = 0
         emptyLabel.font = .systemFont(ofSize: 16)
         emptyLabel.textColor = UIColor(named: Resources.Colors.darkGray)
