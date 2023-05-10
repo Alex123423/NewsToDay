@@ -9,7 +9,6 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
-    
     private let slides: [Slide] = [
         Slide(image: UIImage(named: "image1"), title: "slidetitle1", description: "slidedescript1"),
         Slide(image: UIImage(named: "image2"), title: "slidetitle2", description: "slidedescript2"),

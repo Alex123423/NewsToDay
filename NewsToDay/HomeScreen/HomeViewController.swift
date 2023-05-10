@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         collectionView.delegateCollectionDidSelect = self
         randomNews()
         searchTextField.searchTextField.delegate = self
+        print(API.search(keyWord: "trumparrest").url)
     }
     
     // get news for random category
@@ -48,6 +49,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         }
     }
     
+    //get news for keyWord specified in search field
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.endEditing(true)
         searchNews(with: searchTextField.searchTextField.text)
@@ -65,7 +67,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             guard let self = self else { return }
             switch result {
             case .success(let newsData):
-                print(newsData)
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
@@ -182,7 +183,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
 
 extension HomeViewController: CollectionDidSelectProtocol {
     
-    
     func getNewsFromCategory(categoryName: String) {
         if categoryName == "Random" {
             RequestsManager.shared.getTopNews { [weak self] result in
@@ -201,8 +201,6 @@ extension HomeViewController: CollectionDidSelectProtocol {
             }
         } else {
             RequestsManager.shared.getNewsByCategory(category: categoryName) { [weak self] result in
-                print(categoryName)
-                print(result)
                 guard let self = self else { return }
                 switch result {
                 case .success(let newsData):
