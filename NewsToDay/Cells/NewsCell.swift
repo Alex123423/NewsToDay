@@ -44,6 +44,16 @@ class NewsCell: UICollectionViewCell {
         return label
     }()
     
+    private var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Without category"
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+       return label
+    }()
+    
     lazy var favouriteButton: UIButton = {
         let button = UIButton()
         button.tintColor = .white
@@ -66,6 +76,7 @@ class NewsCell: UICollectionViewCell {
     func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
+            self.categoryLabel.text = newsData.category?.first?.uppercased() ?? "Without category"
             if let imageURL = newsData.imageURL {
                 self.newsImageView.kf.setImage(with: URL(string: imageURL))
             } else {
@@ -78,6 +89,7 @@ class NewsCell: UICollectionViewCell {
         contentView.addSubview(newsImageView)
         contentView.addSubview(favouriteButton)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(categoryLabel)
     }
     
     private func setupConstraints() {
@@ -90,6 +102,9 @@ class NewsCell: UICollectionViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: -15),
             titleLabel.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: -24),
+            
+            categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: 15),
+            categoryLabel.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5),
             
             favouriteButton.heightAnchor.constraint(equalToConstant: 25),
             favouriteButton.widthAnchor.constraint(equalToConstant: 25),

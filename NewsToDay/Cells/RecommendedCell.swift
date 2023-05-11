@@ -16,6 +16,7 @@ class RecommendedCell: UITableViewCell {
     
     private let newsImageView = UIImageView()
     private let newsTitleLabel = UILabel()
+    private let categoryLabel = UILabel()
     private let favouriteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,10 +32,11 @@ class RecommendedCell: UITableViewCell {
     
     func configureCell(_ article: Result) {
         self.newsTitleLabel.text = article.title
+        self.categoryLabel.text = article.category?.first?.capitalized ?? "Without category"
         if let imageURL = article.imageURL, let url = URL(string: imageURL) {
             self.newsImageView.kf.setImage(with: url)
         } else {
-            self.newsImageView.image = UIImage(named: "CellImage")
+            self.newsImageView.image = UIImage(named: "NoImage")
         }
     }
     
@@ -68,9 +70,17 @@ class RecommendedCell: UITableViewCell {
         newsTitleLabel.text = "The latest situation in the presedential election"
         newsTitleLabel.numberOfLines = 0
         newsTitleLabel.textAlignment = .left
-        newsTitleLabel.font = UIFont(name: "Arial", size: 16)
+        newsTitleLabel.font = UIFont.systemFont(ofSize: 16)
         newsTitleLabel.textColor = .black
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func configureCategoryLabel() {
+        categoryLabel.text = "Without category"
+        categoryLabel.textAlignment = .left
+        categoryLabel.font = UIFont.systemFont(ofSize: 14)
+        categoryLabel.textColor = .black
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
@@ -80,10 +90,12 @@ extension RecommendedCell {
     func setupView() {
         contentView.addSubview(newsImageView)
         contentView.addSubview(newsTitleLabel)
+        contentView.addSubview(categoryLabel)
         contentView.addSubview(favouriteButton)
         configureFavouriteButton()
         configureNewsImageView()
         configureTitleLabel()
+        configureCategoryLabel()
     }
     
     
@@ -97,6 +109,9 @@ extension RecommendedCell {
             newsTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -15),
             newsTitleLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: 15),
             newsTitleLabel.centerYAnchor.constraint(equalTo: newsImageView.centerYAnchor),
+            
+            categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: 15),
+            categoryLabel.bottomAnchor.constraint(equalTo: newsTitleLabel.topAnchor, constant: -5),
             
             favouriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             favouriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
