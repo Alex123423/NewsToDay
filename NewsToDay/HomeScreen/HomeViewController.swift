@@ -27,7 +27,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         setupConstraints()
         randomNews()
         setupDelegates()
-//        configureTapGesture()
     }
     
     // get news for random category
@@ -39,8 +38,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
-                    self.middleCollectionView.collectionView.reloadData()
-                    
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
@@ -72,7 +69,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
-                    self.middleCollectionView.collectionView.reloadData()
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
@@ -205,8 +201,6 @@ extension HomeViewController: CollectionDidSelectProtocol {
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
                         self.middleCollectionView.news = newsData.results
-                        self.middleCollectionView.collectionView.reloadData()
-                        
                     }
                 case .failure(let error):
                     print("Error fetching news data: \(error)")
@@ -220,7 +214,6 @@ extension HomeViewController: CollectionDidSelectProtocol {
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
                         self.middleCollectionView.news.append(contentsOf: newsData.results)
-                        self.middleCollectionView.collectionView.reloadData()
                     }
                 case .failure(let error):
                     print(error)
