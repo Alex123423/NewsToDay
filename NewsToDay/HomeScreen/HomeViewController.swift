@@ -27,7 +27,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         setupConstraints()
         randomNews()
         setupDelegates()
-//        configureTapGesture()
     }
     
     // get news for random category
@@ -39,8 +38,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
-                    self.middleCollectionView.collectionView.reloadData()
-                    
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
@@ -54,10 +51,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         searchNews(with: searchTextField.searchTextField.text)
         return true
     }
-    
+ 
     func searchNews(with: String?) {
-        guard let query = with,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+        guard let query = with, !query.trimmingCharacters(in: .whitespaces).isEmpty,
               query.trimmingCharacters(in: .whitespaces).count >= 3 else {
             let alert = UIAlertController(title: "", message: "Search request must contain at least 3 symbols", preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .default) { (action) in }
@@ -65,29 +61,45 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             present(alert, animated: true)
             return
         }
-        RequestsManager.shared.getNewsByKeyWord(keyWord: query) { [weak self] result in
+        
+        var searchQuery = query
+        let keywords = query.components(separatedBy: " ")
+        if keywords.count > 1 {
+            if query.contains("\"") {
+                let phrase = query.replacingOccurrences(of: "\"", with: "")
+                searchQuery = "\"\(phrase)\""
+            } else if query.contains(" NOT ") {
+                let parts = query.components(separatedBy: " NOT ")
+                searchQuery = "\(parts[0]) NOT \(parts[1])"
+            } else if query.contains(" OR ") {
+                let keywords = query.components(separatedBy: " OR ")
+                searchQuery = "\(keywords.joined(separator: " OR "))"
+            } else if query.contains(" AND ") {
+                let keywords = query.components(separatedBy: " AND ")
+                searchQuery = "\(keywords.joined(separator: " AND "))"
+            }
+        }
+        
+        RequestsManager.shared.getNewsByKeyWord(keyWord: searchQuery) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let newsData):
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
-                    self.middleCollectionView.collectionView.reloadData()
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
             }
         }
     }
-    
-    
     //MARK: - Configuring UI Elements
     
     // hiding keyboard
-    private func configureTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tapGesture)
-    }
+    //    private func configureTapGesture() {
+    //        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+    //        view.addGestureRecognizer(tapGesture)
+    //    }
     
     func setupDelegates() {
         collectionView.delegateCollectionDidSelect = self
@@ -205,8 +217,6 @@ extension HomeViewController: CollectionDidSelectProtocol {
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
                         self.middleCollectionView.news = newsData.results
-                        self.middleCollectionView.collectionView.reloadData()
-                        
                     }
                 case .failure(let error):
                     print("Error fetching news data: \(error)")
@@ -220,7 +230,6 @@ extension HomeViewController: CollectionDidSelectProtocol {
                     self.middleCollectionView.news.removeAll()
                     DispatchQueue.main.async {
                         self.middleCollectionView.news.append(contentsOf: newsData.results)
-                        self.middleCollectionView.collectionView.reloadData()
                     }
                 case .failure(let error):
                     print(error)

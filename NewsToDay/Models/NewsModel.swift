@@ -24,7 +24,7 @@ struct Result: Codable {
     let description, content, pubDate: String?
     let imageURL: String?
     let sourceID: String?
-    let category: [Category]?
+    let category: [String]?
     let country: [String]?
     let language: String?
 
@@ -38,20 +38,20 @@ struct Result: Codable {
     }
 }
 
-enum Category: String, Codable {
-    case business = "business"
-    case politics = "politics"
-    case top = "top"
-    case entertainment = "entertainment"
-    case environment = "environment"
-    case food = "food"
-    case health = "health"
-    case science = "science"
-    case sports = "sports"
-    case technology = "technology"
-    case tourism = "tourism"
-    case world = "world"
-}
+//enum Category: String, Codable {
+//    case business = "business"
+//    case politics = "politics"
+//    case top = "top"
+//    case entertainment = "entertainment"
+//    case environment = "environment"
+//    case food = "food"
+//    case health = "health"
+//    case science = "science"
+//    case sports = "sports"
+//    case technology = "technology"
+//    case tourism = "tourism"
+//    case world = "world"
+//}
 
 // MARK: - Encode/decode helpers
 

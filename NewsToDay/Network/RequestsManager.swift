@@ -13,22 +13,22 @@ final class RequestsManager {
     private init() { }
     
     func getRandomNews(completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: API.popular.url) { data, response, error in
-                if let error = error {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: API.popular.url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let receivedNews = try decoder.decode(NewsModel.self, from: data)
+                    completion(.success(receivedNews))
+                } catch {
                     completion(.failure(error))
-                } else if let data = data {
-                    do {
-                        let decoder = JSONDecoder()
-                        let receivedNews = try decoder.decode(NewsModel.self, from: data)
-                        completion(.success(receivedNews))
-                    } catch {
-                        completion(.failure(error))
-                    }
                 }
             }
-            task.resume()
         }
+        task.resume()
+    }
     
     func getNewsByCategory(category: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
         let session = URLSession(configuration: .default)
@@ -48,10 +48,11 @@ final class RequestsManager {
         }
         task.resume()
     }
-    
+
     func getNewsByKeyWord(keyWord: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
         let session = URLSession(configuration: .default)
         let url = API.search(keyWord: keyWord).url
+        print(url)
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
