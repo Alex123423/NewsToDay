@@ -88,6 +88,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17439FE22A0DBD2B002E286D /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				17439FE32A0DBD3A002E286D /* LaunchScreen */,
+				17439FE42A0DBD46002E286D /* OnboardingScreen */,
+				87679D562A0B6958007BC7C7 /* HomeScreen */,
+				87679D6A2A0BAF9E007BC7C7 /* RecommendedScreen */,
+				578757642A0AEBD700AC49F3 /* BookmarksScreen */,
+				68E25F872A0B7F3F002163B3 /* ArticleScreen */,
+				17439FE52A0DBDA8002E286D /* UserProfileScreen */,
+				17439FE62A0DBDCE002E286D /* TermsConditionsScreen */,
+				17439FE72A0DBDE5002E286D /* LanguageScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		17439FE32A0DBD3A002E286D /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		17439FE42A0DBD46002E286D /* OnboardingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				578757452A09659400AC49F3 /* OnboardingViewController.swift */,
+			);
+			path = OnboardingScreen;
+			sourceTree = "<group>";
+		};
+		17439FE52A0DBDA8002E286D /* UserProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D696A2A0A5AB500A502CE /* UserProfileController.swift */,
+			);
+			path = UserProfileScreen;
+			sourceTree = "<group>";
+		};
+		17439FE62A0DBDCE002E286D /* TermsConditionsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D696C2A0A5ADB00A502CE /* TermsConditionsController.swift */,
+			);
+			path = TermsConditionsScreen;
+			sourceTree = "<group>";
+		};
+		17439FE72A0DBDE5002E286D /* LanguageScreen */ = {
+			isa = PBXGroup;
+			children = (
+				578757622A0AD82B00AC49F3 /* LanguageViewController.swift */,
+			);
+			path = LanguageScreen;
+			sourceTree = "<group>";
+		};
 		17BE9C262A0950DC0062B6EA = {
 			isa = PBXGroup;
 			children = (
@@ -107,15 +163,11 @@
 		17BE9C312A0950DC0062B6EA /* NewsToDay */ = {
 			isa = PBXGroup;
 			children = (
-				68E25F872A0B7F3F002163B3 /* ArticleScreen */,
-				87679D572A0B6958007BC7C7 /* Cells */,
-				87679D562A0B6958007BC7C7 /* HomeScreen */,
-				578757642A0AEBD700AC49F3 /* BookmarksScreen */,
-				87679D6A2A0BAF9E007BC7C7 /* RecommendedScreen */,
-				871798372A097999003921BF /* Network */,
-				17BE9C472A0952830062B6EA /* Models */,
 				17BE9C462A09525F0062B6EA /* Application */,
-				17BE9C482A0952AD0062B6EA /* Controllers */,
+				17BE9C472A0952830062B6EA /* Models */,
+				871798372A097999003921BF /* Network */,
+				17439FE22A0DBD2B002E286D /* Screens */,
+				17BE9C482A0952AD0062B6EA /* TabBar */,
 				578757562A0AAF6400AC49F3 /* Localization */,
 				17BE9C492A0952D30062B6EA /* Resources */,
 			);
@@ -140,17 +192,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		17BE9C482A0952AD0062B6EA /* Controllers */ = {
+		17BE9C482A0952AD0062B6EA /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				578757452A09659400AC49F3 /* OnboardingViewController.swift */,
-				17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */,
-				EC7D696A2A0A5AB500A502CE /* UserProfileController.swift */,
-				578757622A0AD82B00AC49F3 /* LanguageViewController.swift */,
-				EC7D696C2A0A5ADB00A502CE /* TermsConditionsController.swift */,
 				57BEFBBC2A0BF51D0073C090 /* TabBar.swift */,
 			);
-			path = Controllers;
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		17BE9C492A0952D30062B6EA /* Resources */ = {
@@ -202,6 +249,7 @@
 		87679D562A0B6958007BC7C7 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				87679D572A0B6958007BC7C7 /* Cells */,
 				87679D5D2A0B6958007BC7C7 /* HomeViewController.swift */,
 				87679D5B2A0B6958007BC7C7 /* MiddleCollectionView.swift */,
 				87679D5C2A0B6958007BC7C7 /* RecommendedTableView.swift */,
