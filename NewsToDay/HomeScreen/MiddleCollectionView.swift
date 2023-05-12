@@ -62,6 +62,12 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.identifier, for: indexPath) as? NewsCell else {
             return UICollectionViewCell()
         }
+        let selectedNews = news[indexPath.row]
+        if BookmarksManager.shared.favouriteArray.contains(selectedNews) {
+            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark.fill"), for: .normal)
+        } else {
+            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark"), for: .normal)
+        }
         cell.configureCell(news[indexPath.row])
         return cell
     }

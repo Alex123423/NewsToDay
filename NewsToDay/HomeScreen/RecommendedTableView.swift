@@ -51,7 +51,6 @@ extension RecommendedTableView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
             return UITableViewCell()
         }
-        cell.selectionStyle = .none
         return cell
     }
     

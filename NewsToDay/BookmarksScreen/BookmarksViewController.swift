@@ -11,8 +11,6 @@ class BookmarksViewController: UIViewController {
     
     private let bookmarksView = BookmarksView()
 
-    var savedNews: [Result] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -21,13 +19,8 @@ class BookmarksViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if savedNews.isEmpty {
-            bookmarksView.tableView.isHidden = true
-            bookmarksView.emptyLabel.isHidden = false
-            bookmarksView.circleView.isHidden = false
-        } else {
-            bookmarksView.emptyLabel.isHidden = true
-            bookmarksView.circleView.isHidden = true
+        DispatchQueue.main.async {
+            self.bookmarksView.tableView.reloadData()
         }
     }
     

@@ -91,7 +91,7 @@ class BookmarksView: UIView {
     }
     
     override func layoutSubviews() {
-            super.layoutSubviews()
+        super.layoutSubviews()
         NSLayoutConstraint.activate([
             topTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             topTitleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -99,14 +99,14 @@ class BookmarksView: UIView {
             topSublabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             topSublabel.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor, constant: 10),
             
-            tableView.topAnchor.constraint(equalTo: topSublabel.bottomAnchor, constant: 20),
+            tableView.topAnchor.constraint(equalTo: topSublabel.bottomAnchor, constant: 30),
             tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
             tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             
             circleView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             circleView.centerYAnchor.constraint(equalTo: self.topAnchor, constant: (self.frame.size.height * 0.5) - 40),
-
+            
             emptyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
             emptyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             emptyLabel.topAnchor.constraint(equalTo: circleView.bottomAnchor, constant: 25)
@@ -118,7 +118,15 @@ class BookmarksView: UIView {
 extension BookmarksView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if BookmarksManager.shared.favouriteArray.isEmpty {
+            tableView.isHidden = true
+            emptyLabel.isHidden = false
+            circleView.isHidden = false
+        } else {
+            emptyLabel.isHidden = true
+            circleView.isHidden = true
+        }
+        return BookmarksManager.shared.favouriteArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,6 +134,15 @@ extension BookmarksView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
+        let selectedNews = BookmarksManager.shared.favouriteArray[indexPath.row]
+        if BookmarksManager.shared.favouriteArray.contains(selectedNews) {
+            print("alredy here")
+            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark,fill"), for: .normal)
+        } else {
+            print("doesn't contain")
+            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark"), for: .normal)
+        }
+        cell.configure(selectedNews)
         return cell
     }
     

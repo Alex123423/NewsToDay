@@ -12,7 +12,7 @@ class NewsCell: UICollectionViewCell {
     
     var liked: Bool = false
     static let identifier = "NewsCell"
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -67,9 +67,14 @@ class NewsCell: UICollectionViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
+            BookmarksManager.shared.favouriteArray.removeAll { $0 == BookmarksManager.shared.currentNews }
+            print("Массив избранное =", BookmarksManager.shared.favouriteArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
+            BookmarksManager.shared.favouriteArray.append(BookmarksManager.shared.currentNews!)
+            print("Массив избранное =", BookmarksManager.shared.favouriteArray.count)
+
         }
     }
     
@@ -82,6 +87,7 @@ class NewsCell: UICollectionViewCell {
             } else {
                 self.newsImageView.image = UIImage(named: "NoImage")
             }
+            BookmarksManager.shared.currentNews = newsData
         }
     }
     

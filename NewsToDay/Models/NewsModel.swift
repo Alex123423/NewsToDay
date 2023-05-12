@@ -15,7 +15,7 @@ struct NewsModel: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable, Equatable {
     let title: String?
     let link: String?
     let keywords: [String]?
