@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		179AF90E2A0DC2BC00FA41F3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179AF90D2A0DC2BC00FA41F3 /* Launch Screen.storyboard */; };
 		17BE9C332A0950DC0062B6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C322A0950DC0062B6EA /* AppDelegate.swift */; };
 		17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */; };
 		17BE9C372A0950DC0062B6EA /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE9C362A0950DC0062B6EA /* LaunchScreenViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		179AF90D2A0DC2BC00FA41F3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		17BE9C2F2A0950DC0062B6EA /* NewsToDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BE9C322A0950DC0062B6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17BE9C342A0950DC0062B6EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			children = (
 				17BE9C4A2A09578B0062B6EA /* Resources.swift */,
 				17BE9C3B2A0950E50062B6EA /* Assets.xcassets */,
+				179AF90D2A0DC2BC00FA41F3 /* Launch Screen.storyboard */,
 				17BE9C402A0950E50062B6EA /* Info.plist */,
 			);
 			path = Resources;
@@ -343,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179AF90E2A0DC2BC00FA41F3 /* Launch Screen.storyboard in Resources */,
 				17BE9C3C2A0950E50062B6EA /* Assets.xcassets in Resources */,
 				578757592A0AAFB900AC49F3 /* Localizable.strings in Resources */,
 			);
@@ -525,7 +529,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsToDay/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -556,7 +560,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsToDay/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
