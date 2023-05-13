@@ -17,6 +17,7 @@ class RecommendedViewController: UIViewController {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
+        getRecommendedNews()
     }
     
     private func configureToptitleLabel() {
@@ -26,6 +27,22 @@ class RecommendedViewController: UIViewController {
         topTitleLabel.textColor = .black
         topTitleLabel.textAlignment = .left
         topTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func getRecommendedNews() {
+        RequestsManager.shared.getNewsByRecommend(category: CategoriesManager.categories.joined(separator: ",")) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                DispatchQueue.main.async {
+                    self.tableView.news = newsData.results
+                    self.tableView.reloadData()
+                    print("get news")
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
     }
     
     private func setupViews() {

@@ -27,8 +27,6 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     
     private let reuseIdentifier = "CategoriesOnCell"
     private var collectionView: UICollectionView
-    private var selectedCategories = Set<String>()
-    private let maxSelections = 5
     weak var parentViewController: CategoriesOnboardingVC?
     
     override init(frame: CGRect) {
@@ -46,7 +44,6 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     func configureCollection() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,13 +102,11 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         } else {
             cell.label.text = category
         }
-        cell.isSelected = selectedCategories.contains(category)
-        if selectedCategories.contains(category) {
-            cell.backgroundColor = .blue
-            cell.label.textColor = .white
+        
+        if CategoriesManager.categories.contains(category) {
+            cell.activate()
         } else {
-            cell.backgroundColor = .white
-            cell.label.textColor = .black
+            cell.deactivate()
         }
         return cell
     }
@@ -122,37 +117,24 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let category = Array(categories.keys)[indexPath.row]
-        if selectedCategories.contains(category) {
+        let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell
+        if CategoriesManager.categories.contains(category) {
             // Если категория уже выбрана, снимаем выделение и удаляем из выбранных
-            selectedCategories.remove(category)
+            CategoriesManager.shared.delete(category: category)
             collectionView.deselectItem(at: indexPath, animated: true)
-        } else if selectedCategories.count < maxSelections {
+            cell?.deactivate()
+    
+        } else if CategoriesManager.categories.count < 5 {
             // Если категория еще не выбрана и можно выбрать еще категории,
             // добавляем в выбранные и устанавливаем выделение
-            selectedCategories.insert(category)
-            clipsToBounds = true
+            CategoriesManager.shared.add(category: category)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-        } else {
+            cell?.activate()
+        } else if CategoriesManager.categories.count == 5 {
             // Иначе выводим сообщение об ошибке
-            let alert = UIAlertController(title: "Error", message: "You can select up to \(maxSelections) categories", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            parentViewController?.present(alert, animated: true, completion: nil)
+            cell?.error()
         }
-        
-        // Обновляем все ячейки
-        collectionView.visibleCells.forEach { cell in
-            guard let indexPath = collectionView.indexPath(for: cell) else { return }
-            let category = Array(categories.keys)[indexPath.row]
-            cell.isSelected = selectedCategories.contains(category)
-            if selectedCategories.contains(category) {
-                cell.backgroundColor = .blue
-                
-            } else {
-                cell.backgroundColor = .white
-                
-            }
-        }
-        print(selectedCategories)
+        print(CategoriesManager.categories.joined(separator: ","))
     }
     
     
@@ -161,7 +143,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         let category = Array(categories.keys)[indexPath.row]
         
         // Удаляем выбранную категорию из массива
-        selectedCategories.remove(category)
+        CategoriesManager.shared.delete(category: category)
         
         // Обновляем ячейку
         if let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell {

@@ -40,7 +40,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
                     self.middleCollectionView.collectionView.reloadData()
-                    
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
