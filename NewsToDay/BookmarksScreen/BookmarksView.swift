@@ -41,9 +41,6 @@ class BookmarksView: UIView {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
-        tableView.dataSource = self
-        tableView.delegate = self
     }
     
     private func configureCircle() {
@@ -111,41 +108,5 @@ class BookmarksView: UIView {
             emptyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             emptyLabel.topAnchor.constraint(equalTo: circleView.bottomAnchor, constant: 25)
         ])
-    }
-}
-
-// MARK: - TableView Delegate
-extension BookmarksView: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if BookmarksManager.shared.favouriteArray.isEmpty {
-            tableView.isHidden = true
-            emptyLabel.isHidden = false
-            circleView.isHidden = false
-        } else {
-            emptyLabel.isHidden = true
-            circleView.isHidden = true
-        }
-        return BookmarksManager.shared.favouriteArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .none
-        let selectedNews = BookmarksManager.shared.favouriteArray[indexPath.row]
-        if BookmarksManager.shared.favouriteArray.contains(selectedNews) {
-            print("alredy here")
-            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark,fill"), for: .normal)
-        } else {
-            print("doesn't contain")
-            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark"), for: .normal)
-        }
-        cell.configure(selectedNews)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }

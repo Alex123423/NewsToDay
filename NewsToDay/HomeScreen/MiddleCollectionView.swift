@@ -22,7 +22,6 @@ class MiddleCollectionView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configureCollection()
         self.addSubview(collectionView)
         setupConstraints()
@@ -63,10 +62,10 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionViewCell()
         }
         let selectedNews = news[indexPath.row]
-        if BookmarksManager.shared.favouriteArray.contains(selectedNews) {
-            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark.fill"), for: .normal)
+        if BookmarksManager.favouriteArray.contains(selectedNews) {
+            cell.favouriteButton.setImage(UIImage(named: "bookmark.fill"), for: .normal)
         } else {
-            cell.favouriteButton.setBackgroundImage(UIImage(named: "bookmark"), for: .normal)
+            cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
         }
         cell.configureCell(news[indexPath.row])
         return cell

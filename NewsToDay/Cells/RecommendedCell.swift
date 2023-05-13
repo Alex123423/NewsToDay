@@ -13,7 +13,8 @@ class RecommendedCell: UITableViewCell {
     static let identifier = "RecommendedCell"
     
     var liked: Bool = false
-
+    var currentNews: Result?
+    
     private let newsImageView = UIImageView()
     private let newsTitleLabel = UILabel()
     private let categoryLabel = UILabel()
@@ -30,14 +31,15 @@ class RecommendedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ article: Result) {
-        self.newsTitleLabel.text = article.title
-        self.categoryLabel.text = article.category?.first?.capitalized ?? "Without category"
-        if let imageURL = article.imageURL, let url = URL(string: imageURL) {
+    func configureCell(_ newsData: Result) {
+        self.newsTitleLabel.text = newsData.title
+        self.categoryLabel.text = newsData.category?.first?.capitalized ?? "Without category"
+        if let imageURL = newsData.imageURL, let url = URL(string: imageURL) {
             self.newsImageView.kf.setImage(with: url)
         } else {
             self.newsImageView.image = UIImage(named: "NoImage")
         }
+        self.currentNews = newsData
     }
     
     func configureFavouriteButton() {
@@ -51,13 +53,13 @@ class RecommendedCell: UITableViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
-            BookmarksManager.shared.favouriteArray.removeAll{ $0 == BookmarksManager.shared.currentNews }
-            print("Массив избранное =", BookmarksManager.shared.favouriteArray.count)
+            BookmarksManager.favouriteArray.removeAll{ $0 == currentNews }
+            print("Массив избранное =", BookmarksManager.favouriteArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
-            BookmarksManager.shared.favouriteArray.append(BookmarksManager.shared.currentNews!)
-            print("Массив избранное =", BookmarksManager.shared.favouriteArray.count)
+            BookmarksManager.favouriteArray.append(currentNews!)
+            print("Массив избранное =", BookmarksManager.favouriteArray.count)
         }
     }
     
@@ -68,8 +70,9 @@ class RecommendedCell: UITableViewCell {
             newsImageView.image = UIImage(named: "NoImage")
         }
         self.newsTitleLabel.text = news.title
-        BookmarksManager.shared.currentNews = news
-//        layoutSubviews()
+        self.categoryLabel.text = news.category?.first?.capitalized
+        self.currentNews = news
+        layoutSubviews()
     }
     
     private func configureNewsImageView() {
