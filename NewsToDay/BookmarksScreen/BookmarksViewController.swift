@@ -19,7 +19,7 @@ class BookmarksViewController: UIViewController {
         bookmarksView.tableView.delegate = self
         bookmarksView.tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(BookmarksManager.favouriteArray.count)
@@ -51,7 +51,6 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if BookmarksManager.favouriteArray.isEmpty {
-            tableView.isHidden = true
             bookmarksView.emptyLabel.isHidden = false
             bookmarksView.circleView.isHidden = false
         } else {
@@ -73,11 +72,19 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
+        cell.delegateFavoriteButton = self
         cell.configure(savedNews)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+}
+
+extension BookmarksViewController: FavouriteButtonProtocol {
+    func favouriteButtonTapped() {
+        print("tapped")
+        self.bookmarksView.tableView.reloadData()
     }
 }
 

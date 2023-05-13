@@ -27,4 +27,6 @@ import Foundation
 struct BookmarksManager {
         
     static var favouriteArray: [Result] = []
+    
 }
+    

@@ -63,9 +63,9 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
         }
         let selectedNews = news[indexPath.row]
         if BookmarksManager.favouriteArray.contains(selectedNews) {
-            cell.favouriteButton.setImage(UIImage(named: "bookmark.fill"), for: .normal)
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         } else {
-            cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
         cell.configureCell(news[indexPath.row])
         return cell

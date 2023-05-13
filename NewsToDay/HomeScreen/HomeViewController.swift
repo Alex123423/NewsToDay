@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     //temporary code for updating table with recommendations
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recommendedTableView.tableView.reloadData()
+        middleCollectionView.collectionView.reloadData()
     }
     
     // get news for random category

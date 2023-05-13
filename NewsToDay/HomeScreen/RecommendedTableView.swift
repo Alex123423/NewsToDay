@@ -44,20 +44,13 @@ class RecommendedTableView: UIView {
 extension RecommendedTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return BookmarksManager.favouriteArray.count
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
             return UITableViewCell()
         }
-        let savedNews = BookmarksManager.favouriteArray[indexPath.row]
-        if BookmarksManager.favouriteArray.contains(savedNews) {
-            cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-        } else {
-            cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        }
-        cell.configure(savedNews)
         return cell
     }
     

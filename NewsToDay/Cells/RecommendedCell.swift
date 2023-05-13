@@ -8,9 +8,15 @@
 import UIKit
 import Kingfisher
 
+protocol FavouriteButtonProtocol: AnyObject {
+    func favouriteButtonTapped()
+}
+
 class RecommendedCell: UITableViewCell {
     
     static let identifier = "RecommendedCell"
+    
+    weak var delegateFavoriteButton: FavouriteButtonProtocol?
     
     var liked: Bool = false
     var currentNews: Result?
@@ -54,6 +60,7 @@ class RecommendedCell: UITableViewCell {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
             BookmarksManager.favouriteArray.removeAll{ $0 == currentNews }
+            
             print("Массив избранное =", BookmarksManager.favouriteArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
@@ -61,6 +68,7 @@ class RecommendedCell: UITableViewCell {
             BookmarksManager.favouriteArray.append(currentNews!)
             print("Массив избранное =", BookmarksManager.favouriteArray.count)
         }
+        delegateFavoriteButton?.favouriteButtonTapped()
     }
     
     func configure(_ news: Result) {
@@ -89,6 +97,8 @@ class RecommendedCell: UITableViewCell {
         newsTitleLabel.numberOfLines = 0
         newsTitleLabel.textAlignment = .left
         newsTitleLabel.font = UIFont.systemFont(ofSize: 16)
+        newsTitleLabel.adjustsFontSizeToFitWidth = true
+        newsTitleLabel.minimumScaleFactor = 0.7
         newsTitleLabel.textColor = .black
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -129,7 +139,7 @@ extension RecommendedCell {
             newsTitleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 5),
             
             categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: 15),
-            categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: -5),
+            categoryLabel.topAnchor.constraint(equalTo: topAnchor),
             
             favouriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             favouriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
