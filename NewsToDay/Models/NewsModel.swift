@@ -38,21 +38,6 @@ struct Result: Codable, Equatable {
     }
 }
 
-//enum Category: String, Codable {
-//    case business = "business"
-//    case politics = "politics"
-//    case top = "top"
-//    case entertainment = "entertainment"
-//    case environment = "environment"
-//    case food = "food"
-//    case health = "health"
-//    case science = "science"
-//    case sports = "sports"
-//    case technology = "technology"
-//    case tourism = "tourism"
-//    case world = "world"
-//}
-
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {

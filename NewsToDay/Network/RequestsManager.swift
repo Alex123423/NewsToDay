@@ -10,10 +10,11 @@ import Foundation
 final class RequestsManager {
     
     static let shared = RequestsManager()
+    private let session = URLSession(configuration: .default)
+
     private init() { }
     
     func getRandomNews(completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
-        let session = URLSession(configuration: .default)
         let task = session.dataTask(with: API.popular.url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -31,7 +32,6 @@ final class RequestsManager {
     }
     
     func getNewsByCategory(category: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
-        let session = URLSession(configuration: .default)
         let url = API.byCategory(category: category).url
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -50,9 +50,7 @@ final class RequestsManager {
     }
 
     func getNewsByKeyWord(keyWord: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
-        let session = URLSession(configuration: .default)
         let url = API.search(keyWord: keyWord).url
-        print(url)
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
