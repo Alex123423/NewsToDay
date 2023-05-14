@@ -16,7 +16,7 @@ class LanguageViewController: UIViewController{
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.setTitle("English", for: .normal)
+        button.setTitle("English".localized, for: .normal)
         button.configuration = .plain()
         button.configuration?.titlePadding = CGFloat(10)
         let font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -37,7 +37,7 @@ class LanguageViewController: UIViewController{
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
-        button.setTitle("Russian", for: .normal)
+        button.setTitle("Russian".localized, for: .normal)
         button.configuration = .plain()
         button.configuration?.titlePadding = CGFloat(10)
         let font = UIFont.systemFont(ofSize: 18, weight: .bold)

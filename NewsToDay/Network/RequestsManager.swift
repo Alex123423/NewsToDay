@@ -71,7 +71,7 @@ final class RequestsManager {
     
     func getNewsByRecommend(category: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
         let session = URLSession(configuration: .default)
-        let url = API.recommend(category: CategoriesManager.categories.joined(separator: ",")).url
+        let url = API.recommend(category: CategoriesManager.shared.categories.joined(separator: ",")).url
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))

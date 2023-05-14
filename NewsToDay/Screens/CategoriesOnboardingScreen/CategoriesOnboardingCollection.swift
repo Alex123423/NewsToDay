@@ -10,19 +10,19 @@ import UIKit
 class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   
     public let categories = [
-        "Random": "🎲",
-        "Politics": "🗳️",
-        "Business": "💼",
-        "Top": "🔝",
-        "Environment": "🌳",
-        "Entertainment": "🎭",
-        "Food": "🍔",
-        "Health": "🏥",
-        "Science": "🔬",
-        "Sports": "⚽️",
-        "Tourism": "🗺️",
-        "Technology": "💻",
-        "World": "🌎"
+        "Random".localized: "🎲",
+        "Politics"localized: "🗳️",
+        "Business"localized: "💼",
+        "Top"localized: "🔝",
+        "Environment"localized: "🌳",
+        "Entertainment"localized: "🎭",
+        "Food"localized: "🍔",
+        "Health"localized: "🏥",
+        "Science"localized: "🔬",
+        "Sports"localized: "⚽️",
+        "Tourism"localized: "🗺️",
+        "Technology"localized: "💻",
+        "World"localized: "🌎"
     ]
     
     private let reuseIdentifier = "CategoriesOnCell"
@@ -102,8 +102,8 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         } else {
             cell.label.text = category
         }
-        
-        if CategoriesManager.categories.contains(category) {
+ 
+        if CategoriesManager.shared.categories.contains(category.lowercased()) {
             cell.activate()
         } else {
             cell.deactivate()
@@ -118,37 +118,26 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let category = Array(categories.keys)[indexPath.row]
         let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell
-        if CategoriesManager.categories.contains(category) {
+        if CategoriesManager.shared.categories.contains(category.lowercased()) {
             // Если категория уже выбрана, снимаем выделение и удаляем из выбранных
             CategoriesManager.shared.delete(category: category)
             collectionView.deselectItem(at: indexPath, animated: true)
             cell?.deactivate()
+            cell?.isSelected = false
     
-        } else if CategoriesManager.categories.count < 5 {
+        } else if CategoriesManager.shared.categories.count < 5 {
             // Если категория еще не выбрана и можно выбрать еще категории,
             // добавляем в выбранные и устанавливаем выделение
             CategoriesManager.shared.add(category: category)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
             cell?.activate()
-        } else if CategoriesManager.categories.count == 5 {
+            cell?.isSelected = true
+        } else if CategoriesManager.shared.categories.count == 5 {
             // Иначе выводим сообщение об ошибке
             cell?.error()
+            cell?.isSelected = false
         }
         print(CategoriesManager.shared.getCategoriesString())
-    }
-    
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let category = Array(categories.keys)[indexPath.row]
-        
-        // Удаляем выбранную категорию из массива
-        CategoriesManager.shared.delete(category: category)
-        
-        // Обновляем ячейку
-        if let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell {
-            cell.isSelected = false
-        }
     }
 }
 
