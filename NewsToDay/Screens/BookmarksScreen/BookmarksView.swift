@@ -41,9 +41,6 @@ class BookmarksView: UIView {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
-        tableView.dataSource = self
-        tableView.delegate = self
     }
     
     private func configureCircle() {
@@ -91,7 +88,7 @@ class BookmarksView: UIView {
     }
     
     override func layoutSubviews() {
-            super.layoutSubviews()
+        super.layoutSubviews()
         NSLayoutConstraint.activate([
             topTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             topTitleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -99,14 +96,14 @@ class BookmarksView: UIView {
             topSublabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             topSublabel.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor, constant: 10),
             
-            tableView.topAnchor.constraint(equalTo: topSublabel.bottomAnchor, constant: 20),
+            tableView.topAnchor.constraint(equalTo: topSublabel.bottomAnchor, constant: 30),
             tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
             tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             
             circleView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             circleView.centerYAnchor.constraint(equalTo: self.topAnchor, constant: (self.frame.size.height * 0.5) - 40),
-
+            
             emptyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
             emptyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             emptyLabel.topAnchor.constraint(equalTo: circleView.bottomAnchor, constant: 25)
@@ -114,21 +111,3 @@ class BookmarksView: UIView {
     }
 }
 
-// MARK: - TableView Delegate
-extension BookmarksView: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .none
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-}

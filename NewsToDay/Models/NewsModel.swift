@@ -15,7 +15,7 @@ struct NewsModel: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable, Equatable {
     let title: String?
     let link: String?
     let keywords: [String]?
@@ -37,21 +37,6 @@ struct Result: Codable {
         case category, country, language
     }
 }
-
-//enum Category: String, Codable {
-//    case business = "business"
-//    case politics = "politics"
-//    case top = "top"
-//    case entertainment = "entertainment"
-//    case environment = "environment"
-//    case food = "food"
-//    case health = "health"
-//    case science = "science"
-//    case sports = "sports"
-//    case technology = "technology"
-//    case tourism = "tourism"
-//    case world = "world"
-//}
 
 // MARK: - Encode/decode helpers
 

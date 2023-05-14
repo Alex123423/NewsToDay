@@ -10,30 +10,31 @@ import UIKit
 class BookmarksViewController: UIViewController {
     
     private let bookmarksView = BookmarksView()
-
-    var savedNews: [Result] = []
+    let bookmarksManager = BookmarksManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupDelegates()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if savedNews.isEmpty {
-            bookmarksView.tableView.isHidden = true
-            bookmarksView.emptyLabel.isHidden = false
-            bookmarksView.circleView.isHidden = false
-        } else {
-            bookmarksView.emptyLabel.isHidden = true
-            bookmarksView.circleView.isHidden = true
+        DispatchQueue.main.async {
+            self.bookmarksView.tableView.reloadData()
         }
     }
     
     //MARK: - Setting up UI elements
     
+    private func setupDelegates() {
+        bookmarksView.tableView.dataSource = self
+        bookmarksView.tableView.delegate = self
+    }
+    
     private func setupViews() {
+        bookmarksView.tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
         view.backgroundColor = .white
         view.addSubview(bookmarksView)
     }
@@ -46,5 +47,48 @@ class BookmarksViewController: UIViewController {
             bookmarksView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bookmarksView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+// MARK: - TableView Delegate&DataSource
+extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if bookmarksManager.bookmarksArray.isEmpty {
+            bookmarksView.emptyLabel.isHidden = false
+            bookmarksView.circleView.isHidden = false
+        } else {
+            bookmarksView.emptyLabel.isHidden = true
+            bookmarksView.circleView.isHidden = true
+        }
+        return bookmarksManager.bookmarksArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        cell.liked = true
+        let savedNews = bookmarksManager.bookmarksArray[indexPath.row]
+        if bookmarksManager.bookmarksArray.contains(savedNews) {
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+        cell.delegateFavoriteButton = self
+        cell.configure(savedNews)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+}
+
+//MARK: - Delegate favourite button
+extension BookmarksViewController: FavouriteButtonProtocol {
+    func favouriteButtonTapped() {
+        self.bookmarksView.tableView.reloadData()
     }
 }

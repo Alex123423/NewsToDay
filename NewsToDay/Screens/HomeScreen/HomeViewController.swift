@@ -28,6 +28,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         randomNews()
         setupDelegates()
     }
+    //temporary code for updating table with recommendations
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        middleCollectionView.collectionView.reloadData()
+    }
     
     // get news for random category
     func randomNews() {
@@ -36,9 +41,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             switch result {
             case .success(let newsData):
                 self.middleCollectionView.news.removeAll()
-                DispatchQueue.main.async {
-                    self.middleCollectionView.news = newsData.results
-                }
+                self.middleCollectionView.news = newsData.results
             case .failure(let error):
                 print("Error fetching news data: \(error)")
             }

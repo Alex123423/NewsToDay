@@ -8,16 +8,24 @@
 import UIKit
 import Kingfisher
 
+protocol FavouriteButtonProtocol: AnyObject {
+    func favouriteButtonTapped()
+}
+
 class RecommendedCell: UITableViewCell {
     
     static let identifier = "RecommendedCell"
+    let bookmarksManager = BookmarksManager.shared
+
+    weak var delegateFavoriteButton: FavouriteButtonProtocol?
     
     var liked: Bool = false
+    var currentNews: Result?
     
     private let newsImageView = UIImageView()
     private let newsTitleLabel = UILabel()
     private let categoryLabel = UILabel()
-    private let favouriteButton = UIButton()
+    let favouriteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,14 +37,15 @@ class RecommendedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ article: Result) {
-        self.newsTitleLabel.text = article.title
-        self.categoryLabel.text = article.category?.first?.capitalized ?? "Without category"
-        if let imageURL = article.imageURL, let url = URL(string: imageURL) {
+    func configureCell(_ newsData: Result) {
+        self.newsTitleLabel.text = newsData.title
+        self.categoryLabel.text = newsData.category?.first?.capitalized ?? "Without category"
+        if let imageURL = newsData.imageURL, let url = URL(string: imageURL) {
             self.newsImageView.kf.setImage(with: url)
         } else {
             self.newsImageView.image = UIImage(named: "NoImage")
         }
+        self.currentNews = newsData
     }
     
     func configureFavouriteButton() {
@@ -50,10 +59,28 @@ class RecommendedCell: UITableViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
+            bookmarksManager.bookmarksArray.removeAll{ $0 == currentNews }
+            
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
+            bookmarksManager.bookmarksArray.append(currentNews!)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
+        delegateFavoriteButton?.favouriteButtonTapped()
+    }
+    
+    func configure(_ news: Result) {
+        if let imageURL = news.imageURL {
+            self.newsImageView.kf.setImage(with: URL(string: imageURL))
+        } else {
+            newsImageView.image = UIImage(named: "NoImage")
+        }
+        self.newsTitleLabel.text = news.title
+        self.categoryLabel.text = news.category?.first?.capitalized
+        self.currentNews = news
+        layoutSubviews()
     }
     
     private func configureNewsImageView() {
@@ -70,6 +97,8 @@ class RecommendedCell: UITableViewCell {
         newsTitleLabel.numberOfLines = 0
         newsTitleLabel.textAlignment = .left
         newsTitleLabel.font = UIFont.systemFont(ofSize: 16)
+        newsTitleLabel.adjustsFontSizeToFitWidth = true
+        newsTitleLabel.minimumScaleFactor = 0.7
         newsTitleLabel.textColor = .black
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -105,12 +134,12 @@ extension RecommendedCell {
             newsImageView.widthAnchor.constraint(equalToConstant: 90),
             newsImageView.heightAnchor.constraint(equalToConstant: 90),
             
-            newsTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -15),
+            newsTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -25),
             newsTitleLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: 15),
-            newsTitleLabel.centerYAnchor.constraint(equalTo: newsImageView.centerYAnchor),
+            newsTitleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 5),
             
             categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: 15),
-            categoryLabel.bottomAnchor.constraint(equalTo: newsTitleLabel.topAnchor, constant: -5),
+            categoryLabel.topAnchor.constraint(equalTo: topAnchor),
             
             favouriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             favouriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),

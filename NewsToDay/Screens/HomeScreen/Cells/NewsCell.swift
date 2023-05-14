@@ -11,8 +11,12 @@ import Kingfisher
 class NewsCell: UICollectionViewCell {
     
     var liked: Bool = false
+    var currentNews: Result?
+
     static let identifier = "NewsCell"
-    
+    let bookmarksManager = BookmarksManager.shared
+
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -67,13 +71,17 @@ class NewsCell: UICollectionViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
+            bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
+            bookmarksManager.bookmarksArray.append(currentNews!)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
     }
     
-    func configureCell(_ newsData: Result) {
+    public func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
             self.categoryLabel.text = newsData.category?.first?.uppercased() ?? "Without category"
@@ -82,6 +90,7 @@ class NewsCell: UICollectionViewCell {
             } else {
                 self.newsImageView.image = UIImage(named: "NoImage")
             }
+            self.currentNews = newsData
         }
     }
     
@@ -113,3 +122,4 @@ class NewsCell: UICollectionViewCell {
         ])
     }
 }
+

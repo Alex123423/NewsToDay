@@ -11,6 +11,7 @@ import SnapKit
 class MiddleCollectionView: UIView {
     
     var collectionView: UICollectionView!
+    let bookmarksManager = BookmarksManager.shared
     
     var news: [Result] = [] {
         didSet {
@@ -22,7 +23,6 @@ class MiddleCollectionView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configureCollection()
         self.addSubview(collectionView)
         setupConstraints()
@@ -61,6 +61,12 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.identifier, for: indexPath) as? NewsCell else {
             return UICollectionViewCell()
+        }
+        let selectedNews = news[indexPath.row]
+        if bookmarksManager.bookmarksArray.contains(selectedNews) {
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
         cell.configureCell(news[indexPath.row])
         return cell
