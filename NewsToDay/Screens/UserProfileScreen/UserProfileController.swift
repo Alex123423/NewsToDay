@@ -122,10 +122,18 @@ class UserProfileController: UIViewController{
         setupViews()
         setConstraints()
         view.backgroundColor = .white
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     //MARK: - Methods
   
+    @objc func updateLanguage() {
+        termsConditionsButton.setTitle("Terms & Conditions".localized, for: .normal)
+        signOutButton.setTitle("Sign Out".localized, for: .normal)
+        languageButton.setTitle("Language".localized, for: .normal)
+        titleLabel.text = "Profile".localized
+    }
+    
     @objc func buttonTermsPressed(_ sender: UIButton) {
         let vc = TearmsConditionsController()
         self.navigationController?.pushViewController(vc, animated: true)

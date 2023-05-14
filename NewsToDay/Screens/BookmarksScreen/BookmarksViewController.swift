@@ -17,6 +17,7 @@ class BookmarksViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,5 +47,9 @@ class BookmarksViewController: UIViewController {
             bookmarksView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bookmarksView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    @objc func updateLanguage() {
+        bookmarksView.reloadInputViews()
     }
 }

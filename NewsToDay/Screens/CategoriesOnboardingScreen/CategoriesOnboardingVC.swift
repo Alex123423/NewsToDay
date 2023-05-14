@@ -15,7 +15,6 @@ class CategoriesOnboardingVC: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
         categoriesOnboardingView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(categoriesOnboardingView)
         
@@ -25,8 +24,13 @@ class CategoriesOnboardingVC: UIViewController {
             categoriesOnboardingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             categoriesOnboardingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
+    @objc func updateLanguage() {
+        categoriesOnboardingView.updateLanguage()
+    }
 }
 
 

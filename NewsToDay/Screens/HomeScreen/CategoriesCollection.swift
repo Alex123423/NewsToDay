@@ -18,7 +18,7 @@ class CategoriesCollection: UIView {
     private var collectionView: UICollectionView!
     weak var delegateCollectionDidSelect: CollectionDidSelectProtocol?
     
-    private var categories = ["Random", "Politics", "Business", "Top", "Environment", "Entertainment", "Food", "Health", "Science", "Sports", "Tourism", "Technology", "World"]
+    private var categories = ["Random".localized, "Politics".localized, "Business".localized, "Top".localized, "Environment".localized, "Entertainment".localized, "Food".localized, "Health".localized, "Science".localized, "Sports".localized, "Tourism".localized, "Technology".localized, "World".localized]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +28,7 @@ class CategoriesCollection: UIView {
         self.addSubview(collectionView)
         setupConstraints()
         makeFirstCellActive()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,6 +61,7 @@ class CategoriesCollection: UIView {
         let firstIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .centeredHorizontally)
     }
+    
 }
 
 extension CategoriesCollection: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -78,7 +80,7 @@ extension CategoriesCollection: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionViewCell()
         }
         let category = categories[indexPath.row]
-        cell.configure(with: category)
+        cell.configure(with: category.localized)
         return cell
     }
     
@@ -91,6 +93,10 @@ extension CategoriesCollection: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegateCollectionDidSelect?.getNewsFromCategory(categoryName: categories[indexPath.item])
+    }
+    
+    @objc func updateLanguage() {
+        collectionView.reloadData()
     }
 }
 

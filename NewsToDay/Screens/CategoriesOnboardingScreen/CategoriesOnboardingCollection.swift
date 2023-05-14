@@ -8,21 +8,21 @@
 import UIKit
 
 class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  
+    
     public let categories = [
         "Random".localized: "🎲",
-        "Politics"localized: "🗳️",
-        "Business"localized: "💼",
-        "Top"localized: "🔝",
-        "Environment"localized: "🌳",
-        "Entertainment"localized: "🎭",
-        "Food"localized: "🍔",
-        "Health"localized: "🏥",
-        "Science"localized: "🔬",
-        "Sports"localized: "⚽️",
-        "Tourism"localized: "🗺️",
-        "Technology"localized: "💻",
-        "World"localized: "🌎"
+        "Politics".localized: "🗳️",
+        "Business".localized: "💼",
+        "Top".localized: "🔝",
+        "Environment".localized: "🌳",
+        "Entertainment".localized: "🎭",
+        "Food".localized: "🍔",
+        "Health".localized: "🏥",
+        "Science".localized: "🔬",
+        "Sports".localized: "⚽️",
+        "Tourism".localized: "🗺️",
+        "Technology".localized: "💻",
+        "World".localized: "🌎"
     ]
     
     private let reuseIdentifier = "CategoriesOnCell"
@@ -35,6 +35,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         configureCollection()
         self.addSubview(collectionView)
         setupConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -59,19 +60,25 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         addSubview(collectionView)
     }
     
-    func setupConstraints() {
-        
+    let titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.text = "Categories"
+        titleLabel.text = "Categories".localized
         titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(titleLabel)
-        
+        return titleLabel
+    }()
+    
+    let subtitleLabel: UILabel = {
         let subtitleLabel = UILabel()
-        subtitleLabel.text = "Thousands of articles in each category"
+        subtitleLabel.text = "Thousands of articles in each category".localized
         subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         subtitleLabel.textColor = .gray
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return subtitleLabel
+    }()
+    
+    func setupConstraints() {
+        addSubview(titleLabel)
         addSubview(subtitleLabel)
         
         NSLayoutConstraint.activate([
@@ -97,12 +104,12 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         let category = Array(categories.keys)[indexPath.row]
         
         if let emoji = categories[category] {
-            let text = emoji + " " + category
+            let text = emoji + " " + category.localized
             cell.label.text = text
         } else {
-            cell.label.text = category
+            cell.label.text = category.localized
         }
- 
+        
         if CategoriesManager.shared.categories.contains(category.lowercased()) {
             cell.activate()
         } else {
@@ -124,7 +131,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
             collectionView.deselectItem(at: indexPath, animated: true)
             cell?.deactivate()
             cell?.isSelected = false
-    
+            
         } else if CategoriesManager.shared.categories.count < 5 {
             // Если категория еще не выбрана и можно выбрать еще категории,
             // добавляем в выбранные и устанавливаем выделение
@@ -139,5 +146,10 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         }
         print(CategoriesManager.shared.getCategoriesString())
     }
+    
+    @objc func updateLanguage() {
+        titleLabel.text = "Categories".localized
+        subtitleLabel.text = "Thousands of articles in each category".localized
+        collectionView.reloadData()
+    }
 }
-
