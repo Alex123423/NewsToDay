@@ -134,7 +134,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
             // Иначе выводим сообщение об ошибке
             cell?.error()
         }
-        print(CategoriesManager.categories.joined(separator: ","))
+        print(CategoriesManager.shared.getCategoriesString())
     }
     
     
