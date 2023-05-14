@@ -64,6 +64,10 @@ class OnboardingViewController: UIViewController {
         page.backgroundStyle = .minimal
         page.pageIndicatorTintColor = .lightGray
         page.currentPageIndicatorTintColor = UIColor(named: "buttonBlue")
+        let selectedImage = UIImage(systemName: "rectangle.fill")?.withTintColor(page.currentPageIndicatorTintColor ?? .black, renderingMode: .alwaysTemplate)
+        let deselectedImage = UIImage(systemName: "cirle.fill")?.withTintColor(page.pageIndicatorTintColor ?? .lightGray, renderingMode: .alwaysTemplate)
+        page.setIndicatorImage(selectedImage, forPage: page.currentPage)
+        page.setIndicatorImage(deselectedImage, forPage: page.currentPage + 1)
         page.translatesAutoresizingMaskIntoConstraints = false
         page.isUserInteractionEnabled = true
         return page
@@ -135,6 +139,7 @@ class OnboardingViewController: UIViewController {
             currentIndex += 1
             updateUI()
             pageControl.currentPage = currentIndex
+            pageControl.setIndicatorImage(UIImage(systemName: "rectangle.fill"), forPage: currentIndex)
         }
     }
     

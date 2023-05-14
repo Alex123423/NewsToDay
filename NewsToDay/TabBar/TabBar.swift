@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
     }
     
     func categoriesControler() -> UINavigationController {
-        let navigationVC = UINavigationController(rootViewController: OnboardingViewController())
+        let navigationVC = UINavigationController(rootViewController: CategoriesOnboardingVC())
         navigationVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "square.grid.2x2"), tag: 1)
         return navigationVC
     }
