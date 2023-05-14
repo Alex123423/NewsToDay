@@ -10,9 +10,9 @@ import Foundation
 final class RequestsManager {
     
     static let shared = RequestsManager()
-    private let session = URLSession(configuration: .default)
-
     private init() { }
+    
+    private let session = URLSession(configuration: .default)
     
     func getRandomNews(completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
         let task = session.dataTask(with: API.popular.url) { data, response, error in

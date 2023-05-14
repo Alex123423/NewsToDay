@@ -10,6 +10,7 @@ import Foundation
 final class BookmarksManager {
     
     static let shared = BookmarksManager()
+    private init() {}
     
     private let defaults = UserDefaults.standard
     private let bookmarksKey = "bookmarks"
@@ -36,9 +37,7 @@ final class BookmarksManager {
             }
         }
     }
-    
-    private init() {}
-    
+        
     func getBookmarks() -> [Result] {
         return bookmarksArray
     }

@@ -16,9 +16,7 @@ class BookmarksViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        bookmarksView.tableView.dataSource = self
-        bookmarksView.tableView.delegate = self
-        bookmarksView.tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
+        setupDelegates()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +28,13 @@ class BookmarksViewController: UIViewController {
     
     //MARK: - Setting up UI elements
     
+    private func setupDelegates() {
+        bookmarksView.tableView.dataSource = self
+        bookmarksView.tableView.delegate = self
+    }
+    
     private func setupViews() {
+        bookmarksView.tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
         view.backgroundColor = .white
         view.addSubview(bookmarksView)
     }
@@ -46,7 +50,7 @@ class BookmarksViewController: UIViewController {
     }
 }
 
-// MARK: - TableView Delegate
+// MARK: - TableView Delegate&DataSource
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,14 +80,15 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(savedNews)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
+    
 }
 
+//MARK: - Delegate favourite button
 extension BookmarksViewController: FavouriteButtonProtocol {
     func favouriteButtonTapped() {
-        print("tapped")
         self.bookmarksView.tableView.reloadData()
     }
 }
