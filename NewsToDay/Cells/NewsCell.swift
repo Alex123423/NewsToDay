@@ -69,13 +69,13 @@ class NewsCell: UICollectionViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
-            BookmarksManager.favouriteArray.removeAll { $0 == currentNews }
-            print("Массив избранное =", BookmarksManager.favouriteArray.count)
+            BookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
+            print("Массив избранное =", BookmarksManager.bookmarksArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
-            BookmarksManager.favouriteArray.append(currentNews!)
-            print("Массив избранное =", BookmarksManager.favouriteArray.count)
+            BookmarksManager.bookmarksArray.append(currentNews!)
+            print("Массив избранное =", BookmarksManager.bookmarksArray.count)
         }
     }
     

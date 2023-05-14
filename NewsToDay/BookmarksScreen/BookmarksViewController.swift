@@ -22,7 +22,7 @@ class BookmarksViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(BookmarksManager.favouriteArray.count)
+        print(BookmarksManager.bookmarksArray.count)
         DispatchQueue.main.async {
             self.bookmarksView.tableView.reloadData()
         }
@@ -50,14 +50,14 @@ class BookmarksViewController: UIViewController {
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if BookmarksManager.favouriteArray.isEmpty {
+        if BookmarksManager.bookmarksArray.isEmpty {
             bookmarksView.emptyLabel.isHidden = false
             bookmarksView.circleView.isHidden = false
         } else {
             bookmarksView.emptyLabel.isHidden = true
             bookmarksView.circleView.isHidden = true
         }
-        return BookmarksManager.favouriteArray.count
+        return BookmarksManager.bookmarksArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,8 +66,8 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         cell.liked = true
-        let savedNews = BookmarksManager.favouriteArray[indexPath.row]
-        if BookmarksManager.favouriteArray.contains(savedNews) {
+        let savedNews = BookmarksManager.bookmarksArray[indexPath.row]
+        if BookmarksManager.bookmarksArray.contains(savedNews) {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         } else {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
