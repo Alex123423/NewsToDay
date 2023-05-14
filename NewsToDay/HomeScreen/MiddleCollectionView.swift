@@ -11,6 +11,7 @@ import SnapKit
 class MiddleCollectionView: UIView {
     
     var collectionView: UICollectionView!
+    let bookmarksManager = BookmarksManager.shared
     
     var news: [Result] = [] {
         didSet {
@@ -62,7 +63,7 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionViewCell()
         }
         let selectedNews = news[indexPath.row]
-        if BookmarksManager.bookmarksArray.contains(selectedNews) {
+        if bookmarksManager.bookmarksArray.contains(selectedNews) {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         } else {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)

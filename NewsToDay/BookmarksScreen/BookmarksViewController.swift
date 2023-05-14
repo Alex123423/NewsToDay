@@ -10,6 +10,7 @@ import UIKit
 class BookmarksViewController: UIViewController {
     
     private let bookmarksView = BookmarksView()
+    let bookmarksManager = BookmarksManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,6 @@ class BookmarksViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(BookmarksManager.bookmarksArray.count)
         DispatchQueue.main.async {
             self.bookmarksView.tableView.reloadData()
         }
@@ -50,14 +50,14 @@ class BookmarksViewController: UIViewController {
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if BookmarksManager.bookmarksArray.isEmpty {
+        if bookmarksManager.bookmarksArray.isEmpty {
             bookmarksView.emptyLabel.isHidden = false
             bookmarksView.circleView.isHidden = false
         } else {
             bookmarksView.emptyLabel.isHidden = true
             bookmarksView.circleView.isHidden = true
         }
-        return BookmarksManager.bookmarksArray.count
+        return bookmarksManager.bookmarksArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,8 +66,8 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         cell.liked = true
-        let savedNews = BookmarksManager.bookmarksArray[indexPath.row]
-        if BookmarksManager.bookmarksArray.contains(savedNews) {
+        let savedNews = bookmarksManager.bookmarksArray[indexPath.row]
+        if bookmarksManager.bookmarksArray.contains(savedNews) {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         } else {
             cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)

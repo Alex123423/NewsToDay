@@ -15,7 +15,8 @@ protocol FavouriteButtonProtocol: AnyObject {
 class RecommendedCell: UITableViewCell {
     
     static let identifier = "RecommendedCell"
-    
+    let bookmarksManager = BookmarksManager.shared
+
     weak var delegateFavoriteButton: FavouriteButtonProtocol?
     
     var liked: Bool = false
@@ -59,14 +60,14 @@ class RecommendedCell: UITableViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
-            BookmarksManager.bookmarksArray.removeAll{ $0 == currentNews }
+            bookmarksManager.bookmarksArray.removeAll{ $0 == currentNews }
             
-            print("Массив избранное =", BookmarksManager.bookmarksArray.count)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
-            BookmarksManager.bookmarksArray.append(currentNews!)
-            print("Массив избранное =", BookmarksManager.bookmarksArray.count)
+            bookmarksManager.bookmarksArray.append(currentNews!)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
         delegateFavoriteButton?.favouriteButtonTapped()
     }

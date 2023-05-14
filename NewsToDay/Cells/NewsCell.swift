@@ -14,6 +14,8 @@ class NewsCell: UICollectionViewCell {
     var currentNews: Result?
 
     static let identifier = "NewsCell"
+    let bookmarksManager = BookmarksManager.shared
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,13 +71,13 @@ class NewsCell: UICollectionViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
-            BookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
-            print("Массив избранное =", BookmarksManager.bookmarksArray.count)
+            bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
-            BookmarksManager.bookmarksArray.append(currentNews!)
-            print("Массив избранное =", BookmarksManager.bookmarksArray.count)
+            bookmarksManager.bookmarksArray.append(currentNews!)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
     }
     
