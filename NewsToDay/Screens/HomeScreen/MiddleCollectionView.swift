@@ -83,7 +83,8 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
         DispatchQueue.main.async {
             vc.configureScreen(selectedArticle: self.news[indexPath.row])
         }
-        parentViewController?.navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        parentViewController?.present(vc, animated: true)
 
     }
     

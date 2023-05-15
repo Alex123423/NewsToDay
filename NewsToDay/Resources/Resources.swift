@@ -5,7 +5,7 @@
 //  Created by Alexey Davidenko on 08.05.2023.
 //
 
-import Foundation
+import UIKit
 
 enum Resources {
     
@@ -31,5 +31,10 @@ enum Resources {
         static let categories = "categories"
         static let favourite = "favourite"
         static let profile = "profile"
+    }
+    
+    enum Images {
+        static let backArrow = "backArrow"
+        static let noImage = "NoImage"
     }
 }

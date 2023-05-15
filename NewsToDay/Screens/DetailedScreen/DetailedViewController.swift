@@ -10,6 +10,10 @@ import Kingfisher
 
 class DetailedViewController: UIViewController {
     
+    let bookmarksManager = BookmarksManager.shared
+    var liked: Bool = false
+    var currentNews: Result?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
@@ -18,50 +22,72 @@ class DetailedViewController: UIViewController {
     
     func configureScreen(selectedArticle: Result) {
         if let imageURL = selectedArticle.imageURL {
-            self.imageView.kf.setImage(with: URL(string: imageURL))
+            self.newsImage.kf.setImage(with: URL(string: imageURL))
         } else {
-            self.imageView.image = UIImage(named: "NoImage")
+            self.newsImage.image = UIImage(named: Resources.Images.noImage)
         }
-        self.textView.text = selectedArticle.content
-        self.themeLabel.text = selectedArticle.title
-        self.nameLabel.text = selectedArticle.creator?.first
-        self.themeButton.setTitle(selectedArticle.category?.first, for: .normal)
-
+        self.newsText.text = selectedArticle.content
+        self.titleLabel.text = selectedArticle.title
+        self.creatorLabel.text = selectedArticle.creator?.first ?? "Not specified"
+        self.categoryName.text = selectedArticle.category?.first?.capitalized
+        if bookmarksManager.bookmarksArray.contains(selectedArticle) {
+            bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+        currentNews = selectedArticle
+    }
+    
+    @objc func favouriteButtonPressed() {
+        print("tapped")
+        if liked {
+            bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            liked = false
+            bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
+//            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
+        } else {
+            bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            liked = true
+            bookmarksManager.bookmarksArray.append(currentNews!)
+//            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
+        }
+    }
+    
+    @objc func arrowBackTapped() {
+        print("tapped")
+        self.dismiss(animated: false)
     }
     
     
     //  MARK: - UI Views
-    private lazy var mainView: UIView = {
-        let element = UIView()
-        element.backgroundColor = .blue
-        return element
-    }()
     
-    private lazy var imageView: UIImageView = {
+    private lazy var newsImage: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: "building")
-        element.contentMode = .scaleToFill
+        element.contentMode = .scaleAspectFill
         return element
     }()
     
-    private lazy var textView: UITextView = {
+    private lazy var newsText: UITextView = {
         let element = UITextView()
         let text = Message()
         element.text = text.text
-        element.textColor = #colorLiteral(red: 0.5589404702, green: 0.5851458907, blue: 0.692604959, alpha: 1)
+        element.textColor = UIColor(named: Resources.Colors.gray)
         element.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         element.showsVerticalScrollIndicator = false
         return element
     }()
     
     //  MARK: - UI Buttons
-    private lazy var themeButton: UIButton = {
-        let element = UIButton(type: .system)
-        element.backgroundColor = #colorLiteral(red: 0.3483863771, green: 0.4508807063, blue: 0.8743079901, alpha: 1)
-        element.setTitle("Politics", for: .normal)
-        element.setTitleColor(.white, for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+    private lazy var categoryName: UILabel = {
+        let element = UILabel()
+        element.backgroundColor = UIColor(named: Resources.Colors.button)
+        element.text = "Politics"
+        element.textColor = .white
+        element.textAlignment = .center
+        element.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         element.layer.cornerRadius = 16
+        element.clipsToBounds = true
         return element
     }()
     
@@ -69,6 +95,7 @@ class DetailedViewController: UIViewController {
         let element = UIButton(type: .system)
         element.setImage(UIImage(named: "bookmark"), for: .normal)
         element.tintColor = .white
+        element.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
         return element
     }()
     
@@ -79,8 +106,16 @@ class DetailedViewController: UIViewController {
         return element
     }()
     
+    private lazy var arrowBackbutton: UIButton = {
+        let element = UIButton(type: .system)
+        element.setImage(UIImage(named: Resources.Images.backArrow), for: .normal)
+        element.tintColor = .white
+        element.addTarget(self, action: #selector(arrowBackTapped), for: .touchUpInside)
+        return element
+    }()
+    
     //  MARK: - UI Labels
-    private lazy var themeLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let element = UILabel()
         element.textColor = .white
         element.text = "The latest situation in the presidential election"
@@ -89,7 +124,7 @@ class DetailedViewController: UIViewController {
         return element
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var creatorLabel: UILabel = {
         let element = UILabel()
         element.textColor = .white
         element.text = "John Doe"
@@ -116,88 +151,86 @@ class DetailedViewController: UIViewController {
         element.numberOfLines = 0
         return element
     }()
-    
-    //  MARK: - UI StackViews
-    private lazy var labelsStackView: UIStackView = {
-        let element = UIStackView()
-        element.axis = .vertical
-        return element
-    }()
-    
-    private lazy var buttonsStackView: UIStackView = {
-        let element = UIStackView()
-        element.axis = .vertical
-        element.spacing = 25
-        element.distribution = .fillEqually
-        return element
-    }()
 }
 
 //  MARK: -  Private Methods
 extension DetailedViewController {
     private func setViews() {
         view.backgroundColor = .white
-        mainView.addSubview(imageView)
-        mainView.addSubview(themeButton)
-        mainView.addSubview(themeLabel)
-        mainView.addSubview(labelsStackView)
-        mainView.addSubview(buttonsStackView)
-        labelsStackView.addArrangedSubview(nameLabel)
-        labelsStackView.addArrangedSubview(authorLabel)
-        buttonsStackView.addArrangedSubview(bookmarkButton)
-        buttonsStackView.addArrangedSubview(arrowButton)
-        view.addSubview(mainView)
+        view.addSubview(newsImage)
         view.addSubview(resultLabel)
-        view.addSubview(textView)
+        view.addSubview(newsText)
+        newsImage.addSubview(authorLabel)
+        newsImage.addSubview(creatorLabel)
+        newsImage.addSubview(titleLabel)
+        newsImage.addSubview(categoryName)
+        newsImage.addSubview(arrowBackbutton)
+        newsImage.addSubview(bookmarkButton)
+        newsImage.addSubview(arrowButton)
+        newsImage.isUserInteractionEnabled = true
     }
     
     private func setConstraints() {
-        textView.snp.makeConstraints { make in
+        
+        newsImage.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(view.frame.height / 2 - 60)
+        }
+        
+        resultLabel.snp.makeConstraints { make in
+            make.top.equalTo(newsImage.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+        }
+
+        newsText.snp.makeConstraints { make in
             make.top.equalTo(resultLabel.snp.bottom).offset(8)
             make.leading.equalTo(resultLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        resultLabel.snp.makeConstraints { make in
-            make.top.equalTo(mainView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(20)
+
+        arrowBackbutton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(26)
+            make.top.equalToSuperview().offset(78)
+            make.height.width.equalTo(12)
         }
+
         bookmarkButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-26)
+            make.centerY.equalTo(arrowBackbutton)
             make.width.equalTo(40)
             make.height.equalTo(30)
         }
         
-        buttonsStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(74)
-            make.trailing.equalToSuperview().offset(-24)
+        arrowButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-26)
+            make.top.equalTo(bookmarkButton.snp.bottom).offset(30)
+            make.width.equalTo(40)
+            make.height.equalTo(30)
         }
         
-        labelsStackView.snp.makeConstraints { make in
-            make.top.equalTo(themeLabel.snp.bottom).offset(24)
-            make.leading.equalToSuperview().inset(20)
+        authorLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-24)
+            make.left.equalToSuperview().offset(26)
         }
         
-        themeLabel.snp.makeConstraints { make in
-            make.top.equalTo(themeButton.snp.bottom).offset(20)
+        creatorLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(authorLabel).inset(15)
+            make.left.equalToSuperview().offset(26)
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(creatorLabel.snp.top).offset(-25)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-        
-        themeButton.snp.makeConstraints { make in
+
+        categoryName.snp.makeConstraints { make in
+            make.bottom.equalTo(titleLabel.snp.top).offset(-15)
             make.leading.equalTo(20)
-            make.top.equalTo(168)
             make.height.equalTo(32)
             make.width.equalTo(90)
         }
-        
-        imageView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
-        
-        mainView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(384)
-        }
+
     }
 }
 

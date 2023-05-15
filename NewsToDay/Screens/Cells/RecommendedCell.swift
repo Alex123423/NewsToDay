@@ -43,7 +43,7 @@ class RecommendedCell: UITableViewCell {
         if let imageURL = newsData.imageURL, let url = URL(string: imageURL) {
             self.newsImageView.kf.setImage(with: url)
         } else {
-            self.newsImageView.image = UIImage(named: "NoImage")
+            self.newsImageView.image = UIImage(named: Resources.Images.noImage)
         }
         self.currentNews = newsData
     }
@@ -75,7 +75,7 @@ class RecommendedCell: UITableViewCell {
         if let imageURL = news.imageURL {
             self.newsImageView.kf.setImage(with: URL(string: imageURL))
         } else {
-            newsImageView.image = UIImage(named: "NoImage")
+            newsImageView.image = UIImage(named: Resources.Images.noImage)
         }
         self.newsTitleLabel.text = news.title
         self.categoryLabel.text = news.category?.first?.capitalized

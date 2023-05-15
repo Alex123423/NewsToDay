@@ -29,7 +29,7 @@ class NewsCell: UICollectionViewCell {
     
     private let newsImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "NoImage")
+        image.image = UIImage(named: Resources.Images.noImage)
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
@@ -88,7 +88,7 @@ class NewsCell: UICollectionViewCell {
             if let imageURL = newsData.imageURL {
                 self.newsImageView.kf.setImage(with: URL(string: imageURL))
             } else {
-                self.newsImageView.image = UIImage(named: "NoImage")
+                self.newsImageView.image = UIImage(named: Resources.Images.noImage)
             }
             self.currentNews = newsData
         }
