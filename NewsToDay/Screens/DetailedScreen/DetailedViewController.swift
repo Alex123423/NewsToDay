@@ -32,6 +32,7 @@ class DetailedViewController: UIViewController {
         self.categoryName.text = selectedArticle.category?.first?.capitalized
         if bookmarksManager.bookmarksArray.contains(selectedArticle) {
             bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            liked = true
         } else {
             bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
@@ -44,12 +45,12 @@ class DetailedViewController: UIViewController {
             bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
             bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
-//            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
             bookmarksManager.bookmarksArray.append(currentNews!)
-//            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
+            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
     }
     
