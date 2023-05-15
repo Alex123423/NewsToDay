@@ -25,9 +25,27 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         "World".localized: "🌎"
     ]
     
+    let titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "Categories".localized
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return titleLabel
+    }()
+    
+    let subtitleLabel: UILabel = {
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = "Thousands of articles in each category".localized
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        subtitleLabel.textColor = .gray
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return subtitleLabel
+    }()
+    
     private let reuseIdentifier = "CategoriesOnCell"
     private var collectionView: UICollectionView
-    weak var parentViewController: CategoriesOnboardingVC?
+    weak var parentViewController: CategoriesVC?
     
     override init(frame: CGRect) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -59,32 +77,17 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(collectionView)
     }
-    
-    let titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "Categories".localized
-        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        return titleLabel
-    }()
-    
-    let subtitleLabel: UILabel = {
-        let subtitleLabel = UILabel()
-        subtitleLabel.text = "Thousands of articles in each category".localized
-        subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        subtitleLabel.textColor = .gray
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        return subtitleLabel
-    }()
-    
+
     func setupConstraints() {
         addSubview(titleLabel)
         addSubview(subtitleLabel)
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             collectionView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 16),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
