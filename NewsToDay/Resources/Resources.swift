@@ -36,5 +36,6 @@ enum Resources {
     enum Images {
         static let backArrow = "backArrow"
         static let noImage = "NoImage"
+        static let building = "building"
     }
 }

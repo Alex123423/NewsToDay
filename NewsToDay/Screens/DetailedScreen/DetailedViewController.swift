@@ -20,11 +20,16 @@ class DetailedViewController: UIViewController {
         setConstraints()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print(newsText.frame.height)
+    }
+    
     func configureScreen(selectedArticle: Result) {
         if let imageURL = selectedArticle.imageURL {
             self.newsImage.kf.setImage(with: URL(string: imageURL))
         } else {
-            self.newsImage.image = UIImage(named: Resources.Images.noImage)
+            self.newsImage.image = UIImage(named: Resources.Images.building)
         }
         self.newsText.text = selectedArticle.content
         self.titleLabel.text = selectedArticle.title
@@ -59,14 +64,15 @@ class DetailedViewController: UIViewController {
     
     private lazy var newsImage: UIImageView = {
         let element = UIImageView()
-        element.image = UIImage(named: "building")
         element.contentMode = .scaleAspectFill
+        element.backgroundColor = .red
         return element
     }()
     
     private lazy var newsText: UITextView = {
         let element = UITextView()
         let text = Message()
+        element.backgroundColor = .clear
         element.text = text.text
         element.textColor = UIColor(named: Resources.Colors.gray)
         element.font = UIFont.systemFont(ofSize: 20, weight: .regular)
@@ -174,7 +180,7 @@ extension DetailedViewController {
         }
         
         resultLabel.snp.makeConstraints { make in
-            make.top.equalTo(newsImage.snp.bottom).offset(10)
+            make.top.equalTo(newsImage.snp.bottom).inset(-20)
             make.leading.equalToSuperview().offset(20)
         }
         
