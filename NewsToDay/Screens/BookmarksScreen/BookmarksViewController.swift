@@ -82,6 +82,12 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailedViewController()
+        DispatchQueue.main.async {
+            vc.configureScreen(selectedArticle: self.bookmarksManager.bookmarksArray[indexPath.row])
+        }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
 }
