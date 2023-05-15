@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         setupConstraints()
         randomNews()
         setupDelegates()
+        middleCollectionView.parentViewController = self
     }
     //temporary code for updating table with recommendations
     override func viewWillAppear(_ animated: Bool) {
@@ -97,12 +98,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         }
     }
     //MARK: - Configuring UI Elements
-    
-    // hiding keyboard
-    //    private func configureTapGesture() {
-    //        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-    //        view.addGestureRecognizer(tapGesture)
-    //    }
     
     func setupDelegates() {
         collectionView.delegateCollectionDidSelect = self

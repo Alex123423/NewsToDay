@@ -13,6 +13,8 @@ class MiddleCollectionView: UIView {
     var collectionView: UICollectionView!
     let bookmarksManager = BookmarksManager.shared
     
+    weak var parentViewController: HomeViewController?
+    
     var news: [Result] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -77,6 +79,12 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = DetailedViewController()
+        DispatchQueue.main.async {
+            vc.configureScreen(selectedArticle: self.news[indexPath.row])
+        }
+        parentViewController?.navigationController?.pushViewController(vc, animated: true)
+
     }
     
 }
