@@ -40,25 +40,20 @@ class DetailedViewController: UIViewController {
     }
     
     @objc func favouriteButtonPressed() {
-        print("tapped")
         if liked {
             bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
             bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
-            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
             bookmarksManager.bookmarksArray.append(currentNews!)
-            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
     }
     
     @objc func arrowBackTapped() {
-        print("tapped")
         self.dismiss(animated: false)
     }
-    
     
     //  MARK: - UI Views
     
@@ -182,20 +177,20 @@ extension DetailedViewController {
             make.top.equalTo(newsImage.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
         }
-
+        
         newsText.snp.makeConstraints { make in
             make.top.equalTo(resultLabel.snp.bottom).offset(8)
             make.leading.equalTo(resultLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-
+        
         arrowBackbutton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(26)
             make.top.equalToSuperview().offset(78)
             make.height.width.equalTo(12)
         }
-
+        
         bookmarkButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-26)
             make.centerY.equalTo(arrowBackbutton)
@@ -219,19 +214,18 @@ extension DetailedViewController {
             make.bottom.equalTo(authorLabel).inset(15)
             make.left.equalToSuperview().offset(26)
         }
-
+        
         titleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(creatorLabel.snp.top).offset(-25)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         categoryName.snp.makeConstraints { make in
             make.bottom.equalTo(titleLabel.snp.top).offset(-15)
             make.leading.equalTo(20)
             make.height.equalTo(32)
             make.width.equalTo(90)
         }
-
     }
 }
 

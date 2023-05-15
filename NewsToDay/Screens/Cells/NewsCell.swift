@@ -72,12 +72,10 @@ class NewsCell: UICollectionViewCell {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
             bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
-            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
             bookmarksManager.bookmarksArray.append(currentNews!)
-            print("Массив избранное =", bookmarksManager.bookmarksArray.count)
         }
     }
     
