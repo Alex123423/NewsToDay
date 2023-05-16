@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         setupConstraints()
         randomNews()
         setupDelegates()
+        getRecommendedNews()
         middleCollectionView.parentViewController = self
     }
     //temporary code for updating table with recommendations
@@ -44,6 +45,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             case .success(let newsData):
                 self.middleCollectionView.news.removeAll()
                 self.middleCollectionView.news = newsData.results
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
+    func getRecommendedNews() {
+        RequestsManager.shared.getNewsByRecommend(category: CategoriesManager.shared.categories.joined(separator: ",")) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                DispatchQueue.main.async {
+                    self.recommendedTableView.news = newsData.results
+                    self.recommendedTableView.reloadData()
+                }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
             }
@@ -156,6 +172,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     
     @objc func seeAllPressed(sender: UIButton) {
         let recommendedVC = RecommendedViewController()
+        recommendedVC.news = recommendedTableView.news
         present(recommendedVC, animated: true)
     }
     
