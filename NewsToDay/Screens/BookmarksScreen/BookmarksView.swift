@@ -19,6 +19,7 @@ class BookmarksView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -108,6 +109,13 @@ class BookmarksView: UIView {
             emptyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             emptyLabel.topAnchor.constraint(equalTo: circleView.bottomAnchor, constant: 25)
         ])
+    }
+    
+    
+    @objc func updateLanguage() {
+        topTitleLabel.text = "Bookmarks".localized
+        topSublabel.text = "Saved articles to the library".localized
+        emptyLabel.text = "You haven't saved any articles yet. Start reading and bookmarking them now".localized
     }
 }
 

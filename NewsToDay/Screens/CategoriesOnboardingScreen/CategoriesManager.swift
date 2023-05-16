@@ -14,31 +14,36 @@ class CategoriesManager {
 
     static let shared = CategoriesManager()
 
-    public static var categories: [String] = []
+    var categories: [String] = []
 
     init() {
         if let categories = userDefaults.object(forKey: key) as? [String] {
-            CategoriesManager.categories = categories
+            self.categories = categories
         } else {
-            CategoriesManager.categories = []
+            self.categories = []
         }
     }
 
     func add(category: String) {
-        CategoriesManager.categories.append(category.lowercased())
-        saveCategories()
+        let lowercaseCategory = category.lowercased()
+        if !categories.contains(lowercaseCategory) {
+            categories.append(lowercaseCategory)
+            saveCategories()
+        }
     }
 
     func delete(category: String) {
-        CategoriesManager.categories.removeAll { $0 == category.lowercased() }
+        if let index = categories.firstIndex(of: category.lowercased()) {
+            categories.remove(at: index)
+        }
         saveCategories()
     }
 
     private func saveCategories() {
-        userDefaults.set(CategoriesManager.categories, forKey: key)
+        userDefaults.set(categories, forKey: key)
     }
     
     func getCategoriesString() -> String {
-        return CategoriesManager.categories.joined(separator: ",")
+        return categories.joined(separator: ",")
         }
 }

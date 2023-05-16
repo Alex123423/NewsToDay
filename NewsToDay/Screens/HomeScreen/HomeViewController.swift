@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         middleCollectionView.collectionView.reloadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     // get news for random category
@@ -156,6 +157,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     @objc func seeAllPressed(sender: UIButton) {
         let recommendedVC = RecommendedViewController()
         present(recommendedVC, animated: true)
+    }
+    
+    @objc func updateLanguage() {
+        topTitleLabel.text = "Browse".localized
+        topSublabel.text = "Discover things of this world".localized
+        bottomTitleLabel.text = "Recommended for you".localized
+        seeAllButton.setTitle("See all".localized, for: .normal)
+        collectionView.updateLanguage()
     }
     
     //MARK: - Constraints

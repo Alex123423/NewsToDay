@@ -30,7 +30,7 @@ class RecommendedViewController: UIViewController {
     }
     
     func getRecommendedNews() {
-        RequestsManager.shared.getNewsByRecommend(category: CategoriesManager.categories.joined(separator: ",")) { [weak self] result in
+        RequestsManager.shared.getNewsByRecommend(category: CategoriesManager.shared.categories.joined(separator: ",")) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let newsData):

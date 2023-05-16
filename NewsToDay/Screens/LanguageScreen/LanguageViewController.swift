@@ -11,11 +11,11 @@ class LanguageViewController: UIViewController{
     
     
     // MARK: - Outlets
-   
+    
     private lazy var changeToENButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
-        button.setTitleColor(.darkGray, for: .normal)
+//        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("English", for: .normal)
         button.configuration = .plain()
         button.configuration?.titlePadding = CGFloat(10)
@@ -26,17 +26,36 @@ class LanguageViewController: UIViewController{
             return updated
         }
         button.configuration?.titleTextAttributesTransformer = transformer
-        button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .left
+        
+        // Check if current language is English and set the background color accordingly
+        if Bundle.currentLanguage == "en" {
+            button.backgroundColor = UIColor.blue
+            button.setTitleColor(.white, for: .normal)
+        } else {
+            button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
+            button.setTitleColor(.darkGray, for: .normal)
+        }
+        
+        // Add checkmark image as right view
+        if Bundle.currentLanguage == "en" {
+            let checkmarkImage = UIImage(systemName: "checkmark")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            let imageView = UIImageView(image: checkmarkImage)
+            button.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -16).isActive = true
+            imageView.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
+        }
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(changeLanguagePressedEN), for: .touchUpInside)
         return button
     }()
     
-    lazy var changeToRUButton: UIButton = {
+    private lazy var changeToRUButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
-        button.setTitleColor(.darkGray, for: .normal)
+//        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("Russian", for: .normal)
         button.configuration = .plain()
         button.configuration?.titlePadding = CGFloat(10)
@@ -48,21 +67,31 @@ class LanguageViewController: UIViewController{
         }
         button.configuration?.titleTextAttributesTransformer = transformer
         button.contentHorizontalAlignment = .left
-        button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
+        
+        // Check if current language is English and set the background color accordingly
+        if Bundle.currentLanguage == "ru" {
+            button.backgroundColor = UIColor.blue
+            button.setTitleColor(.white, for: .normal)
+        } else {
+            button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
+            button.setTitleColor(.darkGray, for: .normal)
+        }
+        
+        // Add checkmark image as right view
+        if Bundle.currentLanguage == "ru" {
+            let checkmarkImage = UIImage(systemName: "checkmark")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            let imageView = UIImageView(image: checkmarkImage)
+            button.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -16).isActive = true
+            imageView.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
+        }
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(changeLanguagePressedRU), for: .touchUpInside)
         return button
     }()
- 
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Language".localized
-        label.textColor = .black
-        label.font = UIFont(name: "Avenir Next Bold", size: 27)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -70,30 +99,37 @@ class LanguageViewController: UIViewController{
         setupViews()
         setConstraints()
         view.backgroundColor = .white
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(backButtonPressed))
-         navigationItem.leftBarButtonItem = backButton
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonPressed))
+        backButton.tintColor = .gray
+        navigationItem.leftBarButtonItem = backButton
+        title = "Language".localized
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
+
+        //MARK: - Methods
     
-    //MARK: - Methods
-  
     @objc func changeLanguagePressedEN(_ sender: UIButton) {
         Bundle.setLanguage(lang: "en")
-        let vc = UserProfileController()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func changeLanguagePressedRU(_ sender: UIButton) {
         Bundle.setLanguage(lang: "ru")
-        let vc = UserProfileController()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func backButtonPressed() {
-        navigationController?.popViewController(animated: true)
+        let vc = UserProfileController()
+        navigationController?.popToViewController(vc, animated: true)
     }
-
+    
+    
+    @objc func updateLanguage() {
+        changeToENButton.setTitle("English".localized, for: .normal)
+        changeToRUButton.setTitle("Russian".localized, for: .normal)
+    }
+    
     func setupViews() {
-        view.addSubview(titleLabel)
         view.addSubview(changeToENButton)
         view.addSubview(changeToRUButton)
         
@@ -103,14 +139,8 @@ class LanguageViewController: UIViewController{
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            
-            
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.heightAnchor.constraint(equalToConstant: 32),
-            
             changeToENButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            changeToENButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
+            changeToENButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             changeToENButton.widthAnchor.constraint(equalToConstant: 360),
             changeToENButton.heightAnchor.constraint(equalToConstant: 60),
             

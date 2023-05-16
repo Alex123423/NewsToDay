@@ -132,8 +132,10 @@ class OnboardingViewController: UIViewController {
         if currentIndex == slides.count - 1 {
             let scene = UIApplication.shared.connectedScenes.first
             if let sceneDelegate = scene?.delegate as? SceneDelegate {
-                let tabBarController = TabBarController()
-                sceneDelegate.window?.rootViewController = tabBarController.createTabBar()
+                let vc = CategoriesOnboardingVC()
+                sceneDelegate.window?.rootViewController = vc
+                //                let tabBarController = TabBarController()
+                //                sceneDelegate.window?.rootViewController = tabBarController.createTabBar()
             }
         } else {
             currentIndex += 1
