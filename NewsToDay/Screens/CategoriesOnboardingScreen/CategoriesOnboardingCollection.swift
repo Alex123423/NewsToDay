@@ -160,6 +160,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         if let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell {
             cell.isSelected = false
         }
+    }
     
     @objc func updateLanguage() {
         titleLabel.text = "Categories".localized
