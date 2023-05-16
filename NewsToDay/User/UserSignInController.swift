@@ -128,10 +128,8 @@ final class UserSignInController: UIViewController {
                 guard let self = self else { return }
                 
                 if let error = error {
-                    // Обработка ошибки
                     print(error.localizedDescription)
                 } else {
-                    // Обработка успешной аутентификации
                     print("User signed in successfully")
                 }
             }
