@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TearmsConditionsController: UIViewController {
+class TermsConditions: UIViewController {
 
     //MARK: - Elements
 

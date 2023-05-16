@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let tabBarController = TabBarController()
             window.rootViewController = tabBarController.createTabBar()
         } else {
-            window.rootViewController = createOnboarding()
+            window.rootViewController = UserRegistrationController()
         }
 
         window.makeKeyAndVisible()
