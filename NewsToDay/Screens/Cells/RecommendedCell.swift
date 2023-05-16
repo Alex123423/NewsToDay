@@ -91,7 +91,7 @@ class RecommendedCell: UITableViewCell {
     
     private func configureTitleLabel() {
         newsTitleLabel.text = "The latest situation in the presedential election"
-        newsTitleLabel.numberOfLines = 2
+        newsTitleLabel.numberOfLines = 0
         newsTitleLabel.textAlignment = .left
         newsTitleLabel.font = UIFont.systemFont(ofSize: 16)
         newsTitleLabel.adjustsFontSizeToFitWidth = true
@@ -131,7 +131,7 @@ extension RecommendedCell {
             newsImageView.widthAnchor.constraint(equalToConstant: 90),
             newsImageView.heightAnchor.constraint(equalToConstant: 90),
             
-            newsTitleLabel.trailingAnchor.constraint(equalTo: favouriteButton.leadingAnchor, constant: -15),
+            newsTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -25),
             newsTitleLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: 15),
             newsTitleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 5),
             
