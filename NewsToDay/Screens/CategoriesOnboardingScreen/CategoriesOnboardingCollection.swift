@@ -107,7 +107,12 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         let category = Array(categories.keys)[indexPath.row]
         
         if let emoji = categories[category] {
-            let text = emoji + " " + category.localized
+            var text = ""
+            if Locale.current.languageCode == "en" {
+                text = emoji + " " + category.localized
+            } else {
+                text = category.localized
+            }
             cell.label.text = text
         } else {
             cell.label.text = category.localized

@@ -27,12 +27,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         setupConstraints()
         randomNews()
         setupDelegates()
-        middleCollectionView.parentViewController = self
-    }
-    //temporary code for updating table with recommendations
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        middleCollectionView.collectionView.reloadData()
+        getRecommendedNews()
         NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
@@ -43,7 +38,24 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             switch result {
             case .success(let newsData):
                 self.middleCollectionView.news.removeAll()
-                self.middleCollectionView.news = newsData.results
+                DispatchQueue.main.async {
+                    self.middleCollectionView.news = newsData.results
+                }
+            case .failure(let error):
+                print("Error fetching news data: \(error)")
+            }
+        }
+    }
+    
+    func getRecommendedNews() {
+        RequestsManager.shared.getNewsByRecommend(category: CategoriesManager.shared.categories.joined(separator: ",")) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newsData):
+                DispatchQueue.main.async {
+                    self.recommendedTableView.news = newsData.results
+                    self.recommendedTableView.reloadData()
+                }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
             }
@@ -100,9 +112,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     }
     //MARK: - Configuring UI Elements
     
+    // hiding keyboard
+    //    private func configureTapGesture() {
+    //        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+    //        view.addGestureRecognizer(tapGesture)
+    //    }
+    
     func setupDelegates() {
         collectionView.delegateCollectionDidSelect = self
         searchTextField.searchTextField.delegate = self
+        recommendedTableView.parentViewController = self
+        middleCollectionView.parentViewController = self
     }
     
     private func setupViews() {
@@ -156,6 +176,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     
     @objc func seeAllPressed(sender: UIButton) {
         let recommendedVC = RecommendedViewController()
+        recommendedVC.news = recommendedTableView.news
         present(recommendedVC, animated: true)
     }
     

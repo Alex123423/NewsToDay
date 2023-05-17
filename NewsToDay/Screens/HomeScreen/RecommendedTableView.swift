@@ -9,43 +9,33 @@ import UIKit
 import SnapKit
 
 class RecommendedTableView: UITableView {
-    
-    var tableView = UITableView()
-
+   
+    weak var parentViewController: UIViewController?
     var news: [Result] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.reloadData()
             }
         }
     }
+    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
-          configureTable()
-          self.addSubview(tableView)
-          setupConstraints()
-      }
-      
-    func configureTable() {
-        tableView.rowHeight = 100
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
-        tableView.dataSource = self
-        tableView.delegate = self
+        configureTable()
     }
     
-    func setupConstraints() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+    func configureTable() {
+        rowHeight = 100
+        separatorStyle = .none
+        backgroundColor = .clear
+        register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
+        dataSource = self
+        delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-    
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - TableView Delegate
@@ -59,10 +49,19 @@ extension RecommendedTableView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
             return UITableViewCell()
         }
+        cell.configureCell(news[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-}
+        guard let parentViewController = parentViewController else {
+                return
+            }
 
+        let selectedArticle = self.news[indexPath.row]
+            let vc = DetailedViewController()
+            vc.configureScreen(selectedArticle: selectedArticle)
+            vc.modalPresentationStyle = .fullScreen
+            parentViewController.present(vc, animated: true)
+        }
+}

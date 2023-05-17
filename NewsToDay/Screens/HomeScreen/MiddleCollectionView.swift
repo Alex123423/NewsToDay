@@ -80,12 +80,15 @@ extension MiddleCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailedViewController()
-        DispatchQueue.main.async {
-            vc.configureScreen(selectedArticle: self.news[indexPath.row])
+        guard let parentViewController = parentViewController else {
+                return
+            }
+
+        let selectedArticle = self.news[indexPath.row]
+            let vc = DetailedViewController()
+            vc.configureScreen(selectedArticle: selectedArticle)
+            vc.modalPresentationStyle = .fullScreen
+            parentViewController.present(vc, animated: true)
         }
-        vc.modalPresentationStyle = .fullScreen
-        parentViewController?.present(vc, animated: true)
-    }
 }
 
