@@ -28,13 +28,21 @@
 
 ## About The Project
 
-| Splash screen | Onbaording | Homepage |
+## News application, in this application the user will be able to see the most popular news, as well as see the news feed divided into categories, the user receives data on popular news in different categories, the user has the opportunity to choose the categories that interest him the most
+
+| Splash screen | Onbaording | Categories |
 | --- | --- | --- |
 | <img src="https://user-images.githubusercontent.com/46907557/238901010-4aae9446-020d-41cb-95f9-7c2b00fdc8f9.png" height="500">|<img src="https://user-images.githubusercontent.com/46907557/238901004-ca63821a-aeb1-4297-8151-909d3cf9d2be.png" height="500"/>| <img src="https://user-images.githubusercontent.com/46907557/238906568-5e1b0e5a-18c9-4fbb-a6e6-89a6ca54708b.png" height="500"/>|
+##
+## Implemented Search-Bar and query search from API, ability to add news to Favorites, the user can remove the "Favorites" mark from the article, after which it will be deleted from there, the picture of the article, the author's name, title, category, publication from which this article is taken, UITabBarController with navigation on each tab
+## The data is saved in the Favorites so that after closing/opening the Favorites application, the user's news selection is savedand the user can change the choice of preferred topics, on the basis of which a list is formed for a separate category on the main screen “Recommendations for You” and showning the best articles in the categories that he has selected on the category screen
 
 | Homescreen | Article | Bookmarks |
 | --- | --- | --- |
 | <img src="https://user-images.githubusercontent.com/46907557/238900993-bb4a5fcf-577a-4c0a-aa9b-1afff04aacd3.png" height="500">|<img src="https://user-images.githubusercontent.com/46907557/238900968-9846d186-47d7-4e6c-b428-6088742b1de8.png" height="500"/>| <img src="https://user-images.githubusercontent.com/46907557/238900990-1d8c7eef-a291-4ec8-a4c9-4ec15fc4bb8c.png" height="500"/>|
+##
+## Localization is enabled with the ability to change the language of the application
+## Possibility of registration and login by mail and password, implementation via Firebase
 
 | Profile | Terms & Conditions | Laguages |
 | --- | --- | --- |
