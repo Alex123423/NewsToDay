@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCore
+import FirebaseAuth
 
 class UserProfileController: UIViewController{
     
@@ -135,7 +138,7 @@ class UserProfileController: UIViewController{
     }
     
     @objc func buttonTermsPressed(_ sender: UIButton) {
-        let vc = TearmsConditionsController()
+        let vc = TermsConditions()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

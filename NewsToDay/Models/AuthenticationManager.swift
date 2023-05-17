@@ -5,8 +5,10 @@
 //  Created by Edward Kheladze on 14.05.2023.
 //
 
-import Foundation
-import Firebase
+import UIKit
+import FirebaseCore
+import FirebaseAuth
+
 
 struct AuthDataResultModel {
     let uid: String

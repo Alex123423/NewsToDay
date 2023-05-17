@@ -44,7 +44,6 @@
 		87679D6C2A0BAFC0007BC7C7 /* RecommendedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87679D6B2A0BAFC0007BC7C7 /* RecommendedViewController.swift */; };
 		EC7D696D2A0A5ADB00A502CE /* TermsConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D696C2A0A5ADB00A502CE /* TermsConditions.swift */; };
 		EC7D696F2A0A5B0F00A502CE /* ConditionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D696E2A0A5B0F00A502CE /* ConditionsModel.swift */; };
-		ECBE7D922A13D78E00713FBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECBE7D912A13D78E00713FBD /* GoogleService-Info.plist */; };
 		ECBE7D942A13D7F200713FBD /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE7D932A13D7F200713FBD /* AuthenticationManager.swift */; };
 		ECBE7D9A2A13D9D700713FBD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ECBE7D992A13D9D700713FBD /* FirebaseAnalytics */; };
 		ECBE7D9C2A13D9D700713FBD /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = ECBE7D9B2A13D9D700713FBD /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -73,7 +72,10 @@
 		ECBE7DCA2A13D9D700713FBD /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ECBE7DC92A13D9D700713FBD /* FirebaseRemoteConfigSwift */; };
 		ECBE7DCC2A13D9D700713FBD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = ECBE7DCB2A13D9D700713FBD /* FirebaseStorage */; };
 		ECBE7DCE2A13D9D700713FBD /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = ECBE7DCD2A13D9D700713FBD /* FirebaseStorageCombine-Community */; };
-		ECBE7DD02A13DA0A00713FBD /* UserScreen in Resources */ = {isa = PBXBuildFile; fileRef = ECBE7DCF2A13DA0A00713FBD /* UserScreen */; };
+		ECBE7DD22A13E42700713FBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECBE7DD12A13E42700713FBD /* GoogleService-Info.plist */; };
+		ECBE7DD72A13E43800713FBD /* UserSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE7DD42A13E43800713FBD /* UserSignInController.swift */; };
+		ECBE7DD82A13E43800713FBD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE7DD52A13E43800713FBD /* UserProfileController.swift */; };
+		ECBE7DD92A13E43800713FBD /* UserRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE7DD62A13E43800713FBD /* UserRegistrationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,9 +117,11 @@
 		87679D6B2A0BAFC0007BC7C7 /* RecommendedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedViewController.swift; sourceTree = "<group>"; };
 		EC7D696C2A0A5ADB00A502CE /* TermsConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditions.swift; sourceTree = "<group>"; };
 		EC7D696E2A0A5B0F00A502CE /* ConditionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsModel.swift; sourceTree = "<group>"; };
-		ECBE7D912A13D78E00713FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECBE7D932A13D7F200713FBD /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		ECBE7DCF2A13DA0A00713FBD /* UserScreen */ = {isa = PBXFileReference; lastKnownFileType = folder; path = UserScreen; sourceTree = "<group>"; };
+		ECBE7DD12A13E42700713FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ECBE7DD42A13E43800713FBD /* UserSignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSignInController.swift; sourceTree = "<group>"; };
+		ECBE7DD52A13E43800713FBD /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		ECBE7DD62A13E43800713FBD /* UserRegistrationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,7 @@
 		17439FE22A0DBD2B002E286D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				ECBE7DD32A13E43800713FBD /* UserScreen */,
 				87679D572A0B6958007BC7C7 /* Cells */,
 				17439FE32A0DBD3A002E286D /* LaunchScreen */,
 				17439FE42A0DBD46002E286D /* OnboardingScreen */,
@@ -171,7 +176,6 @@
 				87679D6A2A0BAF9E007BC7C7 /* RecommendedScreen */,
 				578757642A0AEBD700AC49F3 /* BookmarksScreen */,
 				68E25F872A0B7F3F002163B3 /* DetailedScreen */,
-				ECBE7DCF2A13DA0A00713FBD /* UserScreen */,
 				17439FE62A0DBDCE002E286D /* TermsConditionsScreen */,
 				17439FE72A0DBDE5002E286D /* LanguageScreen */,
 			);
@@ -275,7 +279,7 @@
 				17BE9C3B2A0950E50062B6EA /* Assets.xcassets */,
 				179AF90D2A0DC2BC00FA41F3 /* Launch Screen.storyboard */,
 				17BE9C402A0950E50062B6EA /* Info.plist */,
-				ECBE7D912A13D78E00713FBD /* GoogleService-Info.plist */,
+				ECBE7DD12A13E42700713FBD /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -357,6 +361,16 @@
 				87679D6B2A0BAFC0007BC7C7 /* RecommendedViewController.swift */,
 			);
 			path = RecommendedScreen;
+			sourceTree = "<group>";
+		};
+		ECBE7DD32A13E43800713FBD /* UserScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ECBE7DD52A13E43800713FBD /* UserProfileController.swift */,
+				ECBE7DD42A13E43800713FBD /* UserSignInController.swift */,
+				ECBE7DD62A13E43800713FBD /* UserRegistrationController.swift */,
+			);
+			path = UserScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,10 +469,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				179AF90E2A0DC2BC00FA41F3 /* Launch Screen.storyboard in Resources */,
+				ECBE7DD22A13E42700713FBD /* GoogleService-Info.plist in Resources */,
 				17BE9C3C2A0950E50062B6EA /* Assets.xcassets in Resources */,
-				ECBE7D922A13D78E00713FBD /* GoogleService-Info.plist in Resources */,
 				578757592A0AAFB900AC49F3 /* Localizable.strings in Resources */,
-				ECBE7DD02A13DA0A00713FBD /* UserScreen in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,12 +500,14 @@
 				578757462A09659400AC49F3 /* OnboardingViewController.swift in Sources */,
 				87679D662A0B6958007BC7C7 /* SearchTextField.swift in Sources */,
 				8717983A2A097999003921BF /* RequestsManager.swift in Sources */,
+				ECBE7DD82A13E43800713FBD /* UserProfileController.swift in Sources */,
 				87679D672A0B6958007BC7C7 /* CategoriesCollection.swift in Sources */,
 				87679D642A0B6958007BC7C7 /* RecommendedTableView.swift in Sources */,
 				872963952A1125D10087DB55 /* BookmarksManager.swift in Sources */,
 				17BE9C332A0950DC0062B6EA /* AppDelegate.swift in Sources */,
 				57BEFC122A111B110073C090 /* CategoriesVC.swift in Sources */,
 				EC7D696D2A0A5ADB00A502CE /* TermsConditions.swift in Sources */,
+				ECBE7DD72A13E43800713FBD /* UserSignInController.swift in Sources */,
 				ECBE7D942A13D7F200713FBD /* AuthenticationManager.swift in Sources */,
 				87679D652A0B6958007BC7C7 /* HomeViewController.swift in Sources */,
 				573CCA3C2A1255DA00578C37 /* CategoriesOnboardingVC.swift in Sources */,
@@ -501,6 +516,7 @@
 				17BE9C352A0950DC0062B6EA /* SceneDelegate.swift in Sources */,
 				68E25F8D2A0BBA2F002163B3 /* Message.swift in Sources */,
 				8717983B2A097999003921BF /* API.swift in Sources */,
+				ECBE7DD92A13E43800713FBD /* UserRegistrationController.swift in Sources */,
 				87679D602A0B6958007BC7C7 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,7 +659,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3J42942YG2;
+				DEVELOPMENT_TEAM = 8S654D2Z53;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsToDay/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -674,7 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3J42942YG2;
+				DEVELOPMENT_TEAM = 8S654D2Z53;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsToDay/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -1,8 +1,7 @@
 target 'NewsToDay' do
   use_frameworks!
 
-  
+  # Подключение Firebase/Auth
   pod 'Firebase/Auth'
 
-end
-
+  # Другие зависимости вашего проекта
