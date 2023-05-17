@@ -30,7 +30,7 @@
 
 ## News application, in this application the user will be able to see the most popular news, as well as see the news feed divided into categories, the user receives data on popular news in different categories, the user has the opportunity to choose the categories that interest him the most
 
-| Splash screen | Onbaording | Categories |
+| Splash screen | Onboarding | Categories |
 | --- | --- | --- |
 | <img src="https://user-images.githubusercontent.com/46907557/238901010-4aae9446-020d-41cb-95f9-7c2b00fdc8f9.png" height="500">|<img src="https://user-images.githubusercontent.com/46907557/238901004-ca63821a-aeb1-4297-8151-909d3cf9d2be.png" height="500"/>| <img src="https://user-images.githubusercontent.com/46907557/238906568-5e1b0e5a-18c9-4fbb-a6e6-89a6ca54708b.png" height="500"/>|
 ##
@@ -44,7 +44,7 @@
 ## Localization is enabled with the ability to change the language of the application
 ## Possibility of registration and login by mail and password, implementation via Firebase
 
-| Profile | Terms & Conditions | Laguages |
+| Profile | Terms & Conditions | Languages |
 | --- | --- | --- |
 | <img src="https://user-images.githubusercontent.com/46907557/238901005-a24827d5-6683-4f3f-9122-736369202038.png" height="500">|<img src="https://user-images.githubusercontent.com/46907557/238901012-2d7f9649-1b8c-4624-8a10-7dbad5bb217b.png" height="500"/>| <img src="https://user-images.githubusercontent.com/46907557/238901000-5dd41a72-8b41-4867-a040-e761760c3dc5.png" height="500"/>|
 
