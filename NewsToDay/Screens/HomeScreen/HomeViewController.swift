@@ -114,13 +114,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             }
         }
     }
-    //MARK: - Configuring UI Elements
     
-    // hiding keyboard
-    //    private func configureTapGesture() {
-    //        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-    //        view.addGestureRecognizer(tapGesture)
-    //    }
+    //MARK: - Configuring UI Elements
     
     func setupDelegates() {
         collectionView.delegateCollectionDidSelect = self

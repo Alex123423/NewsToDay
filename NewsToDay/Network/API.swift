@@ -9,13 +9,13 @@ import Foundation
 
 enum API {
     var apiKey: String {
-        return "pub_2208163cf5d19778bb3af801dba462a505e4d"
+        return "pub_2205626b53755973b1578aa4aae8877974363"
     }
     
     var baseURL: String {
         return "https://newsdata.io/api/1/news?apikey="
     }
-    
+  
     case popular
     case search(keyWord: String)
     case byCategory(category: String)

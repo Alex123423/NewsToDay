@@ -18,7 +18,7 @@ class CategoriesCollection: UIView {
     private var collectionView: UICollectionView!
     weak var delegateCollectionDidSelect: CollectionDidSelectProtocol?
     
-    private var categories = ["Random".localized, "Politics".localized, "Business".localized, "Top".localized, "Environment".localized, "Entertainment".localized, "Food".localized, "Health".localized, "Science".localized, "Sports".localized, "Tourism".localized, "Technology".localized, "World".localized]
+    private var categories = ["Random", "Politics", "Business", "Top", "Environment", "Entertainment", "Food", "Health", "Science", "Sports", "Tourism", "Technology", "World"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,11 +92,10 @@ extension CategoriesCollection: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegateCollectionDidSelect?.getNewsFromCategory(categoryName: categories[indexPath.item])
+        delegateCollectionDidSelect?.getNewsFromCategory(categoryName: categories[indexPath.item].lowercased())
     }
     
     @objc func updateLanguage() {
         collectionView.reloadData()
     }
 }
-

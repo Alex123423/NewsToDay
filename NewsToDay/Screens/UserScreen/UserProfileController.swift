@@ -12,7 +12,6 @@ import FirebaseAuth
 
 class UserProfileController: UIViewController{
     
-    
     // MARK: - Outlets
     
     lazy var termsConditionsButton: UIButton = {
@@ -20,19 +19,12 @@ class UserProfileController: UIViewController{
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("Terms & Conditions".localized, for: .normal)
-        button.configuration = .plain()
-        button.configuration?.titlePadding = CGFloat(10)
-        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
-            var updated = attributes
-            updated.font = font
-            return updated
-        }
-        button.configuration?.titleTextAttributesTransformer = transformer
+        button.configuration = createButtonConfiguration(title: "Terms & Conditions".localized)
+        button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentHorizontalAlignment = .left
         button.addTarget(self, action: #selector(buttonTermsPressed), for: .touchUpInside)
+        button.addImageToButton(img: "chevron.right")
         return button
     }()
     
@@ -41,19 +33,12 @@ class UserProfileController: UIViewController{
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("Sign Out".localized, for: .normal)
-        button.configuration = .plain()
-        button.configuration?.titlePadding = CGFloat(10)
-        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
-            var updated = attributes
-            updated.font = font
-            return updated
-        }
-        button.configuration?.titleTextAttributesTransformer = transformer
+        button.configuration = createButtonConfiguration(title: "Sign Out".localized)
         button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signOutButtonPressed), for: .touchUpInside)
+        button.addImageToButton(img: "rectangle.portrait.and.arrow.forward")
         return button
     }()
     
@@ -62,26 +47,20 @@ class UserProfileController: UIViewController{
         button.layer.cornerRadius = 12
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("Language".localized, for: .normal)
-        button.configuration = .plain()
-        button.configuration?.titlePadding = CGFloat(10)
-        let font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        let transformer = UIConfigurationTextAttributesTransformer { (attributes) in
-            var updated = attributes
-            updated.font = font
-            return updated
-        }
-        button.configuration?.titleTextAttributesTransformer = transformer
+        button.configuration = createButtonConfiguration(title: "Language".localized)
         button.contentHorizontalAlignment = .left
         button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(changeLanguagePressed), for: .touchUpInside)
+        button.addImageToButton(img: "chevron.right")
         return button
     }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Profile".localized
         label.textColor = .black
-        label.font = UIFont(name: "Avenir Next Bold", size: 27)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -129,7 +108,19 @@ class UserProfileController: UIViewController{
     }
     
     //MARK: - Methods
-  
+    
+    private func createButtonConfiguration(title: String) -> UIButton.Configuration {
+        var configuration = UIButton.Configuration.plain()
+        configuration.titlePadding = 10
+        configuration.baseForegroundColor = .darkGray
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+            var updated = attributes
+            updated.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+            return updated
+        }
+        return configuration
+    }
+    
     @objc func updateLanguage() {
         termsConditionsButton.setTitle("Terms & Conditions".localized, for: .normal)
         signOutButton.setTitle("Sign Out".localized, for: .normal)
@@ -142,8 +133,8 @@ class UserProfileController: UIViewController{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
-        let vc = OnboardingViewController()
+    @objc func signOutButtonPressed(_ sender: UIButton) {
+        let vc = UserSignInController()
         vc.hidesBottomBarWhenPushed = true
         vc.navigationItem.hidesBackButton = true
         vc.modalPresentationStyle = .fullScreen
@@ -170,27 +161,26 @@ class UserProfileController: UIViewController{
     private func setConstraints() {
         NSLayoutConstraint.activate([
             
-            
             languageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             languageButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 44),
             languageButton.widthAnchor.constraint(equalToConstant: 360),
             languageButton.heightAnchor.constraint(equalToConstant: 60),
             
             termsConditionsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            termsConditionsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -180),
+            termsConditionsButton.bottomAnchor.constraint(equalTo: signOutButton.topAnchor, constant: -30),
             termsConditionsButton.widthAnchor.constraint(equalToConstant: 360),
             termsConditionsButton.heightAnchor.constraint(equalToConstant: 60),
             
             signOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90),
+            signOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             signOutButton.widthAnchor.constraint(equalToConstant: 360),
             signOutButton.heightAnchor.constraint(equalToConstant: 60),
             
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             
             photoImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            photoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 130),
+            photoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             photoImageView.widthAnchor.constraint(equalToConstant: 100),
             photoImageView.heightAnchor.constraint(equalToConstant: 100),
             
@@ -200,9 +190,18 @@ class UserProfileController: UIViewController{
             
             emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             emailLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor),
-            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 }
 
-
+extension UIButton {
+    func addImageToButton(img: String) {
+        let checkmarkImage = UIImage(systemName: img)?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        let imageView = UIImageView(image: checkmarkImage)
+        self.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    }
+}

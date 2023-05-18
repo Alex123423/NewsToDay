@@ -20,6 +20,7 @@ class CategoriesOnboardingVC: UIViewController {
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         return nextButton
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         categoriesOnboardingView.titleLabel.text = "Select your favorite topics".localized

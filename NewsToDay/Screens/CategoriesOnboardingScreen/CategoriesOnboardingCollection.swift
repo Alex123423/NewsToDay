@@ -146,7 +146,6 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         print(CategoriesManager.shared.getCategoriesString())
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell
         let category = Array(categories.keys)[indexPath.row]

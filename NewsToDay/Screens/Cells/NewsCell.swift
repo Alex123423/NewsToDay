@@ -82,7 +82,7 @@ class NewsCell: UICollectionViewCell {
     public func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
-            self.categoryLabel.text = newsData.category?.first?.uppercased() ?? "Without category"
+            self.categoryLabel.text = newsData.category?.first?.localized.uppercased() ?? "Without category"
             if let imageURL = newsData.imageURL {
                 self.newsImageView.kf.setImage(with: URL(string: imageURL))
             } else {
