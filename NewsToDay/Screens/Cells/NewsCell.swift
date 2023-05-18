@@ -79,12 +79,20 @@ class NewsCell: UICollectionViewCell {
         }
     }
     
+    // Kingfisher options
+    let options: KingfisherOptionsInfo = [
+        .processor(BlurImageProcessor(blurRadius: 1)), // Apply blur effect
+        .transition(.fade(0.2)),
+        .scaleFactor(UIScreen.main.scale),
+        .cacheOriginalImage
+    ]
+    
     public func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
             self.categoryLabel.text = newsData.category?.first?.localized.uppercased() ?? "Without category"
             if let imageURL = newsData.imageURL {
-                self.newsImageView.kf.setImage(with: URL(string: imageURL))
+                self.newsImageView.kf.setImage(with: URL(string: imageURL), options: self.options)
             } else {
                 self.newsImageView.image = UIImage(named: Resources.Images.noImage)
             }
