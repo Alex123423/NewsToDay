@@ -30,7 +30,13 @@ class DetailedViewController: UIViewController {
         self.newsText.text = selectedArticle.content
         self.titleLabel.text = selectedArticle.title
         self.creatorLabel.text = selectedArticle.creator?.first ?? "Not specified"
-        self.categoryName.text = selectedArticle.category?.first?.capitalized
+        if let category = selectedArticle.category?.first {
+            let localizedCategory = category.localized
+                self.categoryName.text = localizedCategory.capitalized
+        } else {
+            self.categoryName.text = "Without category"
+        }
+
         if bookmarksManager.bookmarksArray.contains(selectedArticle) {
             bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true

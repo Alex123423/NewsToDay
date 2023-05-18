@@ -39,7 +39,12 @@ class RecommendedCell: UITableViewCell {
     
     func configureCell(_ newsData: Result) {
         self.newsTitleLabel.text = newsData.title
-        self.categoryLabel.text = newsData.category?.first?.capitalized ?? "Without category"
+        if let category = newsData.category?.first {
+            let localizedCategory = category.localized
+                self.categoryLabel.text = localizedCategory.capitalized
+        } else {
+            self.categoryLabel.text = "Without category"
+        }
         if let imageURL = newsData.imageURL, let url = URL(string: imageURL) {
             self.newsImageView.kf.setImage(with: url)
         } else {
