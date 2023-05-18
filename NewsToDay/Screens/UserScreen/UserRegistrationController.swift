@@ -163,18 +163,24 @@ final class UserRegistrationController: UIViewController {
     }
     
     @objc func signUpButtonPressed() {
-        let userSignController = OnboardingViewController()
-        present(userSignController, animated: true, completion: nil)
-        guard let email = emailTextField.text, let password = passwordTextField.text else {
-            return
-        }
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            guard self != nil else { return }
-            
-            if let error = error {
-                print(error.localizedDescription)
+        Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+            if error != nil {
             } else {
-                print("User registered successfully")
+                let db = Firestore.firestore()
+                db.collection("users").addDocument(data: [
+                    "username" : self.userNameTextField.text!,
+                    "email" : self.emailTextField.text!,
+                    "uid" : result!.user.uid
+                ]) { error in
+                    if error != nil {
+                        // Обработка ошибки записи в Firestore
+                        print("Ошибка записи в Firestore: (error.localizedDescription)")
+                    } else {
+                        // Успешная запись в Firestore
+                    }
+                }
+                let userSignController = OnboardingViewController()
+                self.present(userSignController, animated: true, completion: nil)
             }
         }
     }

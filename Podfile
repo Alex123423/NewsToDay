@@ -3,5 +3,7 @@ target 'NewsToDay' do
 
   # Подключение Firebase/Auth
   pod 'Firebase/Auth'
-
+  pod 'Firebase/Analytics"
+  pod 'Firebase/Firestone'
+  pod 'Firebase/Database'
   # Другие зависимости вашего проекта
