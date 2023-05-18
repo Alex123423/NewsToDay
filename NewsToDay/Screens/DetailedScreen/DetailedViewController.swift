@@ -61,6 +61,14 @@ class DetailedViewController: UIViewController {
         self.dismiss(animated: false)
     }
     
+    @objc func shareButtonTapped() {
+        guard let urlString = currentNews?.link,
+              let url = URL(string: urlString) else { return }
+
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activityVC, animated: true)
+    }
+    
     //  MARK: - UI Views
     
     private lazy var newsImage: UIImageView = {
@@ -82,17 +90,6 @@ class DetailedViewController: UIViewController {
     }()
     
     //  MARK: - UI Buttons
-    private lazy var categoryName: UILabel = {
-        let element = UILabel()
-        element.backgroundColor = UIColor(named: Resources.Colors.button)
-        element.text = "Politics"
-        element.textColor = .white
-        element.textAlignment = .center
-        element.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        element.layer.cornerRadius = 16
-        element.clipsToBounds = true
-        return element
-    }()
     
     private lazy var bookmarkButton: UIButton = {
         let element = UIButton(type: .system)
@@ -118,7 +115,31 @@ class DetailedViewController: UIViewController {
         return element
     }()
     
+    private lazy var shareButton: UIButton = {
+        let element = UIButton(type: .system)
+        element.setTitle("Share", for: .normal)
+        element.setTitleColor(.white, for: .normal)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+//        element.backgroundColor = UIColor(named: Resources.Colors.button)
+//        element.layer.cornerRadius = 16
+//        element.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        element.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        return element
+    }()
+    
     //  MARK: - UI Labels
+    private lazy var categoryName: UILabel = {
+        let element = UILabel()
+        element.backgroundColor = UIColor(named: Resources.Colors.button)
+        element.text = "Politics"
+        element.textColor = .white
+        element.textAlignment = .center
+        element.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        element.layer.cornerRadius = 16
+        element.clipsToBounds = true
+        return element
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let element = UILabel()
         element.textColor = .white
@@ -171,6 +192,7 @@ extension DetailedViewController {
         newsImage.addSubview(arrowBackbutton)
         newsImage.addSubview(bookmarkButton)
         newsImage.addSubview(arrowButton)
+        newsImage.addSubview(shareButton)
         newsImage.isUserInteractionEnabled = true
     }
     
@@ -213,6 +235,13 @@ extension DetailedViewController {
             make.height.equalTo(30)
         }
         
+        shareButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-26)
+//            make.top.equalTo(arrowButton.snp.bottom).offset(30)
+            make.centerY.equalTo(categoryName.snp.centerY)
+            make.height.equalTo(30)
+        }
+        
         authorLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-24)
             make.left.equalToSuperview().offset(26)
@@ -232,7 +261,7 @@ extension DetailedViewController {
             make.bottom.equalTo(titleLabel.snp.top).offset(-15)
             make.leading.equalTo(20)
             make.height.equalTo(32)
-            make.width.equalTo(90)
+            make.width.equalTo(120)
         }
     }
 }
