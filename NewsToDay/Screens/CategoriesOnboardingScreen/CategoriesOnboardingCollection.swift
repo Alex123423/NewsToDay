@@ -154,6 +154,8 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         let category = Array(categories.keys)[indexPath.row]
         CategoriesManager.shared.delete(category: category)
         cell?.deactivate()
+        categoriesOnboardingVC?.nextButton.backgroundColor = UIColor(named: "buttonBlue")
+        categoriesOnboardingVC?.nextButton.isEnabled = true
     }
     
     @objc func updateLanguage() {
