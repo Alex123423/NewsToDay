@@ -145,7 +145,6 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
             categoriesOnboardingVC?.nextButton.backgroundColor = .red
             categoriesOnboardingVC?.nextButton.isEnabled = false
         }
-        print(CategoriesManager.shared.getCategoriesString())
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

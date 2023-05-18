@@ -251,7 +251,7 @@ extension DetailedViewController {
         }
     
     @objc func loadData() {
-        print("load article")
+
         guard let article = currentNews, let urlString = article.link, let url = URL(string: urlString) else {
             self.presentOkAlertWithMessage("Invalid news URL")
             return
