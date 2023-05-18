@@ -125,31 +125,24 @@ final class UserSignInController: UIViewController {
     @objc func dontHaveAccountButtonPressed() {
         let userRegistrationController = UserRegistrationController()
         present(userRegistrationController, animated: true, completion: nil)
-        
     }
     
     @objc func signInButtonPressed() {
-        let categoriesOnboardingVC = CategoriesOnboardingVC()
-        let navigationController = UINavigationController(rootViewController: categoriesOnboardingVC)
-        categoriesOnboardingVC.navigationController?.isNavigationBarHidden = true
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let appDelegate = windowScene.delegate as? SceneDelegate {
-            appDelegate.window?.rootViewController = navigationController
-        }
-        guard let email = emailTextField.text, let password = passwordTextField.text else {
-            return
-        }
-
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            guard self != nil else { return }
-            
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (authResult, error) in
+            // Ваш код обработки успешной аутентификации или ошибки
             if let error = error {
-                // Обработка ошибки
-                print(error.localizedDescription)
+                // Обработка ошибки входа
+                print("Ошибка входа: \(error.localizedDescription)")
             } else {
-                // Обработка успешной регистрации
-                print("User registered successfully")
-                // Добавьте здесь код для перехода на главный экран после успешной регистрации
+                // Успешный вход
+                let categoriesOnboardingVC = CategoriesOnboardingVC()
+                let navigationController = UINavigationController(rootViewController: categoriesOnboardingVC)
+                categoriesOnboardingVC.navigationController?.isNavigationBarHidden = true
+                
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let appDelegate = windowScene.delegate as? SceneDelegate {
+                    appDelegate.window?.rootViewController = navigationController
+                }
             }
         }
     }
