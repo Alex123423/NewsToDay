@@ -11,7 +11,6 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     
     var categoriesOnboardingVC: CategoriesOnboardingVC?
     public let categories = [
-        "Random": "🎲",
         "Politics": "🗳️",
         "Business": "💼",
         "Top": "🔝",
