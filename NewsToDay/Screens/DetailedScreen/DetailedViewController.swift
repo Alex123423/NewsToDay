@@ -21,16 +21,11 @@ class DetailedViewController: UIViewController {
         setConstraints()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print(newsText.frame.height)
-    }
-    
     func configureScreen(selectedArticle: Result) {
         if let imageURL = selectedArticle.imageURL {
             self.newsImage.kf.setImage(with: URL(string: imageURL))
         } else {
-            self.newsImage.image = UIImage(named: Resources.Images.building)
+            self.newsImage.image = UIImage(named: Resources.Images.noImage)
         }
         self.newsText.text = selectedArticle.content
         self.titleLabel.text = selectedArticle.title
@@ -120,9 +115,6 @@ class DetailedViewController: UIViewController {
         element.setTitle("Share", for: .normal)
         element.setTitleColor(.white, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-//        element.backgroundColor = UIColor(named: Resources.Colors.button)
-//        element.layer.cornerRadius = 16
-//        element.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         element.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
         return element
     }()
@@ -167,15 +159,6 @@ class DetailedViewController: UIViewController {
         element.numberOfLines = 0
         return element
     }()
-    
-    private lazy var resultLabel: UILabel = {
-        let element = UILabel()
-        element.textColor = #colorLiteral(red: 0.2602780759, green: 0.2769176066, blue: 0.349611342, alpha: 1)
-        element.text = "Results"
-        element.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        element.numberOfLines = 0
-        return element
-    }()
 }
 
 //  MARK: -  Private Methods
@@ -183,7 +166,6 @@ extension DetailedViewController {
     private func setViews() {
         view.backgroundColor = .white
         view.addSubview(newsImage)
-        view.addSubview(resultLabel)
         view.addSubview(newsText)
         newsImage.addSubview(authorLabel)
         newsImage.addSubview(creatorLabel)
@@ -203,14 +185,9 @@ extension DetailedViewController {
             make.height.equalTo(view.frame.height / 2 - 60)
         }
         
-        resultLabel.snp.makeConstraints { make in
-            make.top.equalTo(newsImage.snp.bottom).inset(-20)
-            make.leading.equalToSuperview().offset(20)
-        }
-        
         newsText.snp.makeConstraints { make in
-            make.top.equalTo(resultLabel.snp.bottom).offset(8)
-            make.leading.equalTo(resultLabel.snp.leading)
+            make.top.equalTo(newsImage.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -237,7 +214,6 @@ extension DetailedViewController {
         
         shareButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-26)
-//            make.top.equalTo(arrowButton.snp.bottom).offset(30)
             make.centerY.equalTo(categoryName.snp.centerY)
             make.height.equalTo(30)
         }
