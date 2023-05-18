@@ -9,20 +9,21 @@ import UIKit
 
 class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var categoriesOnboardingVC: CategoriesOnboardingVC?
     public let categories = [
-        "Random".localized: "🎲",
-        "Politics".localized: "🗳️",
-        "Business".localized: "💼",
-        "Top".localized: "🔝",
-        "Environment".localized: "🌳",
-        "Entertainment".localized: "🎭",
-        "Food".localized: "🍔",
-        "Health".localized: "🏥",
-        "Science".localized: "🔬",
-        "Sports".localized: "⚽️",
-        "Tourism".localized: "🗺️",
-        "Technology".localized: "💻",
-        "World".localized: "🌎"
+        "Random": "🎲",
+        "Politics": "🗳️",
+        "Business": "💼",
+        "Top": "🔝",
+        "Environment": "🌳",
+        "Entertainment": "🎭",
+        "Food": "🍔",
+        "Health": "🏥",
+        "Science": "🔬",
+        "Sports": "⚽️",
+        "Tourism": "🗺️",
+        "Technology": "💻",
+        "World": "🌎"
     ]
     
     let titleLabel: UILabel = {
@@ -75,6 +76,8 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         collectionView.delegate = self
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.allowsMultipleSelection = true
+
         addSubview(collectionView)
     }
 
@@ -108,14 +111,12 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         
         if let emoji = categories[category] {
             var text = ""
-            if Locale.current.languageCode == "en" {
+            if Locale.current.languageCode == "ru" {
                 text = emoji + " " + category.localized
             } else {
-                text = category.localized
+                text = emoji + " " + category
             }
             cell.label.text = text
-        } else {
-            cell.label.text = category.localized
         }
         
         if CategoriesManager.shared.categories.contains(category.lowercased()) {
@@ -133,38 +134,26 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let category = Array(categories.keys)[indexPath.row]
         let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell
+        
         if CategoriesManager.shared.categories.contains(category.lowercased()) {
-            // Если категория уже выбрана, снимаем выделение и удаляем из выбранных
             CategoriesManager.shared.delete(category: category)
-            collectionView.deselectItem(at: indexPath, animated: true)
             cell?.deactivate()
-            cell?.isSelected = false
-            
         } else if CategoriesManager.shared.categories.count < 5 {
-            // Если категория еще не выбрана и можно выбрать еще категории,
-            // добавляем в выбранные и устанавливаем выделение
             CategoriesManager.shared.add(category: category)
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
             cell?.activate()
-            cell?.isSelected = true
         } else if CategoriesManager.shared.categories.count == 5 {
-            // Иначе выводим сообщение об ошибке
             cell?.error()
-            cell?.isSelected = false
+            categoriesOnboardingVC?.nextButton.backgroundColor = .red
+            categoriesOnboardingVC?.nextButton.isEnabled = false
         }
         print(CategoriesManager.shared.getCategoriesString())
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell
         let category = Array(categories.keys)[indexPath.row]
-        
-        // Удаляем выбранную категорию из массива
         CategoriesManager.shared.delete(category: category)
-        
-        // Обновляем ячейку
-        if let cell = collectionView.cellForItem(at: indexPath) as? CategoriesOnCell {
-            cell.isSelected = false
-        }
+        cell?.deactivate()
     }
     
     @objc func updateLanguage() {

@@ -81,13 +81,13 @@ class OnboardingViewController: UIViewController {
     }
     
     private func addSubviews() {
-           view.addSubview(imageView)
-           view.addSubview(pageControl)
-           view.addSubview(titleLabel)
-           view.addSubview(descriptionLabel)
-           view.addSubview(nextButton)
-       }
-        
+        view.addSubview(imageView)
+        view.addSubview(pageControl)
+        view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
+        view.addSubview(nextButton)
+    }
+    
     private func setupConstraints() {
         view.backgroundColor = .white
         
@@ -103,7 +103,7 @@ class OnboardingViewController: UIViewController {
             titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -30),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        
+            
             descriptionLabel.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -64),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -132,10 +132,8 @@ class OnboardingViewController: UIViewController {
         if currentIndex == slides.count - 1 {
             let scene = UIApplication.shared.connectedScenes.first
             if let sceneDelegate = scene?.delegate as? SceneDelegate {
-                let vc = CategoriesOnboardingVC()
+                let vc = UserSignInController()
                 sceneDelegate.window?.rootViewController = vc
-                //                let tabBarController = TabBarController()
-                //                sceneDelegate.window?.rootViewController = tabBarController.createTabBar()
             }
         } else {
             currentIndex += 1
@@ -150,7 +148,6 @@ class OnboardingViewController: UIViewController {
         let title: String
         let description: String
     }
-    
 }
 
 extension OnboardingViewController: UIScrollViewDelegate {

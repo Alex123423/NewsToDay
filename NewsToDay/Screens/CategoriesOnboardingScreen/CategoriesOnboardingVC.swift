@@ -10,7 +10,7 @@ import UIKit
 class CategoriesOnboardingVC: UIViewController {
     
     private let categoriesOnboardingView = CategoriesOnboardingCollection()
-    private lazy var nextButton: UIButton = {
+    public lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setTitle("next".localized, for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
@@ -20,6 +20,7 @@ class CategoriesOnboardingVC: UIViewController {
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         return nextButton
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         categoriesOnboardingView.titleLabel.text = "Select your favorite topics".localized
@@ -41,6 +42,8 @@ class CategoriesOnboardingVC: UIViewController {
         ])
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
+        categoriesOnboardingView.categoriesOnboardingVC = self
+
     }
     
     @objc func updateLanguage() {
@@ -52,6 +55,7 @@ class CategoriesOnboardingVC: UIViewController {
         if let sceneDelegate = scene?.delegate as? SceneDelegate {
             let tabBarController = TabBarController()
             sceneDelegate.window?.rootViewController = tabBarController.createTabBar()
+            
         }
     }
 }

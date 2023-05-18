@@ -55,7 +55,6 @@ class LanguageViewController: UIViewController{
     private lazy var changeToRUButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
-//        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("Russian", for: .normal)
         button.configuration = .plain()
         button.configuration?.titlePadding = CGFloat(10)
@@ -67,8 +66,7 @@ class LanguageViewController: UIViewController{
         }
         button.configuration?.titleTextAttributesTransformer = transformer
         button.contentHorizontalAlignment = .left
-        
-        // Check if current language is English and set the background color accordingly
+  
         if Bundle.currentLanguage == "ru" {
             button.backgroundColor = UIColor.blue
             button.setTitleColor(.white, for: .normal)
@@ -77,7 +75,6 @@ class LanguageViewController: UIViewController{
             button.setTitleColor(.darkGray, for: .normal)
         }
         
-        // Add checkmark image as right view
         if Bundle.currentLanguage == "ru" {
             let checkmarkImage = UIImage(systemName: "checkmark")?.withTintColor(.white, renderingMode: .alwaysOriginal)
             let imageView = UIImageView(image: checkmarkImage)
@@ -99,7 +96,7 @@ class LanguageViewController: UIViewController{
         setupViews()
         setConstraints()
         view.backgroundColor = .white
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonPressed))
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .gray
         navigationItem.leftBarButtonItem = backButton
         title = "Language".localized
@@ -118,9 +115,8 @@ class LanguageViewController: UIViewController{
         navigationController?.popToRootViewController(animated: true)
     }
     
-    @objc func backButtonPressed() {
-        let vc = UserProfileController()
-        navigationController?.popToViewController(vc, animated: true)
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     

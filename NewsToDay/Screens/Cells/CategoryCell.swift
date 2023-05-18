@@ -58,7 +58,7 @@ class CategoryCell: UICollectionViewCell {
     }
     
     public func configure(with title: String) {
-        categoryLabel.text = title
+        categoryLabel.text = title.localized
     }
     
     private func setupViews() {
