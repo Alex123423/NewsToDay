@@ -9,7 +9,7 @@ import Foundation
 
 enum API {
     var apiKey: String {
-        return "pub_2205626b53755973b1578aa4aae8877974363"
+        return "pub_21924ad04488c43e5d7a6ab402385b44f4c29"
     }
     
     var baseURL: String {

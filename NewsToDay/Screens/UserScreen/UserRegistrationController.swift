@@ -164,7 +164,7 @@ final class UserRegistrationController: UIViewController {
     
     @objc func signUpButtonPressed() {
         Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
-            if let error = error {
+            if error != nil {
             } else {
                 let db = Firestore.firestore()
                 db.collection("users").addDocument(data: [
@@ -172,7 +172,7 @@ final class UserRegistrationController: UIViewController {
                     "email" : self.emailTextField.text!,
                     "uid" : result!.user.uid
                 ]) { error in
-                    if let error = error {
+                    if error != nil {
                         // Обработка ошибки записи в Firestore
                         print("Ошибка записи в Firestore: (error.localizedDescription)")
                     } else {
