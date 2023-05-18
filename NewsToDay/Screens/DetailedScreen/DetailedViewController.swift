@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SafariServices
 
 class DetailedViewController: UIViewController {
     
@@ -105,6 +106,7 @@ class DetailedViewController: UIViewController {
         let element = UIButton(type: .system)
         element.setImage(UIImage(named: "rightarrow"), for: .normal)
         element.tintColor = .white
+        element.addTarget(self, action: #selector(loadData), for: .touchUpInside)
         return element
     }()
     
@@ -232,6 +234,25 @@ extension DetailedViewController {
             make.height.equalTo(32)
             make.width.equalTo(90)
         }
+    }
+}
+
+extension DetailedViewController {
+    func presentOkAlertWithMessage(_ message: String) {
+            let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        }
+    
+    @objc func loadData() {
+        print("load article")
+        guard let article = currentNews, let urlString = article.link, let url = URL(string: urlString) else {
+            self.presentOkAlertWithMessage("Invalid news URL")
+            return
+        }
+        let safariVC = SFSafariViewController(url: url)
+        self.present(safariVC, animated: true, completion: nil)
     }
 }
 

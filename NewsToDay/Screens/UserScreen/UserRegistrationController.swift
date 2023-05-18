@@ -49,6 +49,8 @@ final class UserRegistrationController: UIViewController {
         titleLabel.text = "Welcome to NewsToDay".localized
         titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         titleLabel.textColor = .black
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.5
         
         descriptionLabel.text = "Hello, I guess you are new around here. You can start using the application after sign up.".localized
         descriptionLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
@@ -115,6 +117,7 @@ final class UserRegistrationController: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
