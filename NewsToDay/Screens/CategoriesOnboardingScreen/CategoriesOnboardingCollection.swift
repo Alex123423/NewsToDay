@@ -9,6 +9,7 @@ import UIKit
 
 class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var categoriesOnboardingVC: CategoriesOnboardingVC?
     public let categories = [
         "Random": "🎲",
         "Politics": "🗳️",
@@ -142,6 +143,8 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
             cell?.activate()
         } else if CategoriesManager.shared.categories.count == 5 {
             cell?.error()
+            categoriesOnboardingVC?.nextButton.backgroundColor = .red
+            categoriesOnboardingVC?.nextButton.isEnabled = false
         }
         print(CategoriesManager.shared.getCategoriesString())
     }
