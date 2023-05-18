@@ -27,8 +27,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         setupConstraints()
         randomNews()
         setupDelegates()
-        getRecommendedNews()
         NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getRecommendedNews()
     }
     
     // get news for random category
@@ -46,9 +50,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
             }
         }
     }
-    
+
     func getRecommendedNews() {
-        RequestsManager.shared.getNewsByRecommend(category: CategoriesManager.shared.categories.joined(separator: ",")) { [weak self] result in
+        RequestsManager.shared.getNewsByCategory(category: CategoriesManager.shared.categories.joined(separator: ",")) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let newsData):

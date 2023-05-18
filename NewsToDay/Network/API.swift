@@ -9,7 +9,7 @@ import Foundation
 
 enum API {
     var apiKey: String {
-        return "pub_21869cabfb95c023632642986db7f1d4be756"
+        return "pub_2208163cf5d19778bb3af801dba462a505e4d"
     }
     
     var baseURL: String {
@@ -19,7 +19,6 @@ enum API {
     case popular
     case search(keyWord: String)
     case byCategory(category: String)
-    case recommend(category: String)
     
     //generating urls for network requests
     var url: URL {
@@ -31,12 +30,9 @@ enum API {
             return URL(string: "\(baseURL)\(apiKey)&q=\(encodedKeyWord)&language=en")!
         case .byCategory(let category):
             return URL(string: "\(baseURL)\(apiKey)&category=\(category)&language=en")!
-        case .recommend(let category):
-            return URL(string: "\(baseURL)\(apiKey)&category=\(category)&language=en")!
         }
     }
 }
-
 
 
 

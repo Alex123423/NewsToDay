@@ -66,22 +66,4 @@ final class RequestsManager {
         }
         task.resume()
     }
-    
-    func getNewsByRecommend(category: String, completion: @escaping (Swift.Result<NewsModel, Error>) -> Void) {
-        let url = API.recommend(category: CategoriesManager.shared.categories.joined(separator: ",")).url
-        let task = session.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            } else if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let receivedNewsByCategory = try decoder.decode(NewsModel.self, from: data)
-                    completion(.success(receivedNewsByCategory))
-                } catch {
-                    completion(.failure(error))
-                }
-            }
-        }
-        task.resume()
-    }
 }
