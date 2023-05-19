@@ -35,6 +35,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
         getRecommendedNews()
     }
     
+    //MARK: - Network requests
+    
     // get news for random category
     func randomNews() {
         RequestsManager.shared.getRandomNews { [weak self] result in
@@ -44,7 +46,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
-                    print(self.middleCollectionView.news)
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
@@ -232,25 +233,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     }
 }
 
-//MARK: - Network requests
+//MARK: - Categories delegate
 
 extension HomeViewController: CollectionDidSelectProtocol {
     
     func getNewsFromCategory(categoryName: String) {
-        if categoryName == "Random" {
-            RequestsManager.shared.getRandomNews { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let newsData):
-                    self.middleCollectionView.news.removeAll()
-                    DispatchQueue.main.async {
-                        self.middleCollectionView.news = newsData.results
-                    }
-                case .failure(let error):
-                    print("Error fetching news data: \(error)")
-                }
-            }
+        if categoryName == "random" {
+            randomNews()
         } else {
+            print("\(categoryName)")
             RequestsManager.shared.getNewsByCategory(category: categoryName) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
