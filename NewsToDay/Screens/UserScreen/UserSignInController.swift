@@ -135,8 +135,8 @@ final class UserSignInController: UIViewController {
                 print("Ошибка входа: \(error.localizedDescription)")
             } else {
                 // Успешный вход
-                let categoriesOnboardingVC = CategoriesOnboardingVC()
-                let navigationController = UINavigationController(rootViewController: categoriesOnboardingVC)
+                let categoriesOnboardingVC = TabBarController()
+                let navigationController = UINavigationController(rootViewController: categoriesOnboardingVC.createTabBar())
                 categoriesOnboardingVC.navigationController?.isNavigationBarHidden = true
                 
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
