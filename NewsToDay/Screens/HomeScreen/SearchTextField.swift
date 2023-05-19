@@ -21,6 +21,7 @@ class SearchTextField: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: Notification.Name("LanguageChangedNotification"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -74,4 +75,9 @@ class SearchTextField: UIView {
             make.centerY.equalTo(containerView)
         }
     }
-}
+    
+    @objc func updateLanguage() {
+        textFieldPlaceHolder = "Search".localized
+        searchTextField.attributedPlaceholder = NSAttributedString(string: textFieldPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: Resources.Colors.gray) as Any])
+        }
+    }
