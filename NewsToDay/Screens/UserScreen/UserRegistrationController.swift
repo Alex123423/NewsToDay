@@ -179,8 +179,14 @@ final class UserRegistrationController: UIViewController {
                         // Успешная запись в Firestore
                     }
                 }
-                let userSignController = OnboardingViewController()
-                self.present(userSignController, animated: true, completion: nil)
+                let categoriesOnboardingVC = CategoriesOnboardingVC()
+                let navigationController = UINavigationController(rootViewController: categoriesOnboardingVC)
+                categoriesOnboardingVC.navigationController?.isNavigationBarHidden = true
+                
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let appDelegate = windowScene.delegate as? SceneDelegate {
+                    appDelegate.window?.rootViewController = navigationController
+                }
             }
         }
     }
