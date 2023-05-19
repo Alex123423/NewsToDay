@@ -21,9 +21,17 @@ class DetailedViewController: UIViewController {
         setConstraints()
     }
     
+    // Kingfisher options
+    let options: KingfisherOptionsInfo = [
+        .processor(BlurImageProcessor(blurRadius: 1)), // Apply blur effect
+        .transition(.fade(0.2)), // Fade-in transition
+        .scaleFactor(UIScreen.main.scale),
+        .cacheOriginalImage
+    ]
+    
     func configureScreen(selectedArticle: Result) {
         if let imageURL = selectedArticle.imageURL {
-            self.newsImage.kf.setImage(with: URL(string: imageURL))
+            self.newsImage.kf.setImage(with: URL(string: imageURL), options: options)
         } else {
             self.newsImage.image = UIImage(named: Resources.Images.noImage)
         }
@@ -65,7 +73,7 @@ class DetailedViewController: UIViewController {
     @objc func shareButtonTapped() {
         guard let urlString = currentNews?.link,
               let url = URL(string: urlString) else { return }
-
+        
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(activityVC, animated: true)
     }
@@ -75,7 +83,7 @@ class DetailedViewController: UIViewController {
     private lazy var newsImage: UIImageView = {
         let element = UIImageView()
         element.contentMode = .scaleAspectFill
-        element.backgroundColor = .red
+        element.backgroundColor = .white
         return element
     }()
     
@@ -201,7 +209,7 @@ extension DetailedViewController {
         arrowBackbutton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(26)
             make.top.equalToSuperview().offset(78)
-            make.height.width.equalTo(12)
+            make.height.width.equalTo(15)
         }
         
         bookmarkButton.snp.makeConstraints { make in
@@ -250,14 +258,14 @@ extension DetailedViewController {
 
 extension DetailedViewController {
     func presentOkAlertWithMessage(_ message: String) {
-            let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        }
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
     
     @objc func loadData() {
-
+        
         guard let article = currentNews, let urlString = article.link, let url = URL(string: urlString) else {
             self.presentOkAlertWithMessage("Invalid news URL")
             return

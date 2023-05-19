@@ -44,6 +44,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
                 self.middleCollectionView.news.removeAll()
                 DispatchQueue.main.async {
                     self.middleCollectionView.news = newsData.results
+                    print(self.middleCollectionView.news)
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
