@@ -10,6 +10,7 @@ import UIKit
 class CategoriesOnboardingVC: UIViewController {
     
     private let categoriesOnboardingView = CategoriesOnboardingCollection()
+    
     public lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setTitle("next".localized, for: .normal)

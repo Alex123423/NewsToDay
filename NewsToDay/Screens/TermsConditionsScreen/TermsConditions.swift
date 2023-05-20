@@ -10,7 +10,6 @@ import UIKit
 class TermsConditions: UIViewController {
 
     //MARK: - Elements
-
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +36,6 @@ class TermsConditions: UIViewController {
     }()
 
     //MARK: - LifeCycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -54,7 +52,6 @@ class TermsConditions: UIViewController {
     }
 
     //MARK: - Methods
-
     @objc func backButtonTapped(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -70,7 +67,6 @@ class TermsConditions: UIViewController {
 
     private func setConstraints() {
         NSLayoutConstraint.activate([
-
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),

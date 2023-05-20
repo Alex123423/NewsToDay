@@ -99,7 +99,6 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
     }
     
     // MARK: - UICollectionViewDataSource
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }

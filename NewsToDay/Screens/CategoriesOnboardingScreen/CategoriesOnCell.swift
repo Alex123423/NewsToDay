@@ -8,6 +8,7 @@
 import UIKit
 
 class CategoriesOnCell: UICollectionViewCell {
+    
     let label = UILabel()
     
     override init(frame: CGRect) {

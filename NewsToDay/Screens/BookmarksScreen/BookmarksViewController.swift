@@ -99,6 +99,7 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: - Delegate favourite button
 extension BookmarksViewController: FavouriteButtonProtocol {
+    
     func favouriteButtonTapped() {
         self.bookmarksView.tableView.reloadData()
     }

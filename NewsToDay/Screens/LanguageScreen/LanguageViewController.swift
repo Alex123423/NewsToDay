@@ -2,20 +2,17 @@
 //  LanguageViewController.swift
 //  NewsToDay
 //
-//  Created by Александра Савчук on 09.05.2023.
+//  Created by Alexey Davidenko on 20.05.2023.
 //
 
 import UIKit
 
 class LanguageViewController: UIViewController{
     
-    
     // MARK: - Outlets
-    
     private lazy var changeToENButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
-//        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("English", for: .normal)
         button.configuration = .plain()
         button.configuration?.titlePadding = CGFloat(10)
@@ -46,7 +43,6 @@ class LanguageViewController: UIViewController{
             imageView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -16).isActive = true
             imageView.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         }
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(changeLanguagePressedEN), for: .touchUpInside)
         return button
@@ -83,14 +79,12 @@ class LanguageViewController: UIViewController{
             imageView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -16).isActive = true
             imageView.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         }
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(changeLanguagePressedRU), for: .touchUpInside)
         return button
     }()
 
     // MARK: - Lifecycle methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -104,7 +98,6 @@ class LanguageViewController: UIViewController{
     }
 
         //MARK: - Methods
-    
     @objc func changeLanguagePressedEN(_ sender: UIButton) {
         Bundle.setLanguage(lang: "en")
         navigationController?.popToRootViewController(animated: true)
@@ -119,7 +112,6 @@ class LanguageViewController: UIViewController{
         navigationController?.popViewController(animated: true)
     }
     
-    
     @objc func updateLanguage() {
         changeToENButton.setTitle("English".localized, for: .normal)
         changeToRUButton.setTitle("Russian".localized, for: .normal)
@@ -128,11 +120,9 @@ class LanguageViewController: UIViewController{
     func setupViews() {
         view.addSubview(changeToENButton)
         view.addSubview(changeToRUButton)
-        
     }
     
     //MARK: - Constraints
-    
     private func setConstraints() {
         NSLayoutConstraint.activate([
             changeToENButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -147,4 +137,3 @@ class LanguageViewController: UIViewController{
         ])
     }
 }
-

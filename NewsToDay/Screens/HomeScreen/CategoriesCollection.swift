@@ -8,11 +8,6 @@
 import UIKit
 import SnapKit
 
-
-protocol CollectionDidSelectProtocol: AnyObject {
-    func getNewsFromCategory(categoryName: String)
-}
-
 class CategoriesCollection: UIView {
     
     private var collectionView: UICollectionView!
@@ -56,12 +51,14 @@ class CategoriesCollection: UIView {
         }
     }
     
-    
     func makeFirstCellActive() {
         let firstIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .centeredHorizontally)
     }
-    
+}
+
+protocol CollectionDidSelectProtocol: AnyObject {
+    func getNewsFromCategory(categoryName: String)
 }
 
 extension CategoriesCollection: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

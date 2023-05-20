@@ -126,7 +126,6 @@ extension RecommendedCell {
         configureCategoryLabel()
     }
     
-    
     func setConstraints() {
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),

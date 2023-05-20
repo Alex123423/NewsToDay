@@ -36,7 +36,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     }
     
     //MARK: - Network requests
-    
     // get news for random category
     func randomNews() {
         RequestsManager.shared.getRandomNews { [weak self] result in
@@ -118,7 +117,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     }
     
     //MARK: - Configuring UI Elements
-    
     func setupDelegates() {
         collectionView.delegateCollectionDidSelect = self
         searchTextField.searchTextField.delegate = self
@@ -190,7 +188,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
     }
     
     //MARK: - Constraints
-    
     private func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -234,7 +231,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate  {
 }
 
 //MARK: - Categories delegate
-
 extension HomeViewController: CollectionDidSelectProtocol {
     
     func getNewsFromCategory(categoryName: String) {

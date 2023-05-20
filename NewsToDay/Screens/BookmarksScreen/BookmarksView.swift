@@ -27,7 +27,6 @@ class BookmarksView: UIView {
     }
     
     //MARK: - Configuring UI elements
-    
     private func setupViews() {
         configureTable()
         configureToptitleLabel()
@@ -90,6 +89,7 @@ class BookmarksView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         NSLayoutConstraint.activate([
             topTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             topTitleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -111,11 +111,9 @@ class BookmarksView: UIView {
         ])
     }
     
-    
     @objc func updateLanguage() {
         topTitleLabel.text = "Bookmarks".localized
         topSublabel.text = "Saved articles to the library".localized
         emptyLabel.text = "You haven't saved any articles yet. Start reading and bookmarking them now".localized
     }
 }
-

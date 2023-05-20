@@ -43,6 +43,7 @@ class RecommendedViewController: UIViewController {
 
     private func setupConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             topTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             topTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),

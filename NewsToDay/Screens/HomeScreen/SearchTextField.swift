@@ -10,6 +10,7 @@ import SnapKit
 
 
 class SearchTextField: UIView {
+    
     let searchImageViewImage = UIImage(systemName: "magnifyingglass")
     var textFieldPlaceHolder = "Search".localized
     

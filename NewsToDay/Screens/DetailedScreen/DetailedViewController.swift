@@ -79,7 +79,6 @@ class DetailedViewController: UIViewController {
     }
     
     //  MARK: - UI Views
-    
     private lazy var newsImage: UIImageView = {
         let element = UIImageView()
         element.contentMode = .scaleAspectFill
@@ -99,7 +98,6 @@ class DetailedViewController: UIViewController {
     }()
     
     //  MARK: - UI Buttons
-    
     private lazy var bookmarkButton: UIButton = {
         let element = UIButton(type: .system)
         element.setImage(UIImage(named: "bookmark"), for: .normal)
@@ -177,6 +175,7 @@ class DetailedViewController: UIViewController {
 
 //  MARK: -  Private Methods
 extension DetailedViewController {
+    
     private func setViews() {
         view.backgroundColor = .white
         view.addSubview(newsImage)
@@ -193,7 +192,6 @@ extension DetailedViewController {
     }
     
     private func setConstraints() {
-        
         newsImage.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(view.frame.height / 2 - 60)
@@ -257,6 +255,7 @@ extension DetailedViewController {
 }
 
 extension DetailedViewController {
+    
     func presentOkAlertWithMessage(_ message: String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -265,7 +264,6 @@ extension DetailedViewController {
     }
     
     @objc func loadData() {
-        
         guard let article = currentNews, let urlString = article.link, let url = URL(string: urlString) else {
             self.presentOkAlertWithMessage("Invalid news URL")
             return

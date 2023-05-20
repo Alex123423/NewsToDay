@@ -13,7 +13,6 @@ import FirebaseAuth
 class UserProfileController: UIViewController{
     
     // MARK: - Outlets
-    
     lazy var termsConditionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 12
@@ -98,7 +97,6 @@ class UserProfileController: UIViewController{
     }()
     
     // MARK: - Lifecycle methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -108,7 +106,6 @@ class UserProfileController: UIViewController{
     }
     
     //MARK: - Methods
-    
     private func createButtonConfiguration(title: String) -> UIButton.Configuration {
         var configuration = UIButton.Configuration.plain()
         configuration.titlePadding = 10
@@ -157,10 +154,8 @@ class UserProfileController: UIViewController{
     }
     
     //MARK: - Constraints
-    
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            
             languageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             languageButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 44),
             languageButton.widthAnchor.constraint(equalToConstant: 360),

@@ -8,6 +8,7 @@
 import Foundation
 
 extension Bundle {
+    
     private static var bundle: Bundle!
     
     static var currentLanguage: String {
