@@ -25,6 +25,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         "World": "🌎"
     ]
     
+    //MARK: - Outelts
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Categories".localized
@@ -80,6 +81,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         addSubview(collectionView)
     }
 
+    //MARK: - Constraints
     func setupConstraints() {
         addSubview(titleLabel)
         addSubview(subtitleLabel)
@@ -98,7 +100,7 @@ class CategoriesOnboardingCollection: UIView, UICollectionViewDataSource, UIColl
         ])
     }
     
-    // MARK: - UICollectionViewDataSource
+    //MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }

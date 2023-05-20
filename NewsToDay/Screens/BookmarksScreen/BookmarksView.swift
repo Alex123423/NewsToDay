@@ -87,6 +87,7 @@ class BookmarksView: UIView {
         emptyLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    //MARK: - Constraints
     override func layoutSubviews() {
         super.layoutSubviews()
         

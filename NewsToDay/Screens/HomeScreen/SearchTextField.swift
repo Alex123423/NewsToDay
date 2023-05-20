@@ -11,6 +11,7 @@ import SnapKit
 
 class SearchTextField: UIView {
     
+    //MARK: - Outlets
     let searchImageViewImage = UIImage(systemName: "magnifyingglass")
     var textFieldPlaceHolder = "Search".localized
     
@@ -30,6 +31,7 @@ class SearchTextField: UIView {
         commonInit()
     }
     
+    //MARK: - Functions
     private func commonInit() {
         configureContainerView()
         configureSearchImageView()

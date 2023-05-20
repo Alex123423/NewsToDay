@@ -28,6 +28,7 @@ final class UserRegistrationController: UIViewController {
         }
     }
     
+    // MARK: - Outlets
     let userNameTextField = UITextField()
     let emailTextField = UITextField()
     let passwordTextField = UITextField()
@@ -35,6 +36,7 @@ final class UserRegistrationController: UIViewController {
     let signUpButton = UIButton(type: .system)
     let alreadyHaveAccountButton = UIButton(type: .system)
     
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -114,6 +116,7 @@ final class UserRegistrationController: UIViewController {
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         alreadyHaveAccountButton.translatesAutoresizingMaskIntoConstraints = false
         
+        //MARK: - Constraints
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -156,6 +159,7 @@ final class UserRegistrationController: UIViewController {
         ])
     }
     
+    //MARK: - Methods
     @objc func alreadyHaveAccountButtonPressed() {
         let userSignController = UserSignInController()
         present(userSignController, animated: true, completion: nil)

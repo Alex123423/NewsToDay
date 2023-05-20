@@ -10,6 +10,7 @@ import SnapKit
 
 class HomeViewController: UIViewController, UITextFieldDelegate  {
     
+    //MARK: - Outlets
     private let collectionView = CategoriesCollection()
     private let middleCollectionView = MiddleCollectionView()
     private let topTitleLabel = UILabel()

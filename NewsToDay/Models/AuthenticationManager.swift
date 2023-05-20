@@ -9,7 +9,6 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 
-
 struct AuthDataResultModel {
     let uid: String
     let email: String?

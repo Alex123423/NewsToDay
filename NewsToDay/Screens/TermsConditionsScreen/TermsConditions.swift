@@ -64,7 +64,6 @@ class TermsConditions: UIViewController {
 
 
     //MARK: Constraints
-
     private func setConstraints() {
         NSLayoutConstraint.activate([
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),

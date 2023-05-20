@@ -37,7 +37,8 @@ final class BookmarksManager {
             }
         }
     }
-        
+    
+    //MARK: - Functions
     func getBookmarks() -> [Result] {
         return bookmarksArray
     }

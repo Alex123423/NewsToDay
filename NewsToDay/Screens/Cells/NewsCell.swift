@@ -27,6 +27,7 @@ class NewsCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Outlets
     private let newsImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Resources.Images.noImage)
@@ -67,6 +68,7 @@ class NewsCell: UICollectionViewCell {
         return button
     }()
     
+    //MARK: - Functions
     @objc func favouriteButtonPressed() {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
@@ -107,6 +109,7 @@ class NewsCell: UICollectionViewCell {
         contentView.addSubview(categoryLabel)
     }
     
+    //MARK: - Constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor,constant: 0),

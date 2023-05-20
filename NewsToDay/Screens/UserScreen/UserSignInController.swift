@@ -28,6 +28,7 @@ final class UserSignInController: UIViewController {
         }
     }
     
+    // MARK: - Outlets
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
     let emailTextField = UITextField()
@@ -35,6 +36,7 @@ final class UserSignInController: UIViewController {
     let signInButton = UIButton(type: .system)
     let dontHaveAccountButton = UIButton(type: .system)
     
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -93,6 +95,7 @@ final class UserSignInController: UIViewController {
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         dontHaveAccountButton.translatesAutoresizingMaskIntoConstraints = false
         
+        //MARK: - Constraints
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -123,6 +126,7 @@ final class UserSignInController: UIViewController {
         ])
     }
     
+    //MARK: - Methods
     @objc func dontHaveAccountButtonPressed() {
         let userRegistrationController = UserRegistrationController()
         present(userRegistrationController, animated: true, completion: nil)
@@ -149,6 +153,7 @@ final class UserSignInController: UIViewController {
     }
 }
 
+//MARK: - Extensions
 extension UITextField {
     private struct AssociatedKeys {
         static var originalImage = "originalImage"

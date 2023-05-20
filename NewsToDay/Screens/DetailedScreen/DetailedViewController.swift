@@ -191,6 +191,7 @@ extension DetailedViewController {
         newsImage.isUserInteractionEnabled = true
     }
     
+    //MARK: - Constraints
     private func setConstraints() {
         newsImage.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -254,6 +255,7 @@ extension DetailedViewController {
     }
 }
 
+//MARK: - Extentions
 extension DetailedViewController {
     
     func presentOkAlertWithMessage(_ message: String) {

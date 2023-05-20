@@ -22,6 +22,7 @@ class RecommendedCell: UITableViewCell {
     var liked: Bool = false
     var currentNews: Result?
     
+    //MARK: - Outlets
     private let newsImageView = UIImageView()
     private let newsTitleLabel = UILabel()
     private let categoryLabel = UILabel()
@@ -37,6 +38,7 @@ class RecommendedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Functions
     func configureCell(_ newsData: Result) {
         self.newsTitleLabel.text = newsData.title
         if let category = newsData.category?.first {
@@ -126,6 +128,7 @@ extension RecommendedCell {
         configureCategoryLabel()
     }
     
+    //MARK: - Constraints
     func setConstraints() {
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),

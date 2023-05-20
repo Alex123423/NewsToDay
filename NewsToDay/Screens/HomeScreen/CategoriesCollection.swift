@@ -30,6 +30,7 @@ class CategoriesCollection: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Functions
     func configureCollection() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -57,6 +58,7 @@ class CategoriesCollection: UIView {
     }
 }
 
+//MARK: - Protocols
 protocol CollectionDidSelectProtocol: AnyObject {
     func getNewsFromCategory(categoryName: String)
 }

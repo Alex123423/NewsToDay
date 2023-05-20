@@ -17,6 +17,7 @@ class OnboardingViewController: UIViewController {
         Slide(image: UIImage(named: "image3"), title: "slidetitle3", description: "slidedescript3")
     ]
     
+    //MARK: - Outlets
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -88,6 +89,7 @@ class OnboardingViewController: UIViewController {
         view.addSubview(nextButton)
     }
     
+    //MARK: - Constraints
     private func setupConstraints() {
         view.backgroundColor = .white
         
@@ -115,6 +117,7 @@ class OnboardingViewController: UIViewController {
         ])
     }
     
+    //MARK: - Functions
     @objc private func updateUI() {
         let slide = slides[currentIndex]
         imageView.image = slide.image

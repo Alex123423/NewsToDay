@@ -11,6 +11,7 @@ class CategoriesOnboardingVC: UIViewController {
     
     private let categoriesOnboardingView = CategoriesOnboardingCollection()
     
+    //MARK: - Outlets
     public lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setTitle("next".localized, for: .normal)
@@ -22,6 +23,7 @@ class CategoriesOnboardingVC: UIViewController {
         return nextButton
     }()
     
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         categoriesOnboardingView.titleLabel.text = "Select your favorite topics".localized
@@ -47,6 +49,7 @@ class CategoriesOnboardingVC: UIViewController {
 
     }
     
+    //MARK: - Functions
     @objc func updateLanguage() {
         categoriesOnboardingView.updateLanguage()
     }
